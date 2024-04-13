@@ -97,7 +97,7 @@ AnimLib.world_camp_fire_tend_sit_add_logs = {
                 FreezeEntityPosition(info.prop.log.entity, false)
                 info.prop.log:attach(info.ped)
                 Citizen.Wait(1850)
-                Prop.Detach(info.proplog, { forceWait = 3500, distance = 1.8, angle = 15 })
+                Prop.Detach(info.prop.log, { forceWait = 3500, distance = 1.8, angle = 15 })
                 info.prop.log = nil
                 return info
             end,
