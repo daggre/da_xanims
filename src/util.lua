@@ -4,6 +4,7 @@ local IsHolding = nil
 
 AnimUtil.AdjustStaminaCore = function(ped, amount)
     local staminaCore = Citizen.InvokeNative(0x36731AC041289BB1, ped, 1) -- GetAttributeCoreValue Stamina
+    staminaCore = tonumber(staminaCore) or 0
     Citizen.InvokeNative(0xC6258F41D86676E0, ped, 1, math.ceil(staminaCore + amount)) -- SetAttributeCoreValue Stamina
 end
 
@@ -32,7 +33,8 @@ AnimUtil.ChangeCore = function(entity, changeData)
 end
 
 AnimUtil.CheckAndSetDefaultMetadata = function(item, metadataCondition, defaultMetadata)
-    if not defaultMetadata then return item; end
+    if type(item) ~= "table" then return item; end
+    if not defaultMetadata or not item then return item; end
     if not item.info or (type(item.info) ~= "table" and type(metadataCondition) == "table") then
         item.info = defaultMetadata
     end
@@ -132,6 +134,10 @@ end
 AnimUtil.ItemHasMetadata = function(items, metadataCondition, defaultMetadata)
     if not da.API.Active then return true; end
     for _, item in pairs(items) do
+        if type(item) ~= "table" or not item.info then
+            da.Log.Debug("Invalid call to ItemHasMetadata, returning false.", item)
+            return false
+        end
         item = AnimUtil.CheckAndSetDefaultMetadata(item, metadataCondition, defaultMetadata)
         for name, evalFn in pairs(metadataCondition) do
             if not item.info[name] and metadataCondition[name] then

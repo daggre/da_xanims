@@ -177,14 +177,14 @@ AnimLib.drink_canteen = {
             info.canteen = info.args
             if not info.canteen then
                 local canteens = da.API.GetItems(function(item)
-                    return item.name == "canteen" and AnimUtil.ItemHasMetadata(item, { water = function(a) return a >= 1 end }, { water = 0 })
+                    return item.name == "canteen" and AnimUtil.ItemHasMetadata({item}, { water = function(a) return a >= 1 end }, { water = 0 })
                 end)
                 if canteens and next(canteens) then
                     info.canteen = canteens[1]
                 end
             end
             Citizen.Wait(550)
-            if not AnimUtil.ItemHasMetadata(info.canteen, { water = function(a) return a > 1 end }, { water = 0 }) then
+            if not AnimUtil.ItemHasMetadata({info.canteen}, { water = function(a) return a > 1 end }, { water = 0 }) then
                 da.API.Notify("This canteen is empty","error")
                 info.gotoExit = true
                 return info
@@ -215,11 +215,6 @@ AnimLib.drink_canteen = {
             anim = "base",
             flag = AnimConfig.Flag.Loop | AnimConfig.Flag.Move,
             onStart = function(info)
-                if not AnimUtil.ItemHasMetadata(info.canteen, { water = function(a) return a > 1 end }, { water = 0 }) then
-                    da.API.Notify("This canteen is empty","error")
-                    info.gotoExit = true
-                    return info
-                end
                 local waterAmount = info.canteen and info.canteen.info and info.canteen.info.water or 0
                 local newWaterAmount = waterAmount - 20
                 newWaterAmount = newWaterAmount >= 0 and newWaterAmount or 0
@@ -231,7 +226,7 @@ AnimLib.drink_canteen = {
             end,
             onFinish = function(info)
                 da.Fn.Drink()
-                if not AnimUtil.ItemHasMetadata(info.canteen, { water = function(a) return a > 1 end }, { water = 0 }) then
+                if not AnimUtil.ItemHasMetadata({info.canteen}, { water = function(a) return a > 1 end }, { water = 0 }) then
                     da.API.Notify("This canteen is empty","error")
                     info.gotoExit = true
                 end
