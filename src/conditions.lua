@@ -447,3 +447,18 @@ Conditions.Check = function(conditionList, debug)
     end
     return true
 end
+
+if da.Util.IsDev then
+    RegisterCommand("da_xanims_dump_conditions", function(source, args, rawCommand)
+        for k,v in pairs(Conditions.Cache) do
+            da.Log.Debug(k, v)
+        end
+    end, false)
+
+    RegisterCommand("da_xanims_dump_conditions_data", function(source, args, rawCommand)
+        local data = GetConditionData()
+        for k,v in pairs(data) do
+            da.Log.Debug(k, v)
+        end
+    end, false)
+end
