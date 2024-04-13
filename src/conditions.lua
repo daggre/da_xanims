@@ -1,5 +1,3 @@
-local allow = "allow"
-
 local AnimalModels = {
     Cat = {
         [`a_c_cat_01`] = true,

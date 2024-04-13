@@ -1,3 +1,4 @@
+allow = "allow"
 
 AnimMenu = {}
 AnimMenu.root = {
