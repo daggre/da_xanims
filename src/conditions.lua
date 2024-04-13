@@ -369,7 +369,6 @@ end
 local GetItems = function()
     local itemsData = {}
     local items = da.API.HasItems(InventoryItems)
-    da.Log.DebugVerbose("Items:", items)
     if not items then return itemsData; end
 
     for itemIndex, itemData in pairs(items) do
