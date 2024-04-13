@@ -1,3 +1,5 @@
+--- Copyright © 2024 Joshua Nelson
+
 AnimLib.medical_bandage = {
     name = "Bandage Kneeling",
     tags = { medical=1, },

@@ -1,3 +1,5 @@
+--- Copyright © 2024 Joshua Nelson
+
 Propset.rock = {
     -- objectHash = `p_rockthrow01x`,
     -- bone = "PH_R_Hand",

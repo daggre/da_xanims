@@ -1,3 +1,5 @@
+--- Copyright © 2024 Joshua Nelson
+
 Propset.Canteen = {
     Fill = {
         objectHash = `p_canteen01x`,

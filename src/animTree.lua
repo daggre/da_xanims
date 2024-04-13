@@ -1,3 +1,5 @@
+--- Copyright © 2024 Joshua Nelson
+
 local BackupKeys = { "z","y","x","w","v","u","t","s","r","q","p","p","n","m","l" }
 
 local function getFinalAnim()

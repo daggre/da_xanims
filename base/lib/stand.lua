@@ -1,3 +1,5 @@
+--- Copyright © 2024 Joshua Nelson
+
 AnimLib.generic_standing = {
     name = "Right Foot Forward",
     tags = { stand=1, },

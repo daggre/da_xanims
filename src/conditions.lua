@@ -1,3 +1,5 @@
+--- Copyright © 2024 Joshua Nelson
+
 local AnimalModels = {
     Cat = {
         [`a_c_cat_01`] = true,

@@ -1,3 +1,5 @@
+--- Copyright © 2024 Joshua Nelson
+
 AnimLib.inspect_tracks = {
     name = "Inspect Tracks",
     tags = { squat=1, },

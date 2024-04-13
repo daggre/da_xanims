@@ -1,3 +1,5 @@
+--- Copyright © 2024 Joshua Nelson
+
 AnimLib.point = {
     name = "Point",
     tags = { root=1, },

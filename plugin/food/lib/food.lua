@@ -1,3 +1,5 @@
+--- Copyright © 2024 Joshua Nelson
+
 AnimLib.eat_apple = {
     name = "Eat Apple",
     tags = { ["food_&_drink"]=1, },

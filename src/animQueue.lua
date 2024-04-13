@@ -1,3 +1,5 @@
+--- Copyright © 2024 Joshua Nelson
+
 local RunningHooks = {}
 -- Fill out AnimLib with reverse lookups for index and hashed entries
 -- Generates alphabetically sorted transition lists by keymap

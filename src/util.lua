@@ -1,3 +1,5 @@
+--- Copyright © 2024 Joshua Nelson
+
 local CanShoot = true
 local DisableFiringThread = false
 local IsHolding = nil

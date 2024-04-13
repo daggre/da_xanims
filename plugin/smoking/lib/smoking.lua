@@ -1,3 +1,5 @@
+--- Copyright © 2024 Joshua Nelson
+
 -- cigarette masc
 AnimLib.smoke_masc_a = {
     name = "Arms Down",

@@ -1,3 +1,5 @@
+--- Copyright © 2024 Joshua Nelson
+
 AnimLib.revolver_inspect = {
     name = "Examine Revolver",
     tags = { weapon=1, },
