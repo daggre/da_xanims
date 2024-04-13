@@ -79,7 +79,6 @@ function Prop:attach(prop, propset)
             end)
             da.Log.Debug("Removed " .. numRemovals .. " polyprop zone(s) with id " .. self.propData.id)
         end
-        AnimUtil.RemoveInteractiveGroundProp(self)
         if self.propData and self.propData.attachWait then self.propData.attachWait = nil; end -- Race is done, allow clean anim to spawn a new one
     end
     if self.entity == nil or not DoesEntityExist(self.entity) then

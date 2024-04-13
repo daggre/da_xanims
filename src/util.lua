@@ -225,7 +225,7 @@ AnimUtil.MonitorIdleAnim = function(animState, info)
                 if AnimInfo then AnimInfo.exit = true; end
                 if clearPedTasks and not needsStumble then ClearPedTasksImmediately(info.ped); end
                 exit = true
-                for propName, prop in pairs(info.prop) do
+                for propName, cacheProp in pairs(info.prop) do
                     Prop.Detach(cacheProp, {
                         velocity = 0.8,
                         angle = 24.0,
