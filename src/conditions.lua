@@ -283,13 +283,13 @@ local GetAllConditions = function(data)
     chk.hasPrimaryWeapon = data.hasWeapZero and data.weapHashZero ~= `weapon_unarmed`
     chk.hasSecondaryWeapon = data.hasWeapOne and data.weapHashOne ~= `weapon_unarmed`
     chk.hasWeapon = chk.hasPrimaryWeapon or chk.hasSecondaryWeapon
-    chk.hasPrimaryKnife = chk.hasPrimaryWeapon and WeaponModels.Knives[data.weaponHashZero] ~= nil
-    chk.hasPrimaryHammer = chk.hasPrimaryWeapon and data.weaponHashZero == `weapon_melee_hammer`
-    chk.hasPrimaryRevolver = chk.hasPrimaryWeapon and WeaponModels.Revolvers[data.weaponHashZero] ~= nil
-    chk.hasPrimaryPistol = chk.hasPrimaryWeapon and WeaponModels.Pistols[data.weaponHashZero] ~= nil
+    chk.hasPrimaryKnife = chk.hasPrimaryWeapon and WeaponModels.Knives[data.weapHashZero] ~= nil
+    chk.hasPrimaryHammer = chk.hasPrimaryWeapon and data.weapHashZero == `weapon_melee_hammer`
+    chk.hasPrimaryRevolver = chk.hasPrimaryWeapon and WeaponModels.Revolvers[data.weapHashZero] ~= nil
+    chk.hasPrimaryPistol = chk.hasPrimaryWeapon and WeaponModels.Pistols[data.weapHashZero] ~= nil
     chk.hasPrimaryShortarm = chk.hasPrimaryWeapon and (chk.hasPrimaryRevolver or chk.hasPrimaryPistol)
-    chk.hasPrimaryLongarm = chk.hasPrimaryWeapon and WeaponModels.Longarms[data.weaponHashZero] ~= nil
-    chk.hasAttachPointRightHip = WeaponModels.Sidearms[data.weaponHashTwo] ~= nil
+    chk.hasPrimaryLongarm = chk.hasPrimaryWeapon and WeaponModels.Longarms[data.weapHashZero] ~= nil
+    chk.hasAttachPointRightHip = WeaponModels.Sidearms[data.weapHashTwo] ~= nil
     chk.isInClearedVeg = da.API.DependencyCheck("da_farming") and AnimUtil.IsInClearedVeg() or false
     chk.canFarmHandpick = not chk.isInClearedVeg and data.interact.farm.farmHandpick
     chk.canFarmKneel = not chk.isInClearedVeg and data.interact.farm.farmKneel
