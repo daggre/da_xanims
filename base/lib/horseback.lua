@@ -26,12 +26,13 @@ AnimLib.horse_duckleft = {
                 while IsEntityPlayingAnim(info.ped, animDict, anim, 3) do
                     AnimUtil.AdjustStaminaCore(info.ped, -3)
                     local staminaCore = Citizen.InvokeNative(0x36731AC041289BB1, info.ped, 1) -- GetAttributeCoreValue Stamina
-                    if staminaCore < 5 then
+                    if not tonumber(staminaCore) or staminaCore < 5 then
                         SetPedToRagdoll(info.ped, 2000, 3000, 0, false, false, false)
                         Citizen.Wait(5)
                         TriggerEvent('da_xanims:queueAnim', "horse_duckleft", "exit")
                         Citizen.Wait(100)
                         ResetPedRagdollTimer(info.ped)
+                        break
                     end
                     Citizen.Wait(300)
                 end
@@ -69,12 +70,13 @@ AnimLib.horse_duckright = {
                 while IsEntityPlayingAnim(info.ped, animDict, anim, 3) do
                     AnimUtil.AdjustStaminaCore(info.ped, -2)
                     local staminaCore = Citizen.InvokeNative(0x36731AC041289BB1, info.ped, 1) -- GetAttributeCoreValue Stamina
-                    if staminaCore < 5 then
+                    if not tonumber(staminaCore) or staminaCore < 5 then
                         SetPedToRagdoll(info.ped, 2000, 3000, 0, false, false, false)
                         Citizen.Wait(5)
                         TriggerEvent('da_xanims:queueAnim', "horse_duckright", "exit")
                         Citizen.Wait(100)
                         ResetPedRagdollTimer(info.ped)
+                        break
                     end
                     Citizen.Wait(300)
                 end
