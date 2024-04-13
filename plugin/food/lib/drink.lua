@@ -160,7 +160,7 @@ AnimLib.drink_canteen = {
     tags = { ["food_&_drink"]=1, },
     key = "w",
     condition = function() return Conditions.Check({
-        onMount = "allow",
+        onMount = allow,
         hasCanteen = true,
         canteenHasWater = true,
         isRunning = false,

@@ -7,7 +7,7 @@ AnimLib.handsup = {
         root = { key = "u" }
     },
     key = "h",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "mech_loco_f@generic@reaction@handsup@unarmed@normal",
         anim = "intro",
@@ -73,7 +73,7 @@ AnimLib.handsup_high = {
     name = "Hands Up High",
     tags = {},
     key = "h",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "mech_loco_f@generic@reaction@handsup@unarmed@normal",
         anim = "intro",
@@ -139,7 +139,7 @@ AnimLib.handsup_relax = {
     name = "Hands Up Tough",
     tags = {},
     key = "t",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "mech_loco_m@generic@reaction@handsup@unarmed@tough",
         anim = "intro",

@@ -3,7 +3,7 @@ AnimLib.greet_subtle_left = {
     name = "Subtle Wave Left",
     tags = { wave=1, },
     key = "z",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "greet_bored_l_001",
@@ -17,7 +17,7 @@ AnimLib.greet_subtle_right = {
     name = "Subtle Wave Right",
     tags = { wave=1, },
     key = "x",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "greet_bored_r_001",
@@ -31,7 +31,7 @@ AnimLib.greet_cocky_left = {
     name = "Wave Low Left",
     tags = { wave=1, },
     key = "a",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "greet_cocky_l_003",
@@ -45,7 +45,7 @@ AnimLib.greet_cocky_right = {
     name = "Wave Low Right",
     tags = { wave=1, },
     key = "d",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "greet_cocky_r_003",
@@ -59,7 +59,7 @@ AnimLib.wave_left = {
     name = "Wave Left",
     tags = { wave=1, },
     key = "q",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "greet_happy_l_001",
@@ -73,7 +73,7 @@ AnimLib.wave_right = {
     name = "Wave Right",
     tags = { wave=1, },
     key = "e",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "greet_happy_r_001",
@@ -102,7 +102,7 @@ AnimLib.ack_chin_up = {
     name = "Chin Up",
     tags = { greet=1, },
     key = "q",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@gen_male@standing@silent",
         anim = "aknwoledge_tough_chin_up_f_001",
@@ -116,7 +116,7 @@ AnimLib.hat_tip_slow = {
     name = "Tip Hat",
     tags = { greet=1, },
     key = "t",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "greet_hat_tip_r_001",
@@ -130,7 +130,7 @@ AnimLib.hat_tip_quick = {
     name = "Tip Hat Casual",
     tags = { greet=1, },
     key = "r",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "greet_hat_tip_r_001",
@@ -159,7 +159,7 @@ AnimLib.salute_point = {
     name = "Salute Point",
     tags = { salute=1, },
     key = "e",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@gen_male@standing@silent",
         anim = "silent_casual_salute_r_001",
@@ -173,7 +173,7 @@ AnimLib.salute_brim = {
     name = "Salute Hat Brim",
     tags = { salute=1, },
     key = "b",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@gen_male@standing@silent",
         anim = "silent_casual_salute_r_002",
@@ -187,7 +187,7 @@ AnimLib.salute_look_down = {
     name = "Salute Casual",
     tags = { salute=1, },
     key = "q",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@gen_male@standing@silent",
         anim = "silent_casual_salute_r_003",
@@ -201,7 +201,7 @@ AnimLib.salute_hat_touch = {
     name = "Salute Touch",
     tags = { salute=1, },
     key = "t",
-    condition = function() return Conditions.Check({ onMount = "allow" }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@gen_male@standing@silent",
         anim = "silent_neutral_hat_tip_r_004",

@@ -71,7 +71,7 @@ AnimMenu.root = {
         music = {
             key = "g",
             condition = function() return Conditions.Check({
-                onMount = "allow",
+                onMount = allow,
                 isRunning = false,
             }) end,
         },
