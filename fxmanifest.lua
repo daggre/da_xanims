@@ -31,6 +31,7 @@ files {
     'ui/index.html',
     'ui/script.js',
     'ui/style.css',
+    'ui/img/chev_r.png',
     'ui/img/rdr_h_spacer.png',
     'ui/img/rdr_menu_bg.png',
     'ui/img/rdr_menu_row.png',
