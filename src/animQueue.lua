@@ -66,7 +66,6 @@ ActiveAnim = nil -- { animLib, animState, animStateName }
 AnimStateQueue = {} -- { { animLib, animState, animStateName }, {...} }
 AnimInterrupt = false
 AnimInfo = nil
-local BackupKeys = { "z","y","x","w","v","u","t","s","r","q","p","p","n","m","l" }
 
 function IsStateType(state, type) return string.sub(state, 1, #type) == type; end
 

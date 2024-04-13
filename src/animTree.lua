@@ -1,3 +1,5 @@
+local BackupKeys = { "z","y","x","w","v","u","t","s","r","q","p","p","n","m","l" }
+
 local function getFinalAnim()
     local animLib, animState, animStateName = nil, nil, nil
     local currentIdle = nil
