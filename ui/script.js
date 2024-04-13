@@ -84,7 +84,7 @@ AppendAnimOption = function(index, value) {
 AppendSubOption = function(index, value) {
     $("#subTreesSpacer").show();
     SubmenuKeys[value.key] = index;
-    const html = '<div class="row"> <div class="column value"><i class="fa-solid fa-caret-right"></i> '+value.name+'</div> <div class="column key">'+value.key+'</div> </div>';
+    const html = '<div class="row"> <div class="column value"><img class="chev" src="img/chev_r.png" />'+value.name+'</div> <div class="column key">'+value.key+'</div> </div>';
 
     $("#subTrees").append(html);
 }

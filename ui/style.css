@@ -113,3 +113,10 @@ i {
     color: #666666;
     padding-right: 0.5em;
 }
+
+.chev {
+    height: 0.8em;
+    width: 0.8em;
+    opacity: 40%;
+    padding-right: 10px;
+}
