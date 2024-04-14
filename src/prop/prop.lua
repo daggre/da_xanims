@@ -156,8 +156,7 @@ function Prop:getInteractCoords(entity, variant, debug)
     local minDist = nil
     local minCoords = nil
 
-    da.Log.Debug(self)
-    local heading = self.propData.spawnParams and self.propData.spawnParams.rotation and self.propData.spawnParams.rotation.z or self.coords.w
+    local heading = self.propData.spawnParams and self.propData.spawnParams.rotation and self.propData.spawnParams.rotation.z or self.propData.coords and self.propData.coords.w or 0
     for _, offset in ipairs(self.propset.offset) do
         if not variant and not offset.interactType or variant == offset.interactType then
             local offRot = tonumber(offset.rotation) and tonumber(offset.rotation) or 0.0

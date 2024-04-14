@@ -111,7 +111,6 @@ end
 
 AnimUtil.GetInteractiveZone = function(interactType, interactTypeSpecific)
     return da.Zone.Get(function(zoneData)
-        print(zoneData.metadata.interactType, interactType, zoneData.metadata.interactTypeSpecific, interactTypeSpecific)
         if interactType ~= nil and zoneData.metadata.interactType == interactType then
             if interactTypeSpecific ~= nil and zoneData.metadata.interactTypeSpecific == interactTypeSpecific then
                 return true
