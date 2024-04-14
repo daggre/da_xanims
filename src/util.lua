@@ -19,7 +19,7 @@ end
 
 AnimUtil.BucketContainsWater = function()
     local bucket = {}
-    bucket.id, bucket.metadata = AnimUtil.GetClosestIntObj("Bucket")
+    bucket.id, bucket.metadata = AnimUtil.GetClosestInteract("object", "Bucket")
     if not bucket.metadata then return false; end
     return bucket.metadata.resourceAmount and bucket.metadata.resourceAmount > 0 or false
 end
@@ -73,13 +73,15 @@ AnimUtil.EquipWeapon = function(attachPoint)
     GiveWeaponToPed_2(playerPedId, activeWeapHash, 0, true, false, 0, true)
 end
 
-AnimUtil.GetClosestIntObj = function(interactTypeSpecific)
-    da.Log.Debug(("Calling GetClosestIntObj type: %s"):format(interactTypeSpecific))
+
+
+AnimUtil.GetClosestInteract = function(interactType, interactTypeSpecific)
+    da.Log.Debug(("Calling GetClosestInteract type: %s %s"):format(interactType, interactTypeSpecific))
     local closestZoneId = nil
     local closestZoneData = nil
     local interactTypeHeightPriority = { .Bale, .Sack, .Crate, }
 
-    local zones = AnimUtil.GetInteractiveZones("object", interactTypeSpecific)
+    local zones = AnimUtil.GetInteractiveZones(interactType, interactTypeSpecific)
     local playerCoords = GetEntityCoords(PlayerPedId())
     local minDist, maxZ = nil, nil
     for _, zoneData in ipairs(zones) do
@@ -123,9 +125,9 @@ AnimUtil.GetInteractiveZone = function(interactType, interactTypeSpecific)
 end
 
 AnimUtil.GetStallQuality = function(propData, chore, alternate)
-    if not propData or not propData.id or not propData.ranchName then return false; end
+    if not propData or not propData.index or not propData.ranchName then return false; end
 
-    local jobIndex = propData.id
+    local jobIndex = propData.index
     local ranchName = propData.ranchName
     local quality, quality2 = da.Net.BlockingCb("ranching:server:getChoreData", 2000, ranchName, chore, jobIndex)
 

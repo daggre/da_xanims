@@ -6,14 +6,16 @@ local InteractivePropType = {
     crate = "Crate",
     feedTrough = "FeedTrough",
     inspectFence = "InspectFence",
-    paddock = "Paddock",
     sack = "Sack",
-    stall = "Stall",
     shortFence = "ShortFence",
     tallFence = "TallFence",
     waterPump = "WaterPump",
     waterTrough = "WaterTrough",
     wheelbarrow = "Wheelbarrow",
+}
+local InteractiveZoneType = {
+    stall = "AnimalStall",
+    paddock = "Paddock",
 }
 
 Prop = {}
@@ -34,10 +36,17 @@ function Prop:init(entity, propset, propData, id)
 end
 
 function Prop:initNearby(type, worldEntity)
-    local interactTypeSpecific = InteractivePropType[type]
+    local interactType, interactTypeSpecific = nil, nil
+    if InteractivePropType[type] then
+        interactType = "object"
+        interactTypeSpecific = InteractivePropType[type]
+    elseif InteractiveZoneType[type] then
+        interactType = "zone"
+        interactTypeSpecific = InteractiveZoneType[type]
+    end
     if not interactTypeSpecific then return nil; end
 
-    local id, propData = AnimUtil.GetClosestIntObj(interactTypeSpecific)
+    local id, propData = AnimUtil.GetClosestInteract(interactType, interactTypeSpecific)
     if not id or not propData then return nil; end
 
     local propset = propData.propset or Propset.Lookup[propData.objectHash]
@@ -217,6 +226,7 @@ function Prop:spawnPolyProp()
     da.Log.Debug("spawnPolyProp propData:", self.propData)
     local coords = GetEntityCoords(self.entity)
     local rotation = GetEntityRotation(self.entity)
+    if self.propData and not self.propData.spawnParams then self.propData.spawnParams = {}; end
     self.propData.spawnParams.rotation = rotation
     da.Obj.CreatePolyProp(objectHash, coords, self.propData.metadata, self.propData.spawnParams)
 end
