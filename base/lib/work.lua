@@ -155,7 +155,8 @@ AnimLib.WorldHumanClipboard = {
                 if not info.chore then info.gotoIdle = true; end
                 return info
             end,
-            onFinish = function(info)
+            onTrigger = function(info)
+                Citizen.Wait(1000)
                 AnimUtil.InspectRanch("StallBedding", info.chore.propData)
                 return info
             end,
@@ -172,7 +173,8 @@ AnimLib.WorldHumanClipboard = {
                 if not info.chore then info.gotoIdle = true; end
                 return info
             end,
-            onFinish = function(info)
+            onTrigger = function(info)
+                Citizen.Wait(1000)
                 AnimUtil.InspectRanch("StallCleanliness", info.chore.propData)
                 return info
             end,
@@ -189,7 +191,8 @@ AnimLib.WorldHumanClipboard = {
                 if not info.chore then info.gotoIdle = true; end
                 return info
             end,
-            onFinish = function(info)
+            onTrigger = function(info)
+                Citizen.Wait(1000)
                 AnimUtil.InspectRanch("WaterTrough", info.chore.propData)
                 return info
             end,
@@ -206,7 +209,8 @@ AnimLib.WorldHumanClipboard = {
                 if not info.chore then info.gotoIdle = true; end
                 return info
             end,
-            onFinish = function(info)
+            onTrigger = function(info)
+                Citizen.Wait(1000)
                 AnimUtil.InspectRanch("FeedTrough", info.chore.propData)
                 return info
             end,
@@ -223,7 +227,8 @@ AnimLib.WorldHumanClipboard = {
                 if not info.chore then info.gotoIdle = true; end
                 return info
             end,
-            onFinish = function(info)
+            onTrigger = function(info)
+                Citizen.Wait(1000)
                 AnimUtil.InspectRanch("Paddock", info.chore.propData)
                 return info
             end,
@@ -240,7 +245,8 @@ AnimLib.WorldHumanClipboard = {
                 if not info.chore then info.gotoIdle = true; end
                 return info
             end,
-            onFinish = function(info)
+            onTrigger = function(info)
+                Citizen.Wait(1000)
                 AnimUtil.InspectRanch("Fence", info.chore.propData)
                 return info
             end,
