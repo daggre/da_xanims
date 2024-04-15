@@ -63,11 +63,8 @@ Add `ensure da_xanims` to your preferred resource config. (Default: server.cfg)
 > - **da_lib**
 
 ## Support
-Discord: daggre
-Discord Server: TBA
-
-## Dependencies
-- da_lib
+- Discord: daggre
+- Discord Server: TBA
 
 ## Authors and Acknowledgment
 daggre_actual
