@@ -82,11 +82,11 @@ function Prop:attach(prop, propset)
 
     if self.propset.interactRange ~= nil then
         if self.propData then
-            propData = da.Net.BlockingCb("polyprops:server:remove", 2000, self.propData)
+            propData = da.Net.BlockingCb("intprop:server:remove", 2000, self.propData)
             local numRemovals = da.Zone.Remove(function(zoneData)
                 return zoneData.interactType == "object" and zoneData.id == self.propData.id
             end)
-            da.Log.Debug("Removed " .. numRemovals .. " polyprop zone(s) with id " .. self.propData.id)
+            da.Log.Debug("Removed " .. numRemovals .. " interactive prop zone(s) with id " .. self.propData.id)
         end
         if self.propData and self.propData.attachWait then self.propData.attachWait = nil; end -- Race is done, allow clean anim to spawn a new one
     end
@@ -134,7 +134,7 @@ function Prop:detach(data)
         Citizen.Wait(0)
     end
     if self.propData and not self.propData.disablePropSpawn and self.propset and self.propset.interactRange ~= nil and not self.propData.attachWait then
-        self:spawnPolyProp()
+        self:spawnIntProp()
         Citizen.Wait(500)
     end
     if not data.forceWait then DetachEntity(self.entity, true, true); end
@@ -217,18 +217,18 @@ function Prop:lock(callbackTimeout, lockTimeout)
     return locked
 end
 
-function Prop:spawnPolyProp()
+function Prop:spawnIntProp()
     FreezeEntityPosition(self.entity, true)
     local objectHash = self.propData.objectHash
     if not objectHash then return; end
 
     self.propData.range = self.propData.range or self.propset.interactRange
-    da.Log.Debug("spawnPolyProp propData:", self.propData)
+    da.Log.Debug("spawnIntProp propData:", self.propData)
     local coords = GetEntityCoords(self.entity)
     local rotation = GetEntityRotation(self.entity)
     if self.propData and not self.propData.spawnParams then self.propData.spawnParams = {}; end
     self.propData.spawnParams.rotation = rotation
-    da.Obj.CreatePolyProp(objectHash, coords, self.propData.metadata, self.propData.spawnParams)
+    da.Obj.CreateIntProp(objectHash, coords, self.propData.metadata, self.propData.spawnParams)
 end
 
 if da.Util.IsDev then
