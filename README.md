@@ -62,7 +62,8 @@ animations inside the framework, but until I write that up you will need to
 contact me for support.
 
 ## Support
-Reach me on Discord: daggre
+Discord: daggre
+Discord Server: TBA
 
 ## Dependencies
 - da_lib
