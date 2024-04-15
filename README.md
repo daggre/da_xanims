@@ -67,4 +67,4 @@ Add `ensure da_xanims` to your preferred resource config. (Default: server.cfg)
 - Discord Server: TBA
 
 ## Authors and Acknowledgment
-daggre_actual
+- daggre_actual
