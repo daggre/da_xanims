@@ -333,12 +333,9 @@ local GetAllConditions = function(data)
     chk.interactWaterTrough = data.interact.object.WaterTrough ~= nil
     chk.interactTallFence = data.interact.object.TallFence ~= nil
     chk.interactShortFence = data.interact.object.ShortFence ~= nil
-    chk.inspectFence = chk.interactTallFence or chk.interactShortFence ~= nil
+    chk.inspectFence = chk.interactTallFence or chk.interactShortFence
     chk.interactWaterPump = data.interact.object.WaterPump ~= nil
     chk.interactWheelbarrow = data.interact.object.Wheelbarrow ~= nil
-    chk.fixFence = (chk.interactTallFence or chk.interactShortFence) and chk.canRepairFence
-    chk.fixShortFence = chk.interactShortFence and chk.canRepairFence and chk.hasPrimaryHammer
-    chk.fixTallFence = chk.interactTallFence and chk.canRepairFence and chk.hasPrimaryHammer
     chk.pickupBucket = data.interact.object.Bucket ~= nil
     chk.bucketIsFull = chk.pickupBucket and AnimUtil.BucketContainsWater()
     chk.hasPitchfork = data.items.pitchfork ~= nil or chk.pickupPitchfork
@@ -363,6 +360,9 @@ local GetAllConditions = function(data)
     chk.canteenHasWater = chk.hasCanteen and AnimUtil.ItemHasMetadata(data.items.canteen, {water = function(a) return a and tonumber(a) >= 20 end}, {water=0})
     chk.atWaterSource = chk.inWater or AnimUtil.AtWaterSource(data.entity)
     chk.canRepairFence = chk.hasNails and chk.hasSplitRail
+    chk.fixFence = (chk.interactTallFence or chk.interactShortFence) and chk.canRepairFence
+    chk.fixShortFence = chk.interactShortFence and chk.canRepairFence and chk.hasPrimaryHammer
+    chk.fixTallFence = chk.interactTallFence and chk.canRepairFence and chk.hasPrimaryHammer
 
     return chk
 end
