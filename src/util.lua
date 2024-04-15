@@ -92,7 +92,12 @@ AnimUtil.GetClosestInteract = function(interactType, interactTypeSpecific)
                 closestZoneData = zoneData
             end
         else
-            local dist = #(zoneData.coords.xyz - playerCoords)
+            local center = zoneData.coords and zoneData.coords.xyz
+            if not center and zoneData.boundary then
+                local zoneCenter = da.Util.CalcBoundaryCenter(zoneData.boundary)
+                center = vec3(zoneCenter.x, zoneCenter.y, playerCoords.z)
+            end
+            local dist = #(center - playerCoords)
             if not minDist or minDist > dist then
                 minDist = dist
                 closestZoneId = zoneData.id
@@ -101,6 +106,7 @@ AnimUtil.GetClosestInteract = function(interactType, interactTypeSpecific)
         end
     end
 
+    da.Log.DebugVerbose(("ClosestZone: %s"):format(closestZoneId), closestZoneData)
     return closestZoneId, closestZoneData
 end
 
