@@ -265,10 +265,11 @@ local InventoryItems = {
 local GetAllConditions = function(data)
     chk = {}
 
+    -- Conditions -- Must evaluate to true or false, not nil
     chk.isDead = IsEntityDead(data.entity) == 1
     chk.isMale = IsPedMale(data.entity) == 1
     chk.inWater = IsEntityInWater(data.entity) == 1
-    chk.inSnow = not chk.inWater and data.interact.weather.snow
+    chk.inSnow = not chk.inWater and data.interact.weather.snow ~= nil
     chk.isSwimming = IsPedSwimming(data.entity) == 1
     chk.onMount = IsPedOnMount(data.entity) == 1
     chk.isRunning = IsPedRunning(data.entity) == 1
@@ -292,25 +293,25 @@ local GetAllConditions = function(data)
     chk.hasAttachPointRightHip = WeaponModels.Sidearms[data.weapHashTwo] ~= nil
     chk.isInClearedVeg = da.API.DependencyCheck("da_farming") and AnimUtil.IsInClearedVeg() or false
     chk.canFarmHandpick = not chk.isInClearedVeg and data.interact.farm.farmHandpick
-    chk.canFarmKneel = not chk.isInClearedVeg and data.interact.farm.farmKneel
-    chk.canFarmRoot = not chk.isInClearedVeg and data.interact.farm.farmRoot
-    chk.canFarmShell = not chk.isInClearedVeg and data.interact.farm.farmShell
-    chk.canFarmHandSpade = not chk.isInClearedVeg and data.interact.farm.farmHandSpade
-    chk.canFarmRake = not chk.isInClearedVeg and data.interact.farm.farmRake
-    chk.canFarmShovel = not chk.isInClearedVeg and data.interact.farm.farmShovel
-    chk.canFarmTree = not chk.isInClearedVeg and data.interact.farm.farmTree
+    chk.canFarmKneel = not chk.isInClearedVeg and data.interact.farm.farmKneel ~= nil
+    chk.canFarmRoot = not chk.isInClearedVeg and data.interact.farm.farmRoot ~= nil
+    chk.canFarmShell = not chk.isInClearedVeg and data.interact.farm.farmShell ~= nil
+    chk.canFarmHandSpade = not chk.isInClearedVeg and data.interact.farm.farmHandSpade ~= nil
+    chk.canFarmRake = not chk.isInClearedVeg and data.interact.farm.farmRake ~= nil
+    chk.canFarmShovel = not chk.isInClearedVeg and data.interact.farm.farmShovel ~= nil
+    chk.canFarmTree = not chk.isInClearedVeg and data.interact.farm.farmTree ~= nil
     chk.interactPitchfork = chk.inAnimalStall
     chk.isValidTurnIn = da.API.DependencyCheck("da_farming") and AnimUtil.IsValidTurnIn() or false
     chk.pickupPitchfork = data.interact.object.Pitchfork
-    chk.pickupRake = data.interact.object.Rake
-    chk.pickupShovel = data.interact.object.Shovel
-    chk.pickupSpade = data.interact.object.Spade
-    chk.pickupBale = data.interact.object.Bale
-    chk.pickupSack = data.interact.object.Sack
-    chk.pickupCrate = data.interact.object.Crate
-    chk.turnInBale = data.interact.turnIn.Bale
-    chk.turnInSack = data.interact.turnIn.Sack
-    chk.turnInCrate = data.interact.turnIn.Crate
+    chk.pickupRake = data.interact.object.Rake ~= nil
+    chk.pickupShovel = data.interact.object.Shovel ~= nil
+    chk.pickupSpade = data.interact.object.Spade ~= nil
+    chk.pickupBale = data.interact.object.Bale ~= nil
+    chk.pickupSack = data.interact.object.Sack ~= nil
+    chk.pickupCrate = data.interact.object.Crate ~= nil
+    chk.turnInBale = data.interact.turnIn.Bale ~= nil
+    chk.turnInSack = data.interact.turnIn.Sack ~= nil
+    chk.turnInCrate = data.interact.turnIn.Crate ~= nil
     chk.turnInCropType = chk.isValidTurnIn and AnimUtil.CanTurnInCrop("turnIn")
     chk.turnIn = chk.isValidTurnIn and (chk.turnInBale or chk.turnInSack or chk.turnInCrate or chk.turnInCropType)
     chk.wagonTurnInBale = data.interact.wagonTurnIn.Bale
@@ -318,27 +319,27 @@ local GetAllConditions = function(data)
     chk.wagonTurnInCrate = data.interact.wagonTurnIn.Crate
     chk.wagonTurnInCropType = chk.isValidTurnIn and AnimUtil.CanTurnInCrop("wagonTurnIn")
     chk.wagonTurnIn = chk.isValidTurnIn and (chk.wagonTurnInBale or chk.wagonTurnInSack or chk.wagonTurnInCrate or chk.wagonTurnInCropType)
-    chk.farmKneel = data.interact.farm.Kneel
-    chk.farmHandSpade = data.interact.farm.HandSpade
-    chk.farmHandpick = data.interact.farm.Handpick
-    chk.farmTree = data.interact.farm.Tree
-    chk.farmRake = data.interact.farm.Rake
-    chk.farmShell = data.interact.farm.Shell
-    chk.farmShovel = data.interact.farm.Shovel
-    chk.farmRoot = data.interact.farm.Root
-    chk.inAnimalStall = data.interact.zone.AnimalStall
-    chk.inPaddock = data.interact.zone.Paddock
-    chk.interactTrough = data.interact.object.Trough
-    chk.interactWaterTrough = data.interact.object.WaterTrough
-    chk.interactTallFence = data.interact.object.TallFence
-    chk.interactShortFence = data.interact.object.ShortFence
-    chk.inspectFence = chk.interactTallFence or chk.interactShortFence
-    chk.interactWaterPump = data.interact.object.WaterPump
-    chk.interactWheelbarrow = data.interact.object.Wheelbarrow
+    chk.farmKneel = data.interact.farm.Kneel ~= nil
+    chk.farmHandSpade = data.interact.farm.HandSpade ~= nil
+    chk.farmHandpick = data.interact.farm.Handpick ~= nil
+    chk.farmTree = data.interact.farm.Tree ~= nil
+    chk.farmRake = data.interact.farm.Rake ~= nil
+    chk.farmShell = data.interact.farm.Shell ~= nil
+    chk.farmShovel = data.interact.farm.Shovel ~= nil
+    chk.farmRoot = data.interact.farm.Root ~= nil
+    chk.inAnimalStall = data.interact.zone.AnimalStall ~= nil
+    chk.inPaddock = data.interact.zone.Paddock ~= nil
+    chk.interactTrough = data.interact.object.HayTrough ~= nil
+    chk.interactWaterTrough = data.interact.object.WaterTrough ~= nil
+    chk.interactTallFence = data.interact.object.TallFence ~= nil
+    chk.interactShortFence = data.interact.object.ShortFence ~= nil
+    chk.inspectFence = chk.interactTallFence or chk.interactShortFence ~= nil
+    chk.interactWaterPump = data.interact.object.WaterPump ~= nil
+    chk.interactWheelbarrow = data.interact.object.Wheelbarrow ~= nil
     chk.fixFence = (chk.interactTallFence or chk.interactShortFence) and chk.canRepairFence
     chk.fixShortFence = chk.interactShortFence and chk.canRepairFence and chk.hasPrimaryHammer
     chk.fixTallFence = chk.interactTallFence and chk.canRepairFence and chk.hasPrimaryHammer
-    chk.pickupBucket = data.interact.object.Bucket
+    chk.pickupBucket = data.interact.object.Bucket ~= nil
     chk.bucketIsFull = chk.pickupBucket and AnimUtil.BucketContainsWater()
     chk.hasPitchfork = data.items.pitchfork ~= nil or chk.pickupPitchfork
     chk.hasRake = data.items.rake ~= nil or chk.pickupRake
@@ -452,8 +453,11 @@ end
 
 if da.Util.IsDev then
     RegisterCommand("da_xanims_dump_conditions", function(source, args, rawCommand)
+        Conditions.BatchCache(PlayerPedId())
         for k,v in pairs(Conditions.Cache) do
-            da.Log.Debug(k, v)
+            if not args[1] or args[1] == k then
+                da.Log.Debug(k, v)
+            end
         end
     end, false)
 
