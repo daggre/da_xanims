@@ -10,18 +10,6 @@ queue system which allows users to chain animations together. Animations use
 environment based conditions and script hooks to create an immersive way to
 interact with your game world.
 
-## Installation
-Clone the **da_xanims** repository into your servers resources folder:
-```
-cd resources
-git clone git@github.com:daggre/da_xanims.git
-```
-Add `ensure da_xanims` to your preferred resource config. (Default: server.cfg)
-
-> [!IMPORTANT]
-> Be sure you have all dependencies installed:
-> - **da_lib**
-
 ## Usage
 Once you are in game, press '**X**' to bring up the X-Anims menu. A small window
 will appear in the bottom right of your screen, the menu will have a list of
@@ -61,6 +49,18 @@ Additionally, it is possible to create your own animations or plugins using this
 framework. There will be more info and resources added for how to design
 animations inside the framework, but until I write that up you will need to
 contact me for support.
+
+## Installation
+Clone the **da_xanims** repository into your servers resources folder:
+```
+cd resources
+git clone git@github.com:daggre/da_xanims.git
+```
+Add `ensure da_xanims` to your preferred resource config. (Default: server.cfg)
+
+> [!IMPORTANT]
+> Be sure you have all dependencies installed:
+> - **da_lib**
 
 ## Support
 Discord: daggre
