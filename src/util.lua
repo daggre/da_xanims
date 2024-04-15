@@ -81,7 +81,7 @@ AnimUtil.GetClosestInteract = function(interactType, interactTypeSpecific)
     local closestZoneData = nil
     local interactTypeHeightPriority = { .Bale, .Sack, .Crate, }
 
-    local zones = AnimUtil.GetInteractiveZones(interactType, interactTypeSpecific)
+    local zones = AnimUtil.GetInteractiveZones(interactType, interactTypeSpecific) or {}
     local playerCoords = GetEntityCoords(PlayerPedId())
     local minDist, maxZ = nil, nil
     for _, zoneData in ipairs(zones) do
