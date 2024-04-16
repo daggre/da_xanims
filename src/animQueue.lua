@@ -261,7 +261,7 @@ function PlayAnimState(animLib, animState, stateName, info)
             table.insert(AnimStateQueue, 1, {nextAnimLib, GetState(nextAnimLib, animState.next), animState.next})
             da.Log.DebugVerbose("Next anim added to queue", nextAnimLib, animState.next)
         end
-    elseif not IsStateType(stateName, "idle") and not IsStateType(stateName, "exit") and (AnimInfo.idle and not next(AnimStateQueue)) then
+    elseif not IsStateType(stateName, "idle") and not IsStateType(stateName, "exit") and (AnimInfo and AnimInfo.idle and not next(AnimStateQueue)) then
         table.insert(AnimStateQueue, 1, {animLib, AnimInfo.idle, AnimInfo.idle.id})
         da.Log.DebugVerbose("Anim added to queue", animLib, AnimInfo.idle.id)
     end
@@ -347,7 +347,7 @@ function PlayAnimState(animLib, animState, stateName, info)
         -- Allow blend
         Citizen.Wait(1000)
     end
-    if animState.nextBlendInSpeed then AnimInfo.nextBlendInSpeed = animState.nextBlendInSpeed; end
+    if AnimInfo and animState.nextBlendInSpeed then AnimInfo.nextBlendInSpeed = animState.nextBlendInSpeed; end
 
     -- Wait this thread here until anim finishes (unless idle loop)
     AnimInterrupt = false
