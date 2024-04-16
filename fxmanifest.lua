@@ -27,7 +27,9 @@ client_scripts {
     'src/animTree.lua',
 }
 
-server_scripts {}
+server_scripts {
+    'plugin/**/prop/item/useable_srv.lua',
+}
 
 files {
     'ui/index.html',
