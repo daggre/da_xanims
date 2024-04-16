@@ -10,7 +10,7 @@ version '0.3'
 lua54 'yes'
 
 client_scripts {
-    'src/config.lua',
+    'src/config_cl.lua',
     'src/util.lua',
     'src/menu.lua',
     'src/conditions.lua',
@@ -28,7 +28,8 @@ client_scripts {
 }
 
 server_scripts {
-    'plugin/**/prop/item/useable_srv.lua',
+    'src/config_srv.lua',
+    'plugin/**/item/useable_srv.lua',
 }
 
 files {
