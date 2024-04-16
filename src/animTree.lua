@@ -295,6 +295,10 @@ end)
 
 local AnimThread = nil
 QueueAnimState = function(animLib, stateName, info)
+    if not animLib then
+        da.Log.Error(da.Log.Line(debug.getinfo(1)), "Invalid animLib detected in queue.")
+        return
+    end
     da.Log.Debug("AST init", animLib.id, stateName)
     -- Check if state is valid, before adding to queue
     local animState = GetState(animLib, stateName)
