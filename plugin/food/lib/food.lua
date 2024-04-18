@@ -264,3 +264,155 @@ AnimLib.eat_breadroll = {
         }
     },
 }
+
+AnimLib.eat_generic = {
+    name = "",
+    tags = {},
+    key = "",
+    condition = function() return Conditions.Check({ onMount = allow, }) end,
+    enter = {
+        animDict = "mech_inventory@item@_templates@book@w15-8_h20-6@unarmed@base",
+        anim = "unholster",
+        blendInSpeed = 1.0,
+        duration = 1000,
+        next = "exit",
+        flag = AnimConfig.Flag.Move,
+        onTrigger = function(info)
+            Citizen.Wait(600)
+            da.Fn.Consume(info.args.name, info.args)
+            return info
+        end,
+    },
+    exit = {
+        animDict = "mech_inventory@eating@multi_bite@wedge_a4-2_b0-75_w8_h9-4_eat_cheese",
+        anim = "quick_right_hand",
+        blendInSpeed = 1.0,
+        flag = AnimConfig.Flag.Move,
+        duration = 1500,
+        onTrigger = function(info)
+            da.Fn.Eat(info.args.increaseAmount)
+            return info
+        end,
+    },
+}
+
+AnimLib.eat_generic_can = {
+    name = "",
+    tags = {},
+    key = "",
+    condition = function() return Conditions.Check({ onMount = allow, }) end,
+    enter = {
+        animDict = "mech_inventory@item@_templates@cylinder@d12_h6-7_inspecty@offhand@base",
+        anim = "unholster",
+        blendInSpeed = 1.0,
+        next = "exit",
+        flag = AnimConfig.Flag.Move,
+        onTrigger = function(info)
+            Citizen.Wait(600)
+            da.Fn.Consume(info.args.name, info.args)
+            info.prop.can = Prop:new()
+            info.prop.can:attach(info.ped, Propset.canned_goods.Hold)
+            return info
+        end,
+    },
+    exit = {
+        animDict = "mech_inventory@eating@canned_food@cylinder@d8-2_h10-5",
+        anim = "right_hand",
+        prop = { id = "can", anim = "right_hand_can" },
+        blendInSpeed = 1.0,
+        duration = 2700,
+        flag = AnimConfig.Flag.Move,
+        onTrigger = function(info)
+            da.Fn.Eat(info.args.increaseAmount)
+            Citizen.Wait(1000)
+            info.prop.can:attach(info.ped, Propset.canned_goods)
+            Citizen.Wait(1650)
+            Prop.Detach(info.prop.can, { forceWait = 10000, velocity = -1.0, angle = 105, distance = 3.0 })
+            info.prop.can = nil
+            return info
+        end,
+    },
+}
+
+AnimLib.eat_generic_stew = {
+    name = "",
+    tags = {},
+    key = "",
+    condition = function() return Conditions.Check({ onMount = allow, }) end,
+    enter = {
+        animDict = "mech_inventory@item@_templates@cylinder@d12_h6-7_inspecty@offhand@base",
+        anim = "unholster",
+        blendInSpeed = 1.0,
+        duration = 660,
+        next = "eat_1",
+        flag = AnimConfig.Flag.Move,
+        onFinish = function(info)
+            da.Fn.Consume(info.args.name, info.args)
+            return info
+        end,
+    },
+    exit = {
+        animDict = "mech_inventory@eating@stew",
+        anim = "eat_finish_discard",
+        blendInSpeed = 1.0,
+        flag = AnimConfig.Flag.Move,
+        duration = 6000,
+        onTrigger = function(info)
+            local stewAmount = 0.7
+            Citizen.Wait(600)
+            info.prop.bowl:expression(stewAmount)
+            Citizen.Wait(500)
+            local oldSpoon = info.prop.spoon
+            info.prop.spoon = Prop:new()
+            info.prop.spoon:attach(info.ped, Propset.spoon.EmptySpoon)
+            Prop.Delete(oldSpoon)
+            Citizen.Wait(1000)
+            while stewAmount > 0 do
+                stewAmount = stewAmount - 0.15
+                info.prop.bowl:expression(stewAmount)
+                Citizen.Wait(500)
+            end
+            da.Fn.Eat(info.args.increaseAmount/2)
+            -- Workaround for certain bowls not having physics, swap empty bowl back to stew bowl
+            local foodBowl = info.prop.bowl
+            info.prop.bowl = Prop:new()
+            info.prop.bowl:attach(info.ped, Propset.bowl.EmptyNoFade)
+            Prop.Delete(foodBowl)
+            -- End of workaround
+            Citizen.Wait(400)
+            Prop.Detach(info.prop.bowl, { forceWait = 10000, velocity = -0.3, angle = 105, distance = 2.5 })
+            info.prop.bowl = nil
+            Citizen.Wait(500)
+            Prop.Detach(info.prop.spoon, { forceWait = 10000, velocity = -1.0, angle = 115, distance = 3.0 })
+            info.prop.spoon = nil
+            return info
+        end,
+    },
+    animations = {
+        eat_1 = {
+            animDict = "mech_inventory@eating@stew",
+            anim = "intro",
+            blendInSpeed = 2.0,
+            flag = AnimConfig.Flag.Move,
+            next = "exit",
+            onTrigger = function(info)
+                local propset = info.args.propset or "Stew"
+                Citizen.Wait(300)
+                info.prop.bowl = Prop:new()
+                info.prop.bowl:attach(info.ped, Propset.bowl[propset])
+                info.prop.bowl:expression(1.0)
+                Citizen.Wait(300)
+                info.prop.spoon = Prop:new()
+                info.prop.spoon:attach(info.ped, Propset.spoon[propset])
+                Citizen.Wait(500)
+                info.prop.bowl:expression(0.9)
+                return info
+            end,
+            onFinish = function(info)
+                -- Change hunger on finish prior to exit to prevent player from skipping anim
+                da.Fn.Eat(info.args.increaseAmount/2)
+                return info
+            end,
+        },
+    }
+}

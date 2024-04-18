@@ -29,3 +29,96 @@ Propset.breadroll = {
         rotation = vec(6.0, 186.0, 166.0),
     },
 }
+
+Propset.canned_goods = {
+    objectHash = `s_cornedbeef01x`,
+    bone = "PH_R_Hand",
+    fadeIn = true,
+    Hold = {
+        objectHash = `s_cornedbeef01x`,
+        bone = "SKEL_R_HAND",
+        position = vec3(0.07, -0.01, -0.05),
+        rotation = vec3(-53.0, 84.0, 0.0),
+        fadeIn = true,
+    },
+}
+
+Propset.spoon = {
+    EmptySpoon = {
+        objectHash = `p_spoon01x`,
+        bone = "PH_R_Hand",
+    },
+    Stew = {
+        objectHash = `p_beefstew_spoon01x`,
+        bone = "PH_R_Hand",
+        fadeIn = true,
+    },
+    Cobbler = {
+        objectHash = `p_peach_spoon01x`,
+        bone = "PH_R_Hand",
+        fadeIn = true,
+    },
+    Cabbage = {
+        objectHash = `p_oatmeal_spoon01x`,
+        bone = "PH_R_Hand",
+        fadeIn = true,
+    },
+    Porridge = {
+        objectHash = `p_oatmeal_spoon01x`,
+        bone = "PH_R_Hand",
+        fadeIn = true,
+    },
+    FishStew = {
+        objectHash = `p_fishstew_spoon01x`,
+        bone = "PH_R_Hand",
+        fadeIn = true,
+    },
+    Bisque = {
+        objectHash = `p_lobster_spoon01x`,
+        bone = "PH_R_Hand",
+        fadeIn = true,
+    },
+}
+
+Propset.bowl = {
+    EmptyNoFade = {
+        objectHash = `p_beefstew01x`,
+        bone = "PH_L_Hand",
+    },
+    Stew = {
+        objectHash = `p_beefstew01x`,
+        bone = "PH_L_Hand",
+        fadeIn = true,
+        expression = { type = 0, DOF_Name = "stew_fill", },
+    },
+    Cobbler = {
+        objectHash = `p_peach_cobbler01x`,
+        bone = "PH_L_Hand",
+        fadeIn = true,
+        expression = { type = 0, DOF_Name = "stew_fill", },
+    },
+    Cabbage = {
+        objectHash = `p_bacon_cabbage01x`,
+        bone = "PH_L_Hand",
+        fadeIn = true,
+        expression = { type = 0, DOF_Name = "stew_fill", },
+    },
+    Porridge = {
+        objectHash = `p_wheat_milk01x`,
+        bone = "PH_L_Hand",
+        fadeIn = true,
+        expression = { type = 0, DOF_Name = "stew_fill", },
+    },
+    FishStew = {
+        objectHash = `p_fishstew01x`,
+        bone = "PH_L_Hand",
+        fadeIn = true,
+        expression = { type = 0, DOF_Name = "stew_fill", },
+    },
+    Bisque = {
+        objectHash = `p_lobster_bisque01x`,
+        bone = "PH_L_Hand",
+        fadeIn = true,
+        expression = { type = 0, DOF_Name = "stew_fill", },
+    },
+}
