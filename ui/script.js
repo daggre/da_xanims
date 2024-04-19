@@ -89,21 +89,33 @@ AppendSubOption = function(index, value) {
     $("#subTrees").append(html);
 }
 
+KeyTranslate = function(key) {
+    let map = {
+        // Translate fr keyboard
+        '&': '1',
+        'é': '2',
+        '"': '3',
+        '\'': '4',
+    };
+    let lowercaseKey = key.toLowerCase();
+    return map.hasOwnProperty(lowercaseKey) ? map[lowercaseKey] : lowercaseKey;
+}
+
 HandleKey = function(key) {
-    if (SubmenuKeys[key]) {
-        let idx = SubmenuKeys[key]
-        // console.log(idx, HudTree)
+    let translatedKey = KeyTranslate(key)
+    if (SubmenuKeys[translatedKey]) {
+        let idx = SubmenuKeys[translatedKey]
         $("#header").html(HudTree.submenu[idx].name)
         InitializeTree(HudTree.submenu[idx])
-    } else if (AnimKeys[key]) {
-        let idx = AnimKeys[key]
+    } else if (AnimKeys[translatedKey]) {
+        let idx = AnimKeys[translatedKey]
         SendClientMessage('anim', {
             animStateName: HudTree.anims[idx].id,
             animLibName: HudTree.anims[idx].animLibName
         });
         Close();
     } else {
-        SendClientMessage('exit', { key: key });
+        SendClientMessage('exit', { key: translatedKey });
         Close();
     }
 }
