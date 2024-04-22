@@ -180,8 +180,9 @@ AnimUtil.MonitorIdleAnim = function(animState, info)
             local hasWeapon, weaponHash = GetCurrentPedWeapon(info.ped)
 
             if walkSpeed < 1.0 then SetPedMaxMoveBlendRatio(info.ped, walkSpeed) end
-            if IsPedDeadOrDying(info.ped) or
-            IsPedFalling(info.ped) or
+            if IsPedDeadOrDying(info.ped) then
+                needsDrop = true
+            elseif IsPedFalling(info.ped) or
             Citizen.InvokeNative(0x9682F850056C9ADE, info.ped) or -- IsPedLassoed
             Citizen.InvokeNative(0xD453BB601D4A606E, info.ped) or -- IsPedBeingHogtied
             Citizen.InvokeNative(0x3AA24CCC0D451379, info.ped) then -- IsPedHogtied
