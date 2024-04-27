@@ -107,6 +107,126 @@ AnimLib.lean_railing_male_a = {
     }
 }
 
+AnimLib.lean_barrel_newspaper = {
+    name = "Lean Newspaper",
+    tags = { lean_front=1, },
+    key = "q",
+    enter = {
+        animDict = "amb_rest_lean@world_human_lean@barrel@read_newspaper@male_a@stand_enter_withprop",
+        anim = "enter_front_lf",
+        blendInSpeed = 1.0,
+        duration = 6500,
+        prop = { newspaper = { anim = "enter_front_lf_newspaper", }, },
+        onStart = function(info)
+            local propset = IsPedMale(info.ped) and Propset.Newspaper or Propset.Newspaper.FemaleGrab
+            info.prop.newspaper = Prop:new(propset)
+            info.prop.newspaper:create()
+            return info
+        end,
+        onTrigger = function(info)
+            Citizen.Wait(1400)
+            info.prop.newspaper:attach(info.ped)
+            Citizen.Wait(600)
+            if not IsPedMale(info.ped) then
+                info.prop.newspaper:attach(info.ped, Propset.Newspaper.Female)
+            end
+            return info
+        end,
+    },
+    exit = {
+        animDict = "amb_rest_lean@world_human_lean@barrel@read_newspaper@male_a@stand_exit_withprop",
+        anim = "exit_front",
+        duration = 2500,
+        prop = { newspaper = { anim = "exit_front_newspaper", }, },
+        onTrigger = function(info)
+            Citizen.Wait(1500)
+            if not IsPedMale(info.ped) then
+                info.prop.newspaper:attach(info.ped, Propset.Newspaper.FemaleGrab)
+            end
+            Citizen.Wait(1300)
+            Prop.Detach(info.prop.newspaper)
+            info.prop.newspaper = nil
+            return info
+        end
+    },
+    idles = {
+        idle_a = {
+            animDict = "amb_rest_lean@world_human_lean@barrel@read_newspaper@male_a@base",
+            anim = "base",
+            flag = AnimConfig.Flag.Loop,
+            prop = { newspaper = { anim = "base_newspaper", loop = true, }, },
+            transitions = {
+                a_a = "s",
+                a_b = "w",
+                a_c = "e",
+                a_d = "q",
+                a_e = "a",
+                a_f = "d",
+                a_g = "1",
+                a_h = "x",
+            },
+        },
+    },
+    animations = {
+        a_a = {
+            animDict = "amb_rest_lean@world_human_lean@barrel@read_newspaper@male_a@idle_a",
+            anim = "idle_a",
+            duration = 8000,
+            prop = { newspaper = { anim = "idle_a_newspaper", }, },
+            name = "Point Read",
+        },
+        a_b = {
+            animDict = "amb_rest_lean@world_human_lean@barrel@read_newspaper@male_a@idle_a",
+            anim = "idle_b",
+            duration = 5000,
+            prop = { newspaper = { anim = "idle_b_newspaper", }, },
+            name = "Scratch Forehead",
+        },
+        a_c = {
+            animDict = "amb_rest_lean@world_human_lean@barrel@read_newspaper@male_a@idle_a",
+            anim = "idle_c",
+            duration = 5000,
+            prop = { newspaper = { anim = "idle_c_newspaper", }, },
+            name = "Shake Head",
+        },
+        a_d = {
+            animDict = "amb_rest_lean@world_human_lean@barrel@read_newspaper@male_a@idle_b",
+            anim = "idle_d",
+            duration = 8000,
+            prop = { newspaper = { anim = "idle_d_newspaper", }, },
+            name = "Nod Head",
+        },
+        a_e = {
+            animDict = "amb_rest_lean@world_human_lean@barrel@read_newspaper@male_a@idle_b",
+            anim = "idle_e",
+            duration = 6500,
+            prop = { newspaper = { anim = "idle_e_newspaper", }, },
+            name = "Scratch Face"
+        },
+        a_f = {
+            animDict = "amb_rest_lean@world_human_lean@barrel@read_newspaper@male_a@idle_b",
+            anim = "idle_f",
+            duration = 7000,
+            prop = { newspaper = { anim = "idle_f_newspaper", }, },
+            name = "Quiet Cough"
+        },
+        a_g = {
+            animDict = "amb_rest_lean@world_human_lean@barrel@read_newspaper@male_a@idle_c",
+            anim = "idle_g",
+            duration = 11000,
+            prop = { newspaper = { anim = "idle_g_newspaper", }, },
+            name = "Re-adjust Lean"
+        },
+        a_h = {
+            animDict = "amb_rest_lean@world_human_lean@barrel@read_newspaper@male_a@idle_c",
+            anim = "idle_h",
+            duration = 8000,
+            prop = { newspaper = { anim = "idle_h_newspaper", }, },
+            name = "Scratch, Point"
+        },
+    },
+}
+
 AnimLib.lean_railing_male_b = {
     name = "Elbows On Railing",
     tags = { lean_front=1, },

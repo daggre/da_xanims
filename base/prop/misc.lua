@@ -24,6 +24,18 @@ Propset.Newspaper = {
     objectHash = `p_cs_newspaper_03x`,
     bone = "PH_R_Hand",
     fadeIn = true,
+    Female = {
+        objectHash = `p_cs_newspaper_03x`,
+        bone = "PH_R_Hand",
+        fadeIn = true,
+        position = vec3(-0.07, 0, 0.005),
+    },
+    FemaleGrab = {
+        objectHash = `p_cs_newspaper_03x`,
+        bone = "PH_R_Hand",
+        fadeIn = true,
+        position = vec3(0, 0, 0),
+    }
 }
 
 Propset.Clipboard = {
@@ -36,5 +48,31 @@ Propset.Clipboard = {
         bone = "SKEL_R_Finger13",
         position = vec3(0.003, -0.004, -0.016),
         rotation = vec3(50.0, -90.0, 0.0),
+    },
+}
+
+Propset.Pencil = {
+    Male = {
+        objectHash = `p_pencil01x`,
+        bone = "PH_R_Hand",
+        fadeIn = true,
+    },
+    Female = {
+        objectHash = `p_pencil01x`,
+        bone = "PH_R_Hand",
+        fadeIn = true,
+        position = vec3(-0.01, -0.01, 0),
+    }
+}
+
+Propset.Ledger = {
+    objectHash = 'p_cs_ledgersmall01x',
+    bone = "PH_L_Hand",
+    fadeIn = true,
+    FemaleGrab = {
+        objectHash = 'p_cs_ledgersmall01x',
+        bone = "PH_L_Hand",
+        fadeIn = true,
+        position = vec3(0, 0.075, 0),
     },
 }

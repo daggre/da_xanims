@@ -253,3 +253,138 @@ AnimLib.WorldHumanClipboard = {
         },
     },
 }
+
+AnimLib.write_notebook_male = {
+    name = "Write Notebook Walk",
+    tags = { work=1 },
+    key = "e",
+    enter = {
+        animDict = "amb_work@world_human_write_notebook@male_a@stand_enter",
+        anim = "enter_back_lf",
+        flag = AnimConfig.Flag.Move,
+        blendInSpeed = 1.0,
+        prop = { ledger = { anim = "enter_back_lf_ledger", }, },
+        onStart = function(info)
+            local propset = IsPedMale(info.ped) and Propset.Ledger or Propset.Ledger.FemaleGrab
+            info.prop.ledger = Prop:new(propset)
+            info.prop.ledger:create()
+            return info
+        end,
+        onTrigger = function(info)
+            Citizen.Wait(1000)
+            info.prop.ledger:attach(info.ped)
+            Citizen.Wait(2000)
+            info.prop.ledger:attach(info.ped, Propset.Ledger)
+            return info
+        end,
+        onFinish = function(info)
+            local propset = IsPedMale(info.ped) and Propset.Pencil.Male or Propset.Pencil.Female
+            info.prop.pencil = Prop:new()
+            info.prop.pencil:attach(info.ped, propset)
+            return info
+        end
+    },
+    exit = {
+        animDict = "amb_work@world_human_write_notebook@male_a@stand_exit",
+        anim = "exit_front",
+        flag = AnimConfig.Flag.Move,
+        prop = { ledger = { anim = "exit_front_ledger", }, },
+        onTrigger = function(info)
+            Citizen.Wait(1000)
+            Prop.Detach(info.prop.pencil)
+            Citizen.Wait(1700)
+            if not IsPedMale(info.ped) then
+                info.prop.ledger:attach(info.ped, Propset.Ledger.FemaleGrab)
+            end
+            Citizen.Wait(1300)
+            Prop.Detach(info.prop.ledger)
+            info.prop.ledger = nil
+            return info
+        end
+
+    },
+    idles = {
+        idle_a = {
+            animDict = "amb_work@world_human_write_notebook@male_a@base",
+            anim = "base",
+            flag = AnimConfig.Flag.MoveLoop,
+            prop = { ledger = { anim = "base_ledger", loop = true, }, },
+            transitions = {
+                a_a = "1",
+                a_b = "2",
+                a_c = "3",
+                a_d = "a",
+                a_e = "w",
+                a_f = "q",
+                a_g = "e",
+                a_h = "s",
+            },
+        },
+    },
+    animations = {
+        a_a = {
+            animDict = "amb_work@world_human_write_notebook@male_a@idle_a",
+            anim = "idle_a",
+            flag = AnimConfig.Flag.Move,
+            duration = 13000,
+            prop = { ledger = { anim = "idle_a_ledger", }, },
+            name = "Pencil Scratch"
+        },
+        a_b = {
+            animDict = "amb_work@world_human_write_notebook@male_a@idle_a",
+            anim = "idle_b",
+            flag = AnimConfig.Flag.Move,
+            prop = { ledger = { anim = "idle_b_ledger", }, },
+            name = "Bite Pencil"
+        },
+        a_c = {
+            animDict = "amb_work@world_human_write_notebook@male_a@idle_a",
+            anim = "idle_c",
+            flag = AnimConfig.Flag.Move,
+            duration = 7500,
+            prop = { ledger = { anim = "idle_c_ledger", }, },
+            name = "Lift Pencil"
+        },
+        a_d = {
+            animDict = "amb_work@world_human_write_notebook@male_a@idle_b",
+            anim = "idle_d",
+            duration = 12000,
+            blendInSpeed = 1.0,
+            flag = AnimConfig.Flag.Move,
+            prop = { ledger = { anim = "idle_d_ledger", }, },
+            name = "Thinking"
+        },
+        a_e = {
+            animDict = "amb_work@world_human_write_notebook@male_a@idle_b",
+            anim = "idle_e",
+            duration = 10000,
+            flag = AnimConfig.Flag.Move,
+            prop = { ledger = { anim = "idle_e_ledger", }, },
+            name = "Look Up"
+        },
+        a_f = {
+            animDict = "amb_work@world_human_write_notebook@male_a@idle_b",
+            anim = "idle_f",
+            duration = 10000,
+            flag = AnimConfig.Flag.Move,
+            prop = { ledger = { anim = "idle_f_ledger", }, },
+            name = "Look Up Right"
+        },
+        a_g = {
+            animDict = "amb_work@world_human_write_notebook@male_a@idle_c",
+            anim = "idle_g",
+            duration = 8500,
+            flag = AnimConfig.Flag.Move,
+            prop = { ledger = { anim = "idle_g_ledger", }, },
+            name = "Neck Crack",
+        },
+        a_h = {
+            animDict = "amb_work@world_human_write_notebook@male_a@idle_c",
+            anim = "idle_h",
+            duration = 11000,
+            flag = AnimConfig.Flag.Move,
+            prop = { ledger = { anim = "idle_h_ledger", }, },
+            name = "Write Things"
+        },
+    },
+}
