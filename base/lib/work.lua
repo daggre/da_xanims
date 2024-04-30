@@ -275,14 +275,12 @@ AnimLib.write_notebook_male = {
             info.prop.ledger:attach(info.ped)
             Citizen.Wait(2000)
             info.prop.ledger:attach(info.ped, Propset.Ledger)
-            return info
-        end,
-        onFinish = function(info)
+            Citizen.Wait(1500)
             local propset = IsPedMale(info.ped) and Propset.Pencil.Male or Propset.Pencil.Female
             info.prop.pencil = Prop:new()
             info.prop.pencil:attach(info.ped, propset)
             return info
-        end
+        end,
     },
     exit = {
         animDict = "amb_work@world_human_write_notebook@male_a@stand_exit",
@@ -308,6 +306,11 @@ AnimLib.write_notebook_male = {
             animDict = "amb_work@world_human_write_notebook@male_a@base",
             anim = "base",
             flag = AnimConfig.Flag.MoveLoop,
+            idleAnimConfig = {
+                canJump = false,
+                canRun = false,
+                canClimb = false,
+            },
             prop = { ledger = { anim = "base_ledger", loop = true, }, },
             transitions = {
                 a_a = "1",
@@ -333,6 +336,7 @@ AnimLib.write_notebook_male = {
         a_b = {
             animDict = "amb_work@world_human_write_notebook@male_a@idle_a",
             anim = "idle_b",
+            duration = 12500,
             flag = AnimConfig.Flag.Move,
             prop = { ledger = { anim = "idle_b_ledger", }, },
             name = "Bite Pencil"
