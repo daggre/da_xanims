@@ -359,9 +359,11 @@ function PlayAnimState(animLib, animState, stateName, info)
     elseif not IsStateType(stateName, "idle") then
         -- Not an idle loop, play for length of anim
         Citizen.Wait(100) -- Wait to call IsEntityPlayingAnim, otherwise it might not register just yet
+        duration = GetGameTimer()
         while not AnimInterrupt and AnimInfo and IsEntityPlayingAnim(AnimInfo.ped, animState.animDict, animState.anim, 3) do
             Citizen.Wait(5)
         end
+        da.Log.DebugVerbose("duration:", GetGameTimer() - duration)
     end
     AnimInterrupt = false
 

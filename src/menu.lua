@@ -5,6 +5,9 @@ allow = "allow"
 AnimMenu = {}
 AnimMenu.root = {
     submenu = {
+        dance = {
+            key = "j"
+        },
         gesture = {
             key = "a",
             condition = function() return Conditions.Check({
