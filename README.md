@@ -5,7 +5,7 @@ v0.8 - Early Release
 
 ## Description
 This script provides a framework for using/building custom raw animation
-scenarios, it provides a tree-based hotkey ui for rapid usage, and is built on a
+scenarios, it provides a tree-based hotkey UI for rapid usage, and is built on a
 queue system which allows users to chain animations together. Animations use
 environment based conditions and script hooks to create an immersive way to
 interact with your game world.
