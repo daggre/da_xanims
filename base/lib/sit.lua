@@ -987,3 +987,4 @@ AnimLib.sit_crate_clean_boots = { -- DISABLED: floating sit
         },
     },
 }
+

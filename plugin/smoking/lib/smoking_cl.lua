@@ -86,7 +86,9 @@ AnimLib.smoke_masc_a = {
             name = "Draw Long",
             onTrigger = function(info)
                 info.prop.cigarette:attach(info.ped, Propset.Cigarette.TwoFingers)
-                Citizen.Wait(4200)
+                Citizen.Wait(3800)
+                info.prop.cigarette:attach(info.ped, Propset.Cigarette)
+                Citizen.Wait(400)
                 info.prop.cigarette:attach(info.ped, Propset.Cigarette.Mouth)
                 Citizen.Wait(2100)
                 info.prop.cigarette:attach(info.ped, Propset.Cigarette.TwoFingers)
