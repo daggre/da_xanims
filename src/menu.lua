@@ -6,7 +6,7 @@ AnimMenu = {}
 AnimMenu.root = {
     submenu = {
         dance = {
-            key = "j"
+            key = "1"
         },
         gesture = {
             key = "a",

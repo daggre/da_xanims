@@ -277,10 +277,10 @@ Citizen.CreateThread(function()
         if IsEntityDead(PlayerPedId()) then
             Citizen.Wait(1000)
         end
-        if (IsControlJustPressed(0, 0x7DA48D2A) and IsInputDisabled(0)) then
+        if (IsControlJustPressed(0, 0x7DA48D2A) and IsInputDisabled(0)) and not IsDisabledControlPressed(0, 0xD7DE6B1E)  then
             AnimMenu, AnimTags = populateAnimConfig(AnimMenu, AnimTags)
         end
-        if (IsControlJustReleased(0, 0x7DA48D2A)) and IsInputDisabled(0) then -- 0x8CC9CD42 old x
+        if (IsControlJustReleased(0, 0x7DA48D2A)) and IsInputDisabled(0) and not IsDisabledControlPressed(0, 0xD7DE6B1E) then -- 0x8CC9CD42 old x
             Conditions.BatchCache(PlayerPedId())
             optionTree = getOptionTree(AnimMenu.root)
             SetNuiFocus(true, false)
