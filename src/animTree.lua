@@ -366,6 +366,7 @@ RegisterNetEvent("da_xanims:queueAnim")
 AddEventHandler("da_xanims:queueAnim", function(animLibName, animStateName, info)
     if not animStateName or not animLibName then return; end
     if ActiveAnim and ActiveAnim[1] and ActiveAnim[1].id == animLibName and animStateName == "enter" then
+        da.Log.Debug("Already playing anim", animLibName, animStateName)
         return
     end
     if animStateName == "enter" then

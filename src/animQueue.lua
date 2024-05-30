@@ -69,12 +69,18 @@ AnimStateQueue = {} -- { { animLib, animState, animStateName }, {...} }
 AnimInterrupt = false
 AnimInfo = nil
 
-function IsStateType(state, type) return string.sub(state, 1, #type) == type; end
+function IsStateType(state, type)
+    if not state then return false; end
+    return string.sub(state, 1, #type) == type
+end
 
 function GetState(animLib, stateName)
     local animState = nil
     if not animLib then return nil; end
 
+    if not stateName then
+        da.Log.DebugVerbose("State not found", stateName, animLib)
+    end
     if IsStateType(stateName, "enter") then
         animState = animLib.enter
     elseif IsStateType(stateName, "exit") and not IsStateType(stateName, "exit_") then
@@ -259,7 +265,7 @@ function PlayAnimState(animLib, animState, stateName, info)
         if not AnimStateQueue[1] or AnimStateQueue[1][3] ~= "exit" then
             local nextAnimLib = AnimLib[animState.animLibName]
             table.insert(AnimStateQueue, 1, {nextAnimLib, GetState(nextAnimLib, animState.next), animState.next})
-            da.Log.DebugVerbose("Next anim added to queue", nextAnimLib, animState.next)
+            da.Log.DebugVerbose("next anim added to queue", nextAnimLib, animState.next)
         end
     elseif not IsStateType(stateName, "idle") and not IsStateType(stateName, "exit") and (AnimInfo and AnimInfo.idle and not next(AnimStateQueue)) then
         table.insert(AnimStateQueue, 1, {animLib, AnimInfo.idle, AnimInfo.idle.id})
@@ -288,11 +294,17 @@ function PlayAnimState(animLib, animState, stateName, info)
             table.insert(AnimStateQueue, 1, {animLib, AnimInfo.idle, AnimInfo.idle.id})
             return
         elseif AnimInfo.gotoExit then
+            AnimInfo.gotoExit = nil
             AnimStateQueue = {}
-            animState = animLib.exit
-            stateName = "exit"
-            ActiveAnim = {animLib, animState, stateName}
+            table.insert(AnimStateQueue, 1, {animLib, animLib.exit, "exit"})
+        elseif AnimInfo.next then
+            AnimStateQueue = {}
+            local nextAnimLib = AnimLib[animState.animLibName]
+            table.insert(AnimStateQueue, 1, {nextAnimLib, GetState(nextAnimLib, AnimInfo.next), animState.next})
+            da.Log.DebugVerbose("info next anim added to queue", nextAnimLib, AnimInfo.next)
+            AnimInfo.next = nil
         end
+        -- TODO: Modify animState duration
     end
 
     if AnimInfo and animState and animState.animDict and animState.animDict ~= "" and animState.anim and animState.anim ~= "" then
@@ -374,7 +386,8 @@ function PlayAnimState(animLib, animState, stateName, info)
     -- Animation is done, check for onFinish logic or exit state
     if animState.onFinish then
         AnimInfo = animState.onFinish(AnimInfo)
-        if AnimInfo.gotoExit then
+        if AnimInfo and AnimInfo.gotoExit then
+            AnimInfo.gotoExit = nil
             AnimStateQueue = {}
             table.insert(AnimStateQueue, 1, {animLib, animLib.exit, "exit"})
         end
