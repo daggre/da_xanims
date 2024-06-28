@@ -82,11 +82,11 @@ function Prop:attach(prop, propset)
 
     if self.propset.interactRange ~= nil then
         if self.propData then
-            propData = da.Net.BlockingCb("intprop:server:remove", 2000, self.propData)
+            da.Net.BlockingCb("intprop:server:remove", 2000, self.propData)
             local numRemovals = da.Zone.Remove(function(zoneData)
                 return zoneData.interactType == "object" and zoneData.id == self.propData.id
             end)
-            da.Log.Debug("Removed " .. numRemovals .. " interactive prop zone(s) with id " .. self.propData.id)
+            da.Log.Debug(("Removed %s interactive prop zone(s) with id %s"):format(numRemovals or 0, self.propData.id))
         end
         if self.propData and self.propData.attachWait then self.propData.attachWait = nil; end -- Race is done, allow clean anim to spawn a new one
     end

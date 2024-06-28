@@ -259,6 +259,7 @@ local InventoryItems = {
     oyster = {},
     clam = {},
     guitar = {},
+    banjo = {},
     attach_back_guitar = {},
 }
 
@@ -352,6 +353,7 @@ local GetAllConditions = function(data)
     chk.hasApple = data.items.apple ~= nil
     chk.hasBread = data.items.bread ~= nil
     chk.hasGuitar = data.items.guitar ~= nil or data.items.attach_back_guitar ~= nil
+    chk.hasBanjo = data.items.banjo ~= nil
     chk.hasNails = data.items.nails ~= nil
     chk.hasSplitRail = data.items.splitrail ~= nil
     chk.hasAnyCig = chk.hasCig or chk.hasRolledCig or chk.hasCannabis

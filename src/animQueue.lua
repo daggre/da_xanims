@@ -161,6 +161,7 @@ function playAnim(ped, animDictionary, animName, blendInSpeed, blendOutSpeed, du
     loadAnimDict(animDictionary)
     ClearPedSecondaryTask(ped)
     da.Log.DebugVerbose(ped, animDictionary, animName, blendInSpeed, blendOutSpeed, duration, flags, playbackRate, ikFlags, p10, taskFilter, p12) -- DEBUG
+    da.Log.DebugVerbose(("Anim dur: %.1fs @ %.1fs"):format(GetAnimDuration(animDictionary, animName), GetGameTimer()/1000))
     TaskPlayAnim(
         ped,
         animDictionary,
@@ -265,11 +266,11 @@ function PlayAnimState(animLib, animState, stateName, info)
         if not AnimStateQueue[1] or AnimStateQueue[1][3] ~= "exit" then
             local nextAnimLib = AnimLib[animState.animLibName]
             table.insert(AnimStateQueue, 1, {nextAnimLib, GetState(nextAnimLib, animState.next), animState.next})
-            da.Log.DebugVerbose("next anim added to queue", nextAnimLib, animState.next)
+            da.Log.DebugVerbose("Next anim added to queue", nextAnimLib.animLibName, animState.next)
         end
     elseif not IsStateType(stateName, "idle") and not IsStateType(stateName, "exit") and (AnimInfo and AnimInfo.idle and not next(AnimStateQueue)) then
         table.insert(AnimStateQueue, 1, {animLib, AnimInfo.idle, AnimInfo.idle.id})
-        da.Log.DebugVerbose("Anim added to queue", animLib, AnimInfo.idle.id)
+        da.Log.DebugVerbose("Anim added to queue", animLib.animLibName, AnimInfo.idle.id)
     end
 
     if animState.onStart then
