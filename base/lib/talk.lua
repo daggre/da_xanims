@@ -610,3 +610,16 @@ AnimLib.nod_point_back_right = {
         flag = AnimConfig.Flag.Move,
     },
 }
+
+AnimLib.shush = {
+    name = "Shush",
+    tags = { react=1, },
+    key = "r",
+    enter = {
+        animDict = "script_mp@emotes@hush_your_mouth@male@unarmed@full",
+        anim = "fullbody_alt_2",
+        blendInSpeed = 1.0,
+        duration = 1000,
+        flag = AnimConfig.Flag.Move,
+    },
+}
