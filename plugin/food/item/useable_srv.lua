@@ -6,6 +6,10 @@ da.API.CreateUseableItem("apple", function(source, item)
     TriggerClientEvent("da_xanims:queueAnim", source, "eat_apple", "enter", item)
 end)
 
+da.API.CreateUseableItem("pear", function(source, item)
+    TriggerClientEvent("da_xanims:queueAnim", source, "eat_pear", "enter", item)
+end)
+
 da.API.CreateUseableItem("bread", function(source, item)
     TriggerClientEvent("da_xanims:queueAnim", source, "eat_breadroll", "enter", item)
 end)

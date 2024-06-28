@@ -159,6 +159,165 @@ AnimLib.eat_apple = {
     },
 }
 
+AnimLib.eat_pear = {
+    name = "Eat Pear",
+    tags = { ["food_&_drink"]=1, },
+    key = "p",
+    triggerCondition = function() return Conditions.Check({ hasPear = true, }) end,
+    enter = {
+        animDict = "amb_misc@world_human_eat_apple@male_a@enter",
+        anim = "enter",
+        flag = AnimConfig.Flag.Move,
+        blendInSpeed = 1.0,
+        onTrigger = function(info)
+            info.prop.pear = Prop:new()
+            Citizen.Wait(1300)
+            da.Log.Debug("args", info.args)
+            da.Fn.Consume("pear", info.args)
+            info.prop.pear:attach(info.ped, Propset.pear)
+            info.pear = {
+                currentResource = 0.0,
+                totalResource = 1.0,
+                hungerPerBite = 10/5,
+                resourcePerBite = 1.0/5,
+            }
+            return info
+        end,
+    },
+    exit = {
+        animDict = "amb_misc@world_human_eat_apple@male_a@exit",
+        anim = "exit",
+        flag = AnimConfig.Flag.Move,
+        onTrigger = function(info)
+            Citizen.Wait(650)
+            Prop.Detach(info.prop.pear, { forceWait = 5000, velocity = -1.0, })
+            info.prop.pear = nil
+            return info
+        end,
+    },
+    idles = {
+        idle_a = {
+            animDict = "amb_misc@world_human_eat_apple@male_a@base",
+            anim = "base",
+            prop = { id = "pear", anim = "base_apple", },
+            flag = AnimConfig.Flag.MoveLoop,
+            transitions = {
+                a_a = "w",
+                -- a_b = "2",
+                a_c = "z",
+                a_d = "b",
+                -- a_e = "q",
+                a_f = "s",
+                -- a_g = "e",
+                exit_throw = "t",
+            },
+        },
+    },
+    animations = {
+        a_a = {
+            animDict = "amb_misc@world_human_eat_apple@male_a@idle_a",
+            anim = "idle_a",
+            flag = AnimConfig.Flag.Move,
+            prop = { id = "pear", anim = "idle_a_apple", },
+            name = "Wipe on Shirt",
+            onTrigger = function(info)
+                Citizen.Wait(4500)
+                info.pear.currentResource = info.pear.currentResource + info.pear.resourcePerBite
+                info.prop.pear:expression(math.min(info.pear.currentResource, info.pear.totalResource))
+                return info
+            end,
+            onFinish = function(info)
+                if info.pear.currentResource > 1 then info.gotoExit = true; end
+                return info
+            end,
+            changeCore = { Hunger = 10/5, },
+        },
+        -- a_b = {
+        --     animDict = "amb_misc@world_human_eat_apple@male_a@idle_a",
+        --     anim = "idle_b",
+        -- },
+        a_c = {
+            animDict = "amb_misc@world_human_eat_apple@male_a@idle_a",
+            anim = "idle_c",
+            flag = AnimConfig.Flag.Move,
+            prop = { id = "pear", anim = "idle_c_apple", },
+            name = "Wipe on Pants, Bite",
+            onTrigger = function(info)
+                Citizen.Wait(4500)
+                info.pear.currentResource = info.pear.currentResource + info.pear.resourcePerBite
+                info.prop.pear:expression(math.min(info.pear.currentResource, info.pear.totalResource))
+                return info
+            end,
+            onFinish = function(info)
+                if info.pear.currentResource > 1 then info.gotoExit = true; end
+                return info
+            end,
+            changeCore = { Hunger = 10/5, },
+        },
+        a_d = {
+            animDict = "amb_misc@world_human_eat_apple@male_a@idle_b",
+            anim = "idle_d",
+            flag = AnimConfig.Flag.Move,
+            prop = { id = "pear", anim = "idle_d_apple", },
+            name = "Bite",
+            duration = 6000,
+            onTrigger = function(info)
+                Citizen.Wait(4000)
+                info.pear.currentResource = info.pear.currentResource + info.pear.resourcePerBite
+                info.prop.pear:expression(math.min(info.pear.currentResource, info.pear.totalResource))
+                return info
+            end,
+            onFinish = function(info)
+                if info.pear.currentResource > 1 then info.gotoExit = true; end
+                return info
+            end,
+            changeCore = { Hunger = 10/5, },
+        },
+        -- a_e = {
+        --     animDict = "amb_misc@world_human_eat_apple@male_a@idle_b",
+        --     anim = "idle_e",
+        -- },
+        a_f = {
+            animDict = "amb_misc@world_human_eat_apple@male_a@idle_b",
+            anim = "idle_f",
+            flag = AnimConfig.Flag.Move,
+            prop = { id = "pear", anim = "idle_f_apple", },
+            name = "Pick Out Seed",
+            onTrigger = function(info)
+                Citizen.Wait(6000)
+                info.pear.currentResource = info.pear.currentResource + info.pear.resourcePerBite
+                info.prop.pear:expression(math.min(info.pear.currentResource, info.pear.totalResource))
+                return info
+            end,
+            onFinish = function(info)
+                if info.pear.currentResource > 1 then info.gotoExit = true; end
+                return info
+            end,
+            changeCore = { Hunger = 10/5, },
+        },
+        -- a_g = {
+        --     animDict = "amb_misc@world_human_eat_apple@male_a@idle_c",
+        --     anim = "idle_g",
+        -- },
+        exit_throw = {
+            animDict = "amb_camp@world_camp_jack_throws_rocks_ledge@idle_a",
+            anim = "idle_c",
+            flag = AnimConfig.Flag.Move,
+            name = "Throw pear",
+            blendInSpeed = 0.5,
+            duration = 3200,
+            onTrigger = function(info)
+                Citizen.Wait(500)
+                info.prop.pear:attach(info.ped, Propset.pear.Throw)
+                Citizen.Wait(2300)
+                Prop.Detach(info.prop.pear, { forceWait = 10000, velocity = 3.0, angle = -1, distance = 20 })
+                info.prop.pear = nil
+                return info
+            end,
+        }
+    },
+}
+
 AnimLib.eat_breadroll = {
     name = "Eat Bread",
     tags = { ["food_&_drink"]=1, },
