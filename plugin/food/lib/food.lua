@@ -455,6 +455,40 @@ AnimLib.eat_generic = {
     },
 }
 
+AnimLib.eat_rotten = {
+    name = "",
+    tags = {},
+    key = "",
+    condition = function() return Conditions.Check({ onMount = allow, }) end,
+    enter = {
+        animDict = "mech_inventory@item@_templates@book@w15-8_h20-6@unarmed@base",
+        anim = "unholster",
+        blendInSpeed = 1.0,
+        duration = 1000,
+        next = "exit",
+        flag = AnimConfig.Flag.Move,
+        changeCore = {
+            Health = -50,
+        },
+        onTrigger = function(info)
+            Citizen.Wait(600)
+            da.Fn.Consume(info.args.name, info.args)
+            return info
+        end,
+    },
+    exit = {
+        animDict = "mech_inventory@eating@multi_bite@wedge_a4-2_b0-75_w8_h9-4_eat_cheese",
+        anim = "quick_right_hand",
+        blendInSpeed = 1.0,
+        flag = AnimConfig.Flag.Move,
+        duration = 1500,
+        onTrigger = function(info)
+            da.Fn.Eat(info.args.increaseAmount)
+            return info
+        end,
+    },
+}
+
 AnimLib.eat_generic_can = {
     name = "",
     tags = {},

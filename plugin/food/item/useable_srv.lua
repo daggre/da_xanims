@@ -15,6 +15,9 @@ da.API.CreateUseableItem("bread", function(source, item)
 end)
 
 local GenericFood = {
+    eat_rotten = {
+        rottingflesh = { amount = 5, },
+    },
     eat_generic = {
         alaskanginseng = { amount = 5, },
         americanginseng = { amount = 5, },
