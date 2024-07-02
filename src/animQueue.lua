@@ -300,7 +300,7 @@ function PlayAnimState(animLib, animState, stateName, info)
             table.insert(AnimStateQueue, 1, {animLib, animLib.exit, "exit"})
         elseif AnimInfo.next then
             AnimStateQueue = {}
-            local nextAnimLib = AnimLib[animState.animLibName]
+            local nextAnimLib = AnimInfo.animLibName or AnimLib[animState.animLibName]
             table.insert(AnimStateQueue, 1, {nextAnimLib, GetState(nextAnimLib, AnimInfo.next), animState.next})
             da.Log.DebugVerbose("info next anim added to queue", nextAnimLib, AnimInfo.next)
             AnimInfo.next = nil
