@@ -17,6 +17,7 @@ AnimMenu.root = {
                 hasSecondaryWeapon = allow,
             }) end,
             submenu = {
+                rock_paper_scissors = { key = "m", conditions = function() return Conditions.Check({ onMount = allow, }) end, },
                 react = { key = "r", condition = function() return Conditions.Check({ onMount = allow, }) end, },
                 talk_negative = { key = "d", condition = function() return Conditions.Check({ onMount = allow, }) end, },
                 talk_positive = { key = "a", condition = function() return Conditions.Check({ onMount = allow, }) end, },
