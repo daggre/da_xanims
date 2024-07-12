@@ -278,8 +278,13 @@ local GetAllConditions = function(data)
     chk.isSprinting = IsPedSprinting(data.entity) == 1
     chk.isMountSprinting = IsPedSprinting(data.mount) == 1
     chk.isAnimal = Citizen.InvokeNative(0x9A100F1CF4546629, data.entity) == 1
+    chk.isEagle = chk.isAnimal and data.model == `a_c_eagle_01`
+    chk.isHawk = chk.isAnimal and data.model == `a_c_hawk_01`
+    chk.isOwl = chk.isAnimal and data.model == `a_c_owl_01`
+    chk.isRaptor = chk.isHawk or chk.isEagle or chk.isOwl
     chk.isCoyote = chk.isAnimal and AnimalModels.Coyote[data.model]
     chk.isDog = chk.isAnimal and AnimalModels.Dog[data.model]
+    chk.isRaccoon = chk.isAnimal and data.model == `a_c_raccoon_01`
     chk.isHorse = chk.isAnimal and AnimalModels.Horse[data.model]
     chk.isWolf = chk.isAnimal and AnimalModels.Wolf[data.model]
     chk.isAiming = IsPlayerFreeAiming(data.entity) == 1

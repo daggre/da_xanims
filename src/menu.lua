@@ -114,28 +114,6 @@ AnimMenu.root = {
                 isRunning = false,
             }) end,
         },
-        -- Animals
-        canine = {
-            key = "a",
-            condition = function() return Conditions.Check({
-                isAnimal = true,
-                isDog = true,
-            }) end
-        },
-        horse = {
-            key = "h",
-            condition = function() return Conditions.Check({
-                isAnimal = true,
-                isHorse = true,
-            }) end
-        },
-        wolf = {
-            key = "w",
-            condition = function() return Conditions.Check({
-                isAnimal = true,
-                isWolf = true,
-            }) end
-        },
         weapon = {
             key = "w",
             condition = function() return Conditions.Check({
@@ -143,6 +121,27 @@ AnimMenu.root = {
                 hasPrimaryWeapon = true,
                 hasSecondaryWeapon = false,
             }) end
+        },
+        -- Animals
+        consume = {
+            key = "f",
+            condition = function() return Conditions.Check({ isAnimal = true, isSwimming = allow, }) end,
+        },
+        rest = {
+            key = "s",
+            condition = function() return Conditions.Check({ isAnimal = true, isSwimming = allow, }) end,
+        },
+        environment = {
+            key = "e",
+            condition = function() return Conditions.Check({ isAnimal = true, isSwimming = allow, }) end,
+        },
+        play = {
+            key = "a",
+            condition = function() return Conditions.Check({ isAnimal = true, isSwimming = allow, }) end,
+        },
+        vocalize = {
+            key = "v",
+            condition = function() return Conditions.Check({ isAnimal = true, isSwimming = allow, }) end,
         },
     },
     condition = function() return Conditions.Check({

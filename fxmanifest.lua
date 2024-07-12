@@ -30,6 +30,7 @@ client_scripts {
 server_scripts {
     'src/config_srv.lua',
     'plugin/**/item/useable_srv.lua',
+    'plugin/**/util_srv.lua',
 }
 
 files {
