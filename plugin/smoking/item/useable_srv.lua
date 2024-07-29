@@ -15,3 +15,15 @@ end)
 da.API.CreateUseableItem("cannabis", function(source, item)
     TriggerClientEvent("da_xanims:queueAnim", source, "smoke_masc_d", "enter", item)
 end)
+
+da.API.CreateUseableItem("pipe", function(source, item)
+    TriggerClientEvent("da_xanims:queueAnim", source, "smoke_pipe", "enter")
+end)
+
+da.API.CreateUseableItem("pipetobacco", function(source, item)
+    TriggerClientEvent("da_xanims:queueAnim", source, "smoke_pipe", "enter", item)
+end)
+
+da.API.CreateUseableItem("finetobacco", function(source, item)
+    TriggerClientEvent("da_xanims:queueAnim", source, "smoke_pipe", "enter", item)
+end)

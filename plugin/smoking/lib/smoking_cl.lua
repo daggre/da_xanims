@@ -1139,7 +1139,6 @@ AnimLib.smoke_cigar_masc = {
             info.prop.cigar:attach(info.ped, Propset.Cigar.MaleMouth)
             Citizen.Wait(2600)
             info.prop.cigar:attach(info.ped, Propset.Cigar.MaleHand)
-            Citizen.Wait(1000)
             return info
         end,
     },
@@ -1196,3 +1195,363 @@ AnimLib.smoke_cigar_masc = {
         }
     },
 }
+
+-- pipe
+AnimLib.smoke_pipe = {
+    name = "Arm at Side",
+    tags = { pipe=1 },
+    key = "a",
+    condition = function() return Conditions.Check({ hasPipe = true, }) end,
+    triggerCondition = function() return Conditions.Check({ hasPipe = true, hasPipeTobacco = true, }) end,
+    enter = {
+        animDict = "amb_wander@code_human_smoking_wander@male_b@trans",
+        anim = "nopipe_trans_pipe",
+        duration = 7500,
+        blendInSpeed = 1.0,
+        flag = AnimConfig.Flag.Move,
+        onTrigger = function(info)
+            info.prop.pipe = Prop:new()
+            da.Fn.Consume("pipetobac", info.args)
+            local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
+            info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+            return info
+        end,
+    },
+    exit = {
+        animDict = "amb_wander@code_human_smoking_wander@male_b@trans",
+        anim = "pipe_trans_nopipe",
+        duration = 6000,
+        flag = AnimConfig.Flag.Move,
+        blendInSpeed = 1.0,
+        onTrigger = function(info)
+            Citizen.Wait(5900)
+            Prop.Detach(info.prop.pipe)
+            info.prop.pipe = nil
+            return info
+        end,
+    },
+    idles = {
+        idle_a = {
+            animDict = "amb_rest@world_human_smoking@male_b@base",
+            anim = "base",
+            flag = AnimConfig.Flag.MoveLoop,
+            onTrigger = function(info)
+                local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
+                info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+                return info
+            end,
+            transitions = {
+                p_1 = "s",
+                p_2 = "q",
+                p_3 = "t",
+                trans_h = "b",
+                trans_e = "x",
+            },
+        },
+    },
+    animations = {
+        p_1 = {
+            animDict = "amb_rest@world_human_smoking@male_b@idle_a",
+            anim = "idle_a",
+            name = "Smoke",
+            blendInSpeed = 1.5,
+            flag = AnimConfig.Flag.Move,
+            onTrigger = function(info)
+                local propset = Conditions.Check({ isMale = true }) and "MalePuff" or "FemalePuff"
+                info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+                return info
+            end,
+
+        },
+        p_2 = {
+            animDict = "amb_rest@world_human_smoking@male_b@idle_a",
+            anim = "idle_b",
+            name = "Think and Smoke",
+            blendInSpeed = 1,
+            flag = AnimConfig.Flag.Move,
+            onTrigger = function(info)
+                local propset = Conditions.Check({ isMale = true }) and "MaleThink" or "FemaleThink"
+                info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+                return info
+            end,
+        },
+        p_3 = {
+            animDict = "amb_rest@world_human_smoking@male_b@idle_a",
+            anim = "idle_c",
+            name = "Tamp Tobacco",
+            flag = AnimConfig.Flag.Move,
+        },
+        trans_h = {
+            flag = AnimConfig.Flag.MoveLoop,
+            name = "Put Hand Behind Back",
+            animLibName = "smoke_pipe_h",
+            nextBlendInSpeed = 0.5,
+            next = "idle_hands",
+            onTrigger = function(info)
+                local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
+                info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+                return info
+            end,
+        },
+        trans_e = {
+            flag = AnimConfig.Flag.MoveLoop,
+            name = "Cross Arm",
+            animLibName = "smoke_pipe_e",
+            nextBlendInSpeed = 0.5,
+            next = "idle_hands",
+            onTrigger = function(info)
+                local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
+                info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+                return info
+            end,
+        }
+    },
+}
+
+AnimLib.smoke_pipe_h = {
+    name = "Hand Behind Back",
+    tags = { pipe=1 },
+    key = "b",
+    condition = function() return Conditions.Check({ hasPipe = true, }) end,
+    triggerCondition = function() return Conditions.Check({ hasPipe = true, hasPipeTobacco = true, }) end,
+    enter = {
+        animDict = "amb_wander@code_human_smoking_wander@male_b@trans",
+        anim = "nopipe_trans_pipe",
+        blendInSpeed = 0.5,
+        flag = AnimConfig.Flag.Move,
+        duration = 6500,
+        nextBlendInSpeed = 0.75,
+        onTrigger = function(info)
+            info.prop.pipe = Prop:new()
+            da.Fn.Consume("pipetobac", info.args)
+            local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
+            info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+            return info
+        end,
+    },
+    exit = {
+        animDict = "amb_wander@code_human_smoking_wander@male_b@trans",
+        anim = "pipe_trans_nopipe",
+        duration = 6000,
+        flag = AnimConfig.Flag.Move,
+        blendInSpeed = 1.0,
+        onTrigger = function(info)
+            Citizen.Wait(5900)
+            Prop.Detach(info.prop.pipe)
+            info.prop.pipe = nil
+            return info
+        end,
+
+    },
+    idles = {
+        idle_hands = {
+            animDict = "amb_rest@world_human_smoking@pipe@proper@male_d@wip_base",
+            anim = "wip_base",
+            flag = AnimConfig.Flag.MoveLoop,
+            blendOutSpeed=0.5,
+            nextBlendInSpeed=0.5,
+            onTrigger = function(info)
+                local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
+                info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+                return info
+            end,
+            transitions = {
+                p_1 = "s",
+                p_2 = "q",
+                p_3 = "t",
+                trans_b ="a",
+                trans_e = "x",
+            },
+        },
+    },
+    animations = {
+        p_1 = {
+            animDict = "amb_rest@world_human_smoking@male_b@idle_a",
+            anim = "idle_a",
+            name = "Smoke",
+            blendInSpeed = 0.5,
+            blendOutSpeed=0.5,
+            nextBlendInSpeed=0.5,
+            flag = AnimConfig.Flag.Move,
+            onTrigger = function(info)
+                local propset = Conditions.Check({ isMale = true }) and "MalePuff" or "FemalePuff"
+                info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+                return info
+            end,
+
+        },
+        p_2 = {
+            animDict = "amb_rest@world_human_smoking@male_b@idle_a",
+            anim = "idle_b",
+            name = "Think and Smoke",
+            blendInSpeed = 0.5,
+            blendOutSpeed=0.5,
+            nextBlendInSpeed=0.5,
+            flag = AnimConfig.Flag.Move,
+            onTrigger = function(info)
+                local propset = Conditions.Check({ isMale = true }) and "MaleThink" or "FemaleThink"
+                info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+                return info
+            end,
+        },
+        p_3 = {
+            animDict = "amb_rest@world_human_smoking@male_b@idle_a",
+            anim = "idle_c",
+            name = "Tamp Tobacco",
+            flag = AnimConfig.Flag.Move,
+            blendInSpeed = 0.5,
+            blendOutSpeed=0.5,
+            nextBlendInSpeed=0.5,
+        },
+        trans_b = {
+            flag = AnimConfig.Flag.MoveLoop,
+            name = "Put Arm at Side",
+            animLibName = "smoke_pipe",
+            nextBlendInSpeed = 0.5,
+            next = "idle_a",
+            onTrigger = function(info)
+                local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
+                info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+                return info
+            end,
+        },
+        trans_e = {
+            flag = AnimConfig.Flag.MoveLoop,
+            name = "Cross Arm",
+            animLibName = "smoke_pipe_e",
+            nextBlendInSpeed = 0.5,
+            next = "idle_hands",
+            onTrigger = function(info)
+                local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
+                info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+                return info
+            end,
+        }
+    },
+}
+
+AnimLib.smoke_pipe_e = {
+    name = "Crossed Arm",
+    tags = { pipe=1 },
+    key = "x",
+    condition = function() return Conditions.Check({ hasPipe = true, }) end,
+    triggerCondition = function() return Conditions.Check({ hasPipe = true, hasPipeTobacco = true, }) end,
+    enter = {
+        animDict = "amb_wander@code_human_smoking_wander@male_b@trans",
+        anim = "nopipe_trans_pipe",
+        blendInSpeed = 0.5,
+        flag = AnimConfig.Flag.Move,
+        duration = 7500,
+        nextBlendInSpeed = 0.75,
+        onTrigger = function(info)
+            info.prop.pipe = Prop:new()
+            da.Fn.Consume("pipetobac", info.args)
+            local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
+            info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+            return info
+        end,
+    },
+    exit = {
+        animDict = "amb_wander@code_human_smoking_wander@male_b@trans",
+        anim = "pipe_trans_nopipe",
+        duration = 6000,
+        flag = AnimConfig.Flag.Move,
+        blendInSpeed = 1.0,
+        onTrigger = function(info)
+            Citizen.Wait(5900)
+            Prop.Detach(info.prop.pipe)
+            info.prop.pipe = nil
+            return info
+        end,
+
+    },
+    idles = {
+        idle_hands = {
+            animDict = "amb_rest@world_human_smoking@pipe@proper@male_c@wip_base",
+            anim = "wip_base",
+            flag = AnimConfig.Flag.MoveLoop,
+            blendOutSpeed=0.5,
+            nextBlendInSpeed=0.5,
+            onTrigger = function(info)
+                -- info.prop.pipe:attach(info.ped, Propset.Pipe.UniIdle)
+                return info
+            end,
+            transitions = {
+                p_1 = "s",
+                p_2 = "q",
+                p_3 = "t",
+                trans_h = "b",
+                trans_b ="a",
+            },
+        },
+    },
+    animations = {
+        p_1 = {
+            animDict = "amb_rest@world_human_smoking@male_b@idle_a",
+            anim = "idle_a",
+            name = "Smoke",
+            blendInSpeed = 0.5,
+            blendOutSpeed=0.5,
+            nextBlendInSpeed=0.5,
+            flag = AnimConfig.Flag.Move,
+            onTrigger = function(info)
+                local propset = Conditions.Check({ isMale = true }) and "MalePuff" or "FemalePuff"
+                info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+                return info
+            end,
+
+        },
+        p_2 = {
+            animDict = "amb_rest@world_human_smoking@male_b@idle_a",
+            anim = "idle_b",
+            name = "Think and Smoke",
+            blendInSpeed = 0.5,
+            blendOutSpeed=0.5,
+            nextBlendInSpeed=0.5,
+            flag = AnimConfig.Flag.Move,
+            onTrigger = function(info)
+                local propset = Conditions.Check({ isMale = true }) and "MaleThink" or "FemaleThink"
+                info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+                return info
+            end,
+        },
+        p_3 = {
+            animDict = "amb_rest@world_human_smoking@male_b@idle_a",
+            anim = "idle_c",
+            name = "Tamp Tobacco",
+            flag = AnimConfig.Flag.Move,
+            blendInSpeed = 0.5,
+            blendOutSpeed=0.5,
+            nextBlendInSpeed=0.5,
+        },
+        trans_h = {
+            --animDict = "amb_rest@world_human_smoking@pipe@proper@male_d@wip_base",
+            --anim = "wip_base",
+            flag = AnimConfig.Flag.MoveLoop,
+            name = "Put Hand Behind Back",
+            animLibName = "smoke_pipe_h",
+            nextBlendInSpeed = 0.5,
+            next = "idle_hands",
+            onTrigger = function(info)
+                local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
+                info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+                return info
+            end,
+        },
+        trans_b = {
+            --animDict = "amb_rest@world_human_smoking@pipe@proper@male_d@wip_base",
+            --anim = "wip_base",
+            flag = AnimConfig.Flag.MoveLoop,
+            name = "Put Arm at Side",
+            animLibName = "smoke_pipe",
+            nextBlendInSpeed = 0.5,
+            next = "idle_a",
+            onTrigger = function(info)
+                local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
+                info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
+                return info
+            end,
+        },
+    },
+}
+

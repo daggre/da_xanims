@@ -251,7 +251,10 @@ local InventoryItems = {
     cigarette = {},
     rolledcigarette = {},
     canteen = {},
+    finetobacco = {},
     pitchfork = {},
+    pipe={},
+    pipetobacco={},
     rake = {},
     shovel = {},
     spade = {},
@@ -262,6 +265,7 @@ local InventoryItems = {
     guitar = {},
     banjo = {},
     attach_back_guitar = {},
+
 }
 
 local GetAllConditions = function(data)
@@ -364,7 +368,6 @@ local GetAllConditions = function(data)
     chk.hasNails = data.items.nails ~= nil
     chk.hasSplitRail = data.items.splitrail ~= nil
     chk.hasAnyCig = chk.hasCig or chk.hasRolledCig or chk.hasCannabis
-    chk.hasSmoke = chk.hasAnyCig or chk.hasCigar
     chk.canteenNotFull = chk.hasCanteen and AnimUtil.ItemHasMetadata(data.items.canteen, {water = function(a) return not a or tonumber(a) < 100 end}, {water=0})
     chk.canteenHasWater = chk.hasCanteen and AnimUtil.ItemHasMetadata(data.items.canteen, {water = function(a) return a and tonumber(a) >= 20 end}, {water=0})
     chk.atWaterSource = chk.inWater or AnimUtil.AtWaterSource(data.entity)
@@ -372,7 +375,9 @@ local GetAllConditions = function(data)
     chk.fixFence = (chk.interactTallFence or chk.interactShortFence) and chk.canRepairFence
     chk.fixShortFence = chk.interactShortFence and chk.canRepairFence and chk.hasPrimaryHammer
     chk.fixTallFence = chk.interactTallFence and chk.canRepairFence and chk.hasPrimaryHammer
-
+    chk.hasPipe = data.items.pipe ~= nil
+    chk.hasPipeTobacco = data.items.pipetobacco ~= nil or data.items.finetobacco ~= nil
+    chk.hasSmoke = chk.hasAnyCig or chk.hasCigar or (chk.hasPipe and chk.hasPipeTobacco)
     return chk
 end
 

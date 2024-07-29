@@ -63,7 +63,10 @@ AnimMenu.root = {
                     key = "g",
                     condition = function() return Conditions.Check({ hasCigar = true, }) end,
                 },
-                -- pipe = { key = "p", },
+                pipe = { --pipe
+                    key = "p",
+                    condition = function() return Conditions.Check({ hasPipe = true, hasPipeTobacco = true, }) end,
+                },
             },
         },
         squat = {

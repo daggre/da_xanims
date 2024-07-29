@@ -80,3 +80,53 @@ Propset.Matchstick = {
     position = vec3(0.01, -0.01, 0.0),
     rotation = vec3(0.0, 105.0, 0.0),
 }
+
+Propset.Pipe = {
+    MaleHandIdle = {
+        objectHash = `P_PIPE01X`,
+        bone = "SKEL_R_Finger13",
+        position = vec3(0.01, -0.03, 0),
+        rotation = vec3(-160, 30, -28),
+    },
+
+    MalePuff = {
+        objectHash = `P_PIPE01X`,
+        bone = "SKEL_R_Finger13",
+        position = vec3( 0.01, -0.03, 0),
+        rotation = vec3(-140, 22, -27),
+    },
+
+    MaleThink = {
+        objectHash = `P_PIPE01X`,
+        bone = "SKEL_R_Finger13",
+        position = vec3( 0.01, -0.03, 0),
+        rotation = vec3(-160, 30, -50),
+    },
+
+    FemaleHandIdle = {
+        objectHash = `P_PIPE01X`,
+        bone = "SKEL_R_Finger13",
+        position = vec3(0.01, -0.03, 0),
+        rotation = vec3(-170, 30, -40),
+    },
+
+    FemalePuff = {
+        objectHash = `P_PIPE01X`,
+        bone = "SKEL_R_Finger13",
+        position = vec3( 0.01, -0.03, 0),
+        rotation = vec3(-175, 19, -35),
+    },
+
+    FemaleThink = {
+        objectHash = `P_PIPE01X`,
+        bone = "SKEL_R_Finger13",
+        position = vec3( 0.01, -0.03, 0),
+        rotation = vec3(-155, 30, -65),
+    },
+    UniIdle = {
+        objectHash = `P_PIPE01X`,
+        bone = "SKEL_R_Finger13",
+        position = vec3(0.01, -0.03, 0),
+        rotation = vec3(-160, 16, -28),
+    }
+}
