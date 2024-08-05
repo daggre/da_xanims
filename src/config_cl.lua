@@ -46,6 +46,8 @@ AnimConfig.Flag = {
     -- Combo Flags
     Move = (1<<3)|(1<<4), -- UpperBody, Secondary
     MoveLoop = (1<<0)|(1<<3)|(1<<4), -- UpperBody, Secondary, Loop
+    MoveHigh = (1<<3)|(1<<4)|(1<<26), -- UpperBody, Secondary, UpperBodyTags
+    MoveHighLoop = (1<<0)|(1<<3)|(1<<4)|(1<<26), -- UpperBody, Secondary, Loop, UpperBodyTags
 }
 AnimConfig.IkFlag = {
 	AIK_DISABLE_LEG_IK = (1 << 0),

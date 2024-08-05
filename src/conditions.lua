@@ -252,9 +252,10 @@ local InventoryItems = {
     rolledcigarette = {},
     canteen = {},
     finetobacco = {},
+    goldpan = {},
     pitchfork = {},
-    pipe={},
-    pipetobacco={},
+    pipe = {},
+    pipetobacco = {},
     rake = {},
     shovel = {},
     spade = {},
@@ -269,7 +270,7 @@ local InventoryItems = {
 }
 
 local GetAllConditions = function(data)
-    chk = {}
+    local chk = {}
 
     -- Conditions -- Must evaluate to true or false, not nil
     chk.isDead = IsEntityDead(data.entity) == 1
@@ -367,6 +368,7 @@ local GetAllConditions = function(data)
     chk.hasBanjo = data.items.banjo ~= nil
     chk.hasNails = data.items.nails ~= nil
     chk.hasSplitRail = data.items.splitrail ~= nil
+    chk.hasGoldPan = data.items.goldpan ~= nil
     chk.hasAnyCig = chk.hasCig or chk.hasRolledCig or chk.hasCannabis
     chk.canteenNotFull = chk.hasCanteen and AnimUtil.ItemHasMetadata(data.items.canteen, {water = function(a) return not a or tonumber(a) < 100 end}, {water=0})
     chk.canteenHasWater = chk.hasCanteen and AnimUtil.ItemHasMetadata(data.items.canteen, {water = function(a) return a and tonumber(a) >= 20 end}, {water=0})
