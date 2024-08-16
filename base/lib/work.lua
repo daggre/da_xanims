@@ -76,6 +76,10 @@ AnimLib.WorldHumanClipboard = {
             animDict = "amb_work@world_human_clipboard@male_a@base",
             anim = "base",
             flag = AnimConfig.Flag.MoveLoop,
+            idleAnimConfig = {
+                canClimb = false,
+                canJump = false,
+            },
             transitions = {
                 a_a = "w",
                 a_b = "d",
