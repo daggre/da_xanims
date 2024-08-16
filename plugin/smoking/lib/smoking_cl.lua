@@ -149,7 +149,7 @@ AnimLib.smoke_masc_a = {
 AnimLib.smoke_masc_c = {
     name = "Slouch",
     tags = { cigarette=1, },
-    triggerCondition = function() return Conditions.Check({ hasAnyCig = true, }) end,
+    triggerCondition = function() return Conditions.Check({ hasAnyCig = true, hasMatchbook = true, }) end,
     key = "s",
     enter = {
         animDict = "amb_rest@world_human_smoking@male_c@stand_enter",
@@ -283,7 +283,7 @@ AnimLib.smoke_masc_d = {
     name = "Stern",
     tags = { cigarette=1, },
     key = "t",
-    triggerCondition = function() return Conditions.Check({ hasAnyCig = true, }) end,
+    triggerCondition = function() return Conditions.Check({ hasAnyCig = true, hasMatchbook = true, }) end,
     enter = {
         animDict = "amb_rest@world_human_smoking@male_c@stand_enter",
         anim = "enter_back_rf",
@@ -526,7 +526,7 @@ AnimLib.lean_smoke_a = {
         lean_back = { name = "Smoke Cigarette", }
     },
     key = "q",
-    triggerCondition = function() return Conditions.Check({ hasAnyCig = true, }) end,
+    triggerCondition = function() return Conditions.Check({ hasAnyCig = true, hasMatchbook = true, }) end,
     enter = {
         animDict = "amb_rest_lean@world_human_lean@wall@male_a@trans",
         anim = "a_trans_smoking_a",
@@ -636,7 +636,7 @@ AnimLib.smoke_fem_a = {
     name = "Sassy",
     tags = { cigarette=1 },
     key = "y",
-    triggerCondition = function() return Conditions.Check({ hasAnyCig = true, }) end,
+    triggerCondition = function() return Conditions.Check({ hasAnyCig = true, hasMatchbook = true, }) end,
     enter = {
         animDict = "amb_rest@world_human_smoking@male_c@stand_enter",
         anim = "enter_back_rf",
@@ -1047,7 +1047,7 @@ AnimLib.smoke_cigar_fem = {
     name = "Standing",
     tags = { cigar= 1 },
     key = "s",
-    triggerCondition = function() return Conditions.Check({ isMale = false, hasCigar = true, }) end,
+    triggerCondition = function() return Conditions.Check({ isMale = false, hasCigar = true, hasMatchbook = true, }) end,
     condition = function() return Conditions.Check({ isMale = false, }) end,
     enter = {
         animDict = "script_mp@emotes@smoke_cigar@female@unarmed@upper",
@@ -1124,7 +1124,7 @@ AnimLib.smoke_cigar_masc = {
     name = "standing",
     tags = { cigar=1 },
     key = "s",
-    triggerCondition = function() return Conditions.Check({ isMale = true,hasCigar = true, }) end,
+    triggerCondition = function() return Conditions.Check({ isMale = true, hasCigar = true, hasMatchbook = true, }) end,
     condition = function() return Conditions.Check({ isMale = true, }) end,
     enter = {
         animDict = "script_mp@emotes@smoke_cigar@male@unarmed@upper",
@@ -1202,7 +1202,7 @@ AnimLib.smoke_pipe = {
     tags = { pipe=1 },
     key = "a",
     condition = function() return Conditions.Check({ hasPipe = true, }) end,
-    triggerCondition = function() return Conditions.Check({ hasPipe = true, hasPipeTobacco = true, }) end,
+    triggerCondition = function() return Conditions.Check({ hasPipe = true, hasPipeTobacco = true, hasMatchbook = true, }) end,
     enter = {
         animDict = "amb_wander@code_human_smoking_wander@male_b@trans",
         anim = "nopipe_trans_pipe",
@@ -1554,4 +1554,3 @@ AnimLib.smoke_pipe_e = {
         },
     },
 }
-
