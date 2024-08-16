@@ -96,12 +96,23 @@ AnimMenu.root = {
             key = "w",
             submenu = {
                 fire = { key = "f", },
+                bartending = { key = "a", },
             },
         },
         hostage = {
             key = "h",
             condition = function() return Conditions.Check({
                 onMount = allow,
+            }) end,
+        },
+        bar = {
+            key = "b",
+            submenu = {
+                bartender = { key = "b"},
+                patron = { key = "d"}
+            },
+            condition = function() return Conditions.Check({
+                onMount = false,
             }) end,
         },
         horseback = {
