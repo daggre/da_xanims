@@ -274,21 +274,20 @@ Citizen.CreateThread(function()
     AnimMenu, AnimTags = populateAnimConfig(AnimMenu, AnimTags)
     while true do
         Citizen.Wait(5)
-        if IsEntityDead(PlayerPedId()) then
-            Citizen.Wait(1000)
-        end
-        if (IsControlJustPressed(0, 0x7DA48D2A) and IsInputDisabled(0)) and not IsDisabledControlPressed(0, 0xD7DE6B1E)  then
+        if IsEntityDead(PlayerPedId()) then Citizen.Wait(1000); end
+
+        local justPressed = da.Control.GetJustPressed({"x"})
+        if justPressed.x then
+            da.Control.ShortPress("x", function()
+                    -- If we shortpress x, Open the x anims menu
+                    Conditions.BatchCache(PlayerPedId())
+                    optionTree = getOptionTree(AnimMenu.root)
+                    SetNuiFocus(true, false)
+                    SendNUIMessage({ type = 'show', optionTree = optionTree, })
+                    optionTree = {}
+                end)
+            -- Run BatchCache on x press
             AnimMenu, AnimTags = populateAnimConfig(AnimMenu, AnimTags)
-        end
-        if (IsControlJustReleased(0, 0x7DA48D2A)) and IsInputDisabled(0) and not IsDisabledControlPressed(0, 0xD7DE6B1E) then -- 0x8CC9CD42 old x
-            Conditions.BatchCache(PlayerPedId())
-            optionTree = getOptionTree(AnimMenu.root)
-            SetNuiFocus(true, false)
-            SendNUIMessage({
-                type = 'show',
-                optionTree = optionTree,
-            })
-            optionTree = {}
         end
     end
 end)
