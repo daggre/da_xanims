@@ -13,8 +13,8 @@ AnimLib.eat_apple = {
         onTrigger = function(info)
             info.prop.apple = Prop:new()
             Citizen.Wait(1300)
-            da.Log.Debug("args", info.args)
-            da.Fn.Consume("apple", info.args)
+            log.debug("args", info.args)
+            API.consume("apple", info.args)
             info.prop.apple:attach(info.ped, Propset.apple)
             info.apple = {
                 currentResource = 0.0,
@@ -172,8 +172,8 @@ AnimLib.eat_pear = {
         onTrigger = function(info)
             info.prop.pear = Prop:new()
             Citizen.Wait(1300)
-            da.Log.Debug("args", info.args)
-            da.Fn.Consume("pear", info.args)
+            log.debug("args", info.args)
+            API.consume("pear", info.args)
             info.prop.pear:attach(info.ped, Propset.pear)
             info.pear = {
                 currentResource = 0.0,
@@ -331,7 +331,7 @@ AnimLib.eat_breadroll = {
         onTrigger = function(info)
             info.prop.bread = Prop:new()
             Citizen.Wait(1300)
-            da.Fn.Consume("bread", info.args)
+            API.consume("bread", info.args)
             info.prop.bread:attach(info.ped, Propset.breadroll)
             info.bread = {
                 currentResource = 0.0,
@@ -438,7 +438,7 @@ AnimLib.eat_generic = {
         flag = AnimConfig.Flag.Move,
         onTrigger = function(info)
             Citizen.Wait(600)
-            da.Fn.Consume(info.args.name, info.args)
+            API.consume(info.args.name, info.args)
             return info
         end,
     },
@@ -449,7 +449,7 @@ AnimLib.eat_generic = {
         flag = AnimConfig.Flag.Move,
         duration = 1500,
         onTrigger = function(info)
-            da.Fn.Eat(info.args.increaseAmount)
+            API.eat(info.args.increaseAmount)
             return info
         end,
     },
@@ -472,7 +472,7 @@ AnimLib.eat_rotten = {
         },
         onTrigger = function(info)
             Citizen.Wait(600)
-            da.Fn.Consume(info.args.name, info.args)
+            API.consume(info.args.name, info.args)
             return info
         end,
     },
@@ -483,7 +483,7 @@ AnimLib.eat_rotten = {
         flag = AnimConfig.Flag.Move,
         duration = 1500,
         onTrigger = function(info)
-            da.Fn.Eat(info.args.increaseAmount)
+            API.eat(info.args.increaseAmount)
             return info
         end,
     },
@@ -502,7 +502,7 @@ AnimLib.eat_generic_can = {
         flag = AnimConfig.Flag.Move,
         onTrigger = function(info)
             Citizen.Wait(600)
-            da.Fn.Consume(info.args.name, info.args)
+            API.consume(info.args.name, info.args)
             info.prop.can = Prop:new()
             info.prop.can:attach(info.ped, Propset.canned_goods.Hold)
             return info
@@ -516,7 +516,7 @@ AnimLib.eat_generic_can = {
         duration = 2700,
         flag = AnimConfig.Flag.Move,
         onTrigger = function(info)
-            da.Fn.Eat(info.args.increaseAmount)
+            API.eat(info.args.increaseAmount)
             Citizen.Wait(1000)
             info.prop.can:attach(info.ped, Propset.canned_goods)
             Citizen.Wait(1650)
@@ -540,7 +540,7 @@ AnimLib.eat_generic_stew = {
         next = "eat_1",
         flag = AnimConfig.Flag.Move,
         onFinish = function(info)
-            da.Fn.Consume(info.args.name, info.args)
+            API.consume(info.args.name, info.args)
             return info
         end,
     },
@@ -565,7 +565,7 @@ AnimLib.eat_generic_stew = {
                 info.prop.bowl:expression(stewAmount)
                 Citizen.Wait(500)
             end
-            da.Fn.Eat(info.args.increaseAmount/2)
+            API.eat(info.args.increaseAmount/2)
             -- Workaround for certain bowls not having physics, swap empty bowl back to stew bowl
             local foodBowl = info.prop.bowl
             info.prop.bowl = Prop:new()
@@ -603,7 +603,7 @@ AnimLib.eat_generic_stew = {
             end,
             onFinish = function(info)
                 -- Change hunger on finish prior to exit to prevent player from skipping anim
-                da.Fn.Eat(info.args.increaseAmount/2)
+                API.eat(info.args.increaseAmount/2)
                 return info
             end,
         },

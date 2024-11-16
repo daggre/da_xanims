@@ -9,7 +9,23 @@ description 'Animation library and queue system for custom animation scenarios'
 version '0.3'
 lua54 'yes'
 
+shared_scripts {
+    '@da_log/log_sh.lua',
+    '@da_lib/api/api_sh.lua',
+}
+
 client_scripts {
+    '@da_lib/lib/anim_cl.lua',
+    '@da_lib/lib/cache_lazy.lua',
+    '@da_lib/lib/net_cl.lua',
+    '@da_lib/lib/util_cl.lua',
+    '@da_lib/lib/nui_cl.lua',
+    '@da_lib/lib/control_cl.lua',
+    '@da_lib/lib/object_cl.lua',
+    '@da_lib/lib/chance_cl.lua',
+    '@da_lib/lib/mode_cl.lua',
+    '@da_lib/lib/move_cl.lua',
+    '@da_lib/lib/weapon_cl.lua',
     'src/config_cl.lua',
     'src/util.lua',
     'src/menu.lua',
@@ -28,7 +44,6 @@ client_scripts {
 }
 
 server_scripts {
-    'src/config_srv.lua',
     'plugin/**/item/useable_srv.lua',
     'plugin/**/util_srv.lua',
 }

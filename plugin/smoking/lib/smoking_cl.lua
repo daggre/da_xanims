@@ -13,7 +13,7 @@ AnimLib.smoke_masc_a = {
         duration = 6000,
         onTrigger = function(info)
             info.prop.cigarette = Prop:new()
-            da.Fn.Consume("cig", info.args)
+            API.consume("cig", info.args)
             Citizen.Wait(950)
             info.prop.cigarette:attach(info.ped, Propset.Cigarette)
             Citizen.Wait(1050)
@@ -158,7 +158,7 @@ AnimLib.smoke_masc_c = {
         duration = 6000,
         onTrigger = function(info)
             info.prop.cigarette = Prop:new()
-            da.Fn.Consume("cig", info.args)
+            API.consume("cig", info.args)
             Citizen.Wait(950)
             info.prop.cigarette:attach(info.ped, Propset.Cigarette)
             Citizen.Wait(1050)
@@ -291,7 +291,7 @@ AnimLib.smoke_masc_d = {
         duration = 6000,
         onTrigger = function(info)
             info.prop.cigarette = Prop:new()
-            da.Fn.Consume("cig", info.args)
+            API.consume("cig", info.args)
             Citizen.Wait(950)
             info.prop.cigarette:attach(info.ped, Propset.Cigarette)
             Citizen.Wait(1050)
@@ -422,7 +422,7 @@ AnimLib.smoke_masc_b = {
         duration = 6000,
         onTrigger = function(info)
             info.prop.cigarette = Prop:new()
-            da.Fn.Consume("cig", info.args)
+            API.consume("cig", info.args)
             Citizen.Wait(950)
             info.prop.cigarette:attach(info.ped, Propset.Cigarette)
             Citizen.Wait(1050)
@@ -534,7 +534,7 @@ AnimLib.lean_smoke_a = {
         onTrigger = function(info)
             info.prop.matchstick = Prop:new()
             info.prop.cigarette = Prop:new()
-            da.Fn.Consume("cig", info.args)
+            API.consume("cig", info.args)
             Citizen.Wait(3000)
             info.prop.matchstick:attach(info.ped, Propset.Matchstick)
             Citizen.Wait(200)
@@ -645,7 +645,7 @@ AnimLib.smoke_fem_a = {
         nextBlendInSpeed = 1.0,
         onTrigger = function(info)
             info.prop.cigarette = Prop:new()
-            da.Fn.Consume("cig", info.args)
+            API.consume("cig", info.args)
             Citizen.Wait(950)
             info.prop.cigarette:attach(info.ped, Propset.Cigarette)
             Citizen.Wait(1050)
@@ -780,7 +780,7 @@ AnimLib.smoke_fem_b = {
         nextBlendInSpeed = 1.0,
         onTrigger = function(info)
             info.prop.cigarette = Prop:new()
-            da.Fn.Consume("cig", info.args)
+            API.consume("cig", info.args)
             Citizen.Wait(950)
             info.prop.cigarette:attach(info.ped, Propset.Cigarette)
             Citizen.Wait(1050)
@@ -923,7 +923,7 @@ AnimLib.smoke_fem_c = {
         nextBlendInSpeed = 1.3,
         onTrigger = function(info)
             info.prop.cigarette = Prop:new()
-            da.Fn.Consume("cig", info.args)
+            API.consume("cig", info.args)
             Citizen.Wait(950)
             info.prop.cigarette:attach(info.ped, Propset.Cigarette)
             Citizen.Wait(1050)
@@ -1056,7 +1056,7 @@ AnimLib.smoke_cigar_fem = {
         flag = AnimConfig.Flag.Move,
         onTrigger = function(info)
             info.prop.cigar = Prop:new()
-            da.Fn.Consume("cigar", info.args)
+            API.consume("cigar", info.args)
             info.prop.cigar:attach(info.ped, Propset.Cigar.FemaleHand)
             Citizen.Wait(1000)
             info.prop.cigar:attach(info.ped, Propset.Cigar.FemaleMouth)
@@ -1133,7 +1133,7 @@ AnimLib.smoke_cigar_masc = {
         flag = AnimConfig.Flag.Move,
         onTrigger = function(info)
             info.prop.cigar = Prop:new()
-            da.Fn.Consume("cigar", info.args)
+            API.consume("cigar", info.args)
             info.prop.cigar:attach(info.ped, Propset.Cigar.MaleHand)
             Citizen.Wait(1000)
             info.prop.cigar:attach(info.ped, Propset.Cigar.MaleMouth)
@@ -1211,7 +1211,7 @@ AnimLib.smoke_pipe = {
         flag = AnimConfig.Flag.Move,
         onTrigger = function(info)
             info.prop.pipe = Prop:new()
-            da.Fn.Consume("pipetobac", info.args)
+            API.consume("pipetobac", info.args)
             local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
             info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
             return info
@@ -1323,7 +1323,7 @@ AnimLib.smoke_pipe_h = {
         nextBlendInSpeed = 0.75,
         onTrigger = function(info)
             info.prop.pipe = Prop:new()
-            da.Fn.Consume("pipetobac", info.args)
+            API.consume("pipetobac", info.args)
             local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
             info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
             return info
@@ -1445,7 +1445,7 @@ AnimLib.smoke_pipe_e = {
         nextBlendInSpeed = 0.75,
         onTrigger = function(info)
             info.prop.pipe = Prop:new()
-            da.Fn.Consume("pipetobac", info.args)
+            API.consume("pipetobac", info.args)
             local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
             info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
             return info

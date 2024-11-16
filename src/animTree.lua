@@ -2,6 +2,39 @@
 
 local BackupKeys = { "z","y","x","w","v","u","t","s","r","q","p","p","n","m","l" }
 
+da_mode.register({
+    name = "xanims",
+    priority = 10,
+    onActivate = function() log.debug("da_mode start xanims") end,
+    onDeactivate = function() log.debug("da_mode stop xanims") end,
+    keymaps = {
+        -- disablePlayerFiring = true,
+        Escape = {
+            justPressed = {
+                primary = true,
+                fn = function()
+                    da_mode.deactivate("xanims")
+                end,
+            }
+        },
+        x = {
+            justPressed = {
+                fn = function()
+                    log.debug("da_mode game x justPressed")
+                    TriggerEvent("da_xanims:batchCache")
+                end,
+            },
+            justReleased = {
+                fn = function()
+                    log.debug("da_mode game x justReleased")
+                    da_mode.activate("xanims")
+                end,
+            },
+        }
+
+    },
+})
+
 local function getFinalAnim()
     local animLib, animState, animStateName = nil, nil, nil
     local currentIdle = nil
@@ -70,7 +103,7 @@ local function addSortedTransitions(animLib, animState, animLibName)
                     key = BackupKeys[backupIndex]
                 end
                 if _keymap[key] ~= nil then
-                    da.Log.Warn(da.Log.Line(debug.getinfo(1)), "Duplicate keymap for "..tostring(transitionData[2]).." '"..tostring(animStateKeyMap).."' detected in "..tostring(animLibName).." animlib.")
+                    log.warn(log.line(1), "Duplicate keymap for "..tostring(transitionData[2]).." '"..tostring(animStateKeyMap).."' detected in "..tostring(animLibName).." animlib.")
                 end
                 _keymap[key] = transitionData[2]
                 if backupIndex > 0 then
@@ -192,7 +225,7 @@ end
 
 local function populateAnimMenu(tag, menu, tagsData)
     if tagsData[tag] == nil then
-        da.Log.Warn(da.Log.Line(debug.getinfo(1)), "Invalid tag '"..tostring(tag).."' detected when populating anim menu.")
+        log.warn(log.line(1), "Invalid tag '"..tostring(tag).."' detected when populating anim menu.")
         return menu
     end
     menu.anims = tagsData[tag].anims
@@ -227,9 +260,9 @@ local function populateTags(animLibs, animTags)
                         backupIndex = backupIndex + 1
                     end
                     if animTags[tag] == nil then
-                        da.Log.Warn(da.Log.Line(debug.getinfo(1)), tostring(animLib.id).." has invalid tag '"..tostring(tag).."'")
+                        log.warn(log.line(1), tostring(animLib.id).." has invalid tag '"..tostring(tag).."'")
                     elseif animTags[tag]._keyMap[key] ~= nil then
-                        da.Log.Warn(da.Log.Line(debug.getinfo(1)), "Duplicate keymap for "..tostring(animLib.id).." '"..tostring(key).."' detected in "..tostring(tag).." menu.")
+                        log.warn(log.line(1), "Duplicate keymap for "..tostring(animLib.id).." '"..tostring(key).."' detected in "..tostring(tag).." menu.")
                     else
                         animTags[tag]._keyMap[key] = animLib.id
                         table.insert(animTags[tag].anims, {
@@ -268,6 +301,12 @@ local function populateAnimConfig(menu, tagsData)
     return menu, tagsData
 end
 
+AddEventHandler("da_xanims:batchCache", function(args)
+    if API.isDead() then return; end
+    log.debug("Populating anim config")
+    AnimMenu, AnimTags = populateAnimConfig(AnimMenu, AnimTags)
+end)
+
 -- Init and HUD key listener
 Citizen.CreateThread(function()
     local optionTree = {}
@@ -276,16 +315,16 @@ Citizen.CreateThread(function()
         Citizen.Wait(5)
         if IsEntityDead(PlayerPedId()) then Citizen.Wait(1000); end
 
-        local justPressed = da.Control.GetJustPressed({"x"})
+        local justPressed = da_control.isJustPressed({"x"})
         if justPressed.x then
-            da.Control.ShortPress("x", function()
-                    -- If we shortpress x, Open the x anims menu
-                    Conditions.BatchCache(PlayerPedId())
-                    optionTree = getOptionTree(AnimMenu.root)
-                    SetNuiFocus(true, false)
-                    SendNUIMessage({ type = 'show', optionTree = optionTree, })
-                    optionTree = {}
-                end)
+            da_control.trackShortPress("x", function()
+                -- If we shortpress x, Open the x anims menu
+                Conditions.BatchCache(PlayerPedId())
+                optionTree = getOptionTree(AnimMenu.root)
+                SetNuiFocus(true, false)
+                da_ui.send("show", { optionTree = optionTree })
+                optionTree = {}
+            end)
             -- Run BatchCache on x press
             AnimMenu, AnimTags = populateAnimConfig(AnimMenu, AnimTags)
         end
@@ -295,10 +334,10 @@ end)
 local AnimThread = nil
 QueueAnimState = function(animLib, stateName, info)
     if not animLib then
-        da.Log.Error(da.Log.Line(debug.getinfo(1)), "Invalid animLib detected in queue.")
+        log.error(log.line(1))
         return
     end
-    da.Log.Debug("AST init", animLib.id, stateName)
+    log.debug("AST init", animLib.id, stateName)
     -- Check if state is valid, before adding to queue
     local animState = GetState(animLib, stateName)
     assert(animState, ("Queue:%s:%s:%s"):format(animLib.id, animState, stateName))
@@ -322,50 +361,51 @@ QueueAnimState = function(animLib, stateName, info)
     while next(AnimStateQueue) do
         local animLibId = AnimStateQueue and AnimStateQueue[1] and AnimStateQueue[1][1] and AnimStateQueue[1][1].id or ""
         local animStateName = AnimStateQueue and AnimStateQueue[1] and AnimStateQueue[1][3] or ""
-        da.Log.Debug("AST play", animLibId, animStateName)
+        log.debug("AST play", animLibId, animStateName)
         PlayAnimState(table.unpack(table.remove(AnimStateQueue, 1)))
     end
     AnimThread = false
-    da.Log.Debug("AST done")
+    log.debug("AST done")
 end
 
 RegisterCommand("xanim_force_reset", function(source, args, rawCommand)
-    da.Log.Info("Resetting animation system...")
+    log.info("Resetting animation system...")
     TriggerEvent("da_xanims:forceExit")
     Citizen.Wait(2000)
     AnimThread = false
     AnimInfo = nil
     Citizen.Wait(1000)
-    da.Log.Info("Reset complete")
+    log.info("Reset complete")
 end, false)
 
-RegisterNUICallback('exit', function(data, cb)
+local QueueAnim = function(data)
     SetNuiFocus(false, false)
-    cb({})
-end)
+    if not data or not data.animLibName or not data.animStateName then
+        return false
+    end
 
-RegisterNUICallback('anim', function(data, cb)
-    SetNuiFocus(false, false)
     local animLib = nil
     if data.animStateName == "exit" then
-        if not ActiveAnim then return; end
+        if not ActiveAnim then return true; end
         animLib = ActiveAnim[1]
-    elseif not data.animStateName or not data.animLibName then
-        return
     else
-    if not AnimLib then return; end
         animLib = AnimLib[data.animLibName]
     end
-    if not animLib then return; end
+    if not animLib then return false; end
+
     QueueAnimState(animLib, data.animStateName)
-    cb({})
-end)
+end
+
+da_ui.events({
+    anim = QueueAnim,
+    exit = function() SetNuiFocus(false, false) end, -- TODO: Check if we still need this in a post-mode world
+})
 
 RegisterNetEvent("da_xanims:queueAnim")
 AddEventHandler("da_xanims:queueAnim", function(animLibName, animStateName, info)
     if not animStateName or not animLibName then return; end
     if ActiveAnim and ActiveAnim[1] and ActiveAnim[1].id == animLibName and animStateName == "enter" then
-        da.Log.Debug("Already playing anim", animLibName, animStateName)
+        log.debug("Already playing anim", animLibName, animStateName)
         return
     end
     if animStateName == "enter" then
@@ -375,7 +415,7 @@ AddEventHandler("da_xanims:queueAnim", function(animLibName, animStateName, info
             QueueAnimState(animLib, "exit")
         end
     elseif not ActiveAnim or ActiveAnim[1].id ~= animLibName then
-        da.Log.Error(da.Log.Line(debug.getinfo(1)), "Tried to queue anim outside of "..ActiveAnim[1].id.." lib:", animLibName, animStateName)
+        log.error(log.line(1))
         return
     end
     QueueAnimState(AnimLib[animLibName], animStateName, info)

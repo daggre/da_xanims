@@ -1,16 +1,16 @@
-da.API.CreateUseableItem("canteen", function(source, item)
+API.createUseableItem("canteen", function(source, item)
     TriggerClientEvent("da_xanims:queueAnim", source, "drink_canteen", "enter", item)
 end)
 
-da.API.CreateUseableItem("apple", function(source, item)
+API.createUseableItem("apple", function(source, item)
     TriggerClientEvent("da_xanims:queueAnim", source, "eat_apple", "enter", item)
 end)
 
-da.API.CreateUseableItem("pear", function(source, item)
+API.createUseableItem("pear", function(source, item)
     TriggerClientEvent("da_xanims:queueAnim", source, "eat_pear", "enter", item)
 end)
 
-da.API.CreateUseableItem("bread", function(source, item)
+API.createUseableItem("bread", function(source, item)
     TriggerClientEvent("da_xanims:queueAnim", source, "eat_breadroll", "enter", item)
 end)
 
@@ -206,7 +206,7 @@ local GenericFood = {
 
 for animLibName, foodTypeData in pairs(GenericFood) do
     for itemName, foodData in pairs(foodTypeData) do
-        da.API.CreateUseableItem(itemName, function(source, item)
+        API.createUseableItem(itemName, function(source, item)
             item.increaseAmount = foodData.amount
             item.propset = foodData.propset
             TriggerClientEvent("da_xanims:queueAnim", source, animLibName, "enter", item)

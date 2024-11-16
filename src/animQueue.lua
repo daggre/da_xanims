@@ -79,7 +79,7 @@ function GetState(animLib, stateName)
     if not animLib then return nil; end
 
     if not stateName then
-        da.Log.DebugVerbose("State not found", stateName, animLib)
+        log.spam("State not found", stateName, animLib)
     end
     if IsStateType(stateName, "enter") then
         animState = animLib.enter
@@ -95,14 +95,14 @@ function GetState(animLib, stateName)
 end
 
 function CleanAnimInfo(animInfo)
-    da.Log.DebugVerbose("Cleaning AnimInfo...", da.Log.Line(debug.getinfo(2)))
+    log.spam(log.line(2), "Cleaning AnimInfo...")
     for hookId in pairs(RunningHooks) do
-        da.Log.DebugVerbose("Delaying clean, active hook:", hookId)
+        log.spam("Delaying clean, active hook:", hookId)
         local hookTimeout = GetGameTimer() + 10000
         while RunningHooks[hookId] or GetGameTimer() > hookTimeout do
             Citizen.Wait(10)
         end
-        da.Log.DebugVerbose("Hook complete", hookId)
+        log.spam("Hook complete", hookId)
     end
     AnimUtil.MonitorIdleAnimHalt()
     if not animInfo then return; end
@@ -136,49 +136,6 @@ function UpdateCurrentIdle(animInfo, animLib)
     return animInfo
 end
 
-local function loadAnimDict(dict)
-    local timeout = 200
-    local loopWaitTime = 5
-    local waitTime = 0
-    while ( not HasAnimDictLoaded( dict ) or waitTime > timeout ) do
-        RequestAnimDict( dict )
-        waitTime = waitTime + loopWaitTime
-        Citizen.Wait(loopWaitTime)
-    end
-end
-
-function playAnim(ped, animDictionary, animName, blendInSpeed, blendOutSpeed, duration, flags, playbackRate, ikFlags, taskFilter)
-    blendInSpeed = tonumber(blendInSpeed) or 3.0
-    blendOutSpeed = tonumber(blendOutSpeed) or 0.5
-    duration = tonumber(duration) or -1
-    flags = tonumber(flags) or 0
-    playbackRate = tonumber(playbackRate) or 0 -- Values from 0.0 to 1.0 (0.05 is near default)
-    ikFlags = tonumber(ikFlags) or 0
-    local p10 = 0
-    taskFilter = false
-    local p12 = 0
-
-    loadAnimDict(animDictionary)
-    ClearPedSecondaryTask(ped)
-    da.Log.DebugVerbose(ped, animDictionary, animName, blendInSpeed, blendOutSpeed, duration, flags, playbackRate, ikFlags, p10, taskFilter, p12) -- DEBUG
-    da.Log.DebugVerbose(("Anim dur: %.1fs @ %.1fs"):format(GetAnimDuration(animDictionary, animName), GetGameTimer()/1000))
-    TaskPlayAnim(
-        ped,
-        animDictionary,
-        animName,
-        blendInSpeed,
-        blendOutSpeed,
-        duration,
-        flags,
-        playbackRate,
-        ikFlags,
-        p10,
-        taskFilter,
-        p12
-        )
-    RemoveAnimDict(animDictionary)
-end
-
 function InitializeAnimInfo(animInfo, animLib, entity, info)
     if animInfo == nil then animInfo = { prop = {}, }; end
     if animInfo.ped == nil then animInfo.ped = entity; end
@@ -199,30 +156,16 @@ function IsExitingAnimState(animLib, animStateName)
     return false
 end
 
-local function playEntityAnim(entity, animDictionary, animName, loop, stayInAnim, delta, bitset)
-    local p3 = 0.0
-    loop = loop or 0
-    stayInAnim = stayInAnim or 0
-    local p6 = ""
-    delta = delta or 0.0
-    bitset = bitset or 0
-
-    da.Log.DebugVerbose(entity, animDictionary, animName, p3, loop, stayInAnim, p6, delta, bitset)
-    loadAnimDict(animDictionary)
-    PlayEntityAnim(entity, animName, animDictionary, p3, loop, stayInAnim, p6, delta, bitset)
-    RemoveAnimDict(animDictionary)
-end
-
 function PlayAnimState(animLib, animState, stateName, info)
     if not animLib or type(animLib) ~= "table" then
-        da.Log.Error(da.Log.Line(debug.getinfo(2)), "Playing anim with no animLib.", stateName, animState, info)
+        log.error(log.line(2), "Playing anim with no animLib.", stateName, animState, info)
         return
     end
     -- Initialize animLib on enter
     if IsStateType(stateName, "enter") then
         -- assert(not ActiveAnim, "Tried to enter animation while animation is already active.")
         if ActiveAnim then
-            da.Log.Error(da.Log.Line(debug.getinfo(1)), "Tried to enter animation while animation is already active.")
+            log.error(log.line(1), "Tried to enter animation while animation is already active.")
             return
         end
         local playerPedId = PlayerPedId()
@@ -260,17 +203,17 @@ function PlayAnimState(animLib, animState, stateName, info)
 
     AnimUtil.MonitorIdleAnimHalt()
     ActiveAnim = {animLib, animState, stateName}
-    if not animState then da.Log.Error(ActiveAnim, da.Log.Line(debug.getinfo(1))) end
+    if not animState then log.error(log.line(1), ActiveAnim) end
 
     if animState.next then
         if not AnimStateQueue[1] or AnimStateQueue[1][3] ~= "exit" then
             local nextAnimLib = AnimLib[animState.animLibName]
             table.insert(AnimStateQueue, 1, {nextAnimLib, GetState(nextAnimLib, animState.next), animState.next})
-            da.Log.DebugVerbose("Next anim added to queue", nextAnimLib.animLibName, animState.next)
+            log.spam("Next anim added to queue", nextAnimLib.animLibName, animState.next)
         end
     elseif not IsStateType(stateName, "idle") and not IsStateType(stateName, "exit") and (AnimInfo and AnimInfo.idle and not next(AnimStateQueue)) then
         table.insert(AnimStateQueue, 1, {animLib, AnimInfo.idle, AnimInfo.idle.id})
-        da.Log.DebugVerbose("Anim added to queue", animLib.animLibName, AnimInfo.idle.id)
+        log.spam("Anim added to queue", animLib.animLibName, AnimInfo.idle.id)
     end
 
     if animState.onStart then
@@ -302,14 +245,14 @@ function PlayAnimState(animLib, animState, stateName, info)
             AnimStateQueue = {}
             local nextAnimLib = AnimInfo.animLibName or AnimLib[animState.animLibName]
             table.insert(AnimStateQueue, 1, {nextAnimLib, GetState(nextAnimLib, AnimInfo.next), animState.next})
-            da.Log.DebugVerbose("info next anim added to queue", nextAnimLib, AnimInfo.next)
+            log.spam("info next anim added to queue", nextAnimLib, AnimInfo.next)
             AnimInfo.next = nil
         end
         -- TODO: Modify animState duration
     end
 
     if AnimInfo and animState and animState.animDict and animState.animDict ~= "" and animState.anim and animState.anim ~= "" then
-        playAnim(
+        da_anim.ped(
             AnimInfo.ped,
             animState.animDict,
             animState.anim,
@@ -342,7 +285,7 @@ function PlayAnimState(animLib, animState, stateName, info)
     if AnimInfo and animState.prop then
         for propName, propData in pairs(animState.prop) do
             if propData.anim and AnimInfo.prop and AnimInfo.prop[propName] then
-                playEntityAnim(
+                da_anim.object(
                     AnimInfo.prop[propName].entity,
                     propData.animDict or animState.animDict,
                     propData.anim,
@@ -376,7 +319,7 @@ function PlayAnimState(animLib, animState, stateName, info)
         while not AnimInterrupt and AnimInfo and IsEntityPlayingAnim(AnimInfo.ped, animState.animDict, animState.anim, 3) do
             Citizen.Wait(5)
         end
-        da.Log.DebugVerbose("duration:", GetGameTimer() - duration)
+        log.spam("duration:", GetGameTimer() - duration)
     end
     AnimInterrupt = false
 

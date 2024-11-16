@@ -87,7 +87,7 @@ AnimLib.world_camp_fire_tend_sit_add_logs = {
             blendOutSpeed = 0.6,
             onTrigger = function(info)
                 info.prop.log = Prop:new(Propset.Firewood,
-                    da.Util.GetOffsetFromEntity(
+                    da_util.GetOffsetFromEntity(
                         info.ped,
                         133.5, 0.708, -1.0,
                         vec3(2, 80, 233)))
@@ -219,7 +219,7 @@ AnimLib.world_camp_fire_tend_sit_poke_fire = {
             name = "Transition to Tend Fire",
             onTrigger = function(info)
                 info.prop.log = Prop:new(Propset.Firewood,
-                    da.Util.GetOffsetFromEntity(
+                    da_util.GetOffsetFromEntity(
                         info.ped,
                         133.5, 0.708, -1.0,
                         vec3(2, 80, 233)))
@@ -333,7 +333,7 @@ AnimLib.world_human_wash_kneel_river_maleb = {
             name = "Drink and Spit",
             onTrigger = function(info)
                 Citizen.Wait(2500)
-                if IsEntityInWater(info.ped) then da.Fn.Drink(); end
+                if IsEntityInWater(info.ped) then API.Drink(); end
                 return info
             end,
         },
@@ -402,7 +402,7 @@ AnimLib.world_human_wash_kneel_river_femaleb = {
             name = "Drink Water",
             onTrigger = function(info)
                 Citizen.Wait(8000)
-                if IsEntityInWater(info.ped) then da.Fn.Drink(); end
+                if IsEntityInWater(info.ped) then API.Drink(); end
                 return info
             end,
         },

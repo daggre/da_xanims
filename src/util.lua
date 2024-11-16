@@ -11,7 +11,7 @@ AnimUtil.AdjustStaminaCore = function(ped, amount)
 end
 
 AnimUtil.AtWaterSource = function(ent)
-    local waterSources = da.Util.GetEntitiesNearPoint(GetEntityCoords(ent), 1.8, function(entity)
+    local waterSources = da_util.GetEntitiesNearPoint(GetEntityCoords(ent), 1.8, function(entity)
         return AnimConfig.WaterSources[GetEntityModel(entity)] ~= nil
     end)
     return waterSources and #waterSources > 0
@@ -29,7 +29,7 @@ AnimUtil.ChangeCore = function(entity, changeData)
         if AnimUtil.StatModifiers[stat] then
             AnimUtil.StatModifiers[stat](entity, value)
         else
-            da.Log.Warn(da.Log.Line(debug.getinfo(1)), "Encountered invalid stat modifier: "..stat)
+            log.warn(log.line(1))
         end
     end
 end
@@ -43,7 +43,7 @@ AnimUtil.CheckAndSetDefaultMetadata = function(item, metadataCondition, defaultM
     for metadataField, defaultValue in pairs(defaultMetadata) do
         if item.info[metadataField] == nil then
             item.info[metadataField] = defaultValue
-            da.API.SetItemMetadata(item, item.info)
+            API.setItemMetadata(item, item.info)
         end
     end
     return item
@@ -76,7 +76,7 @@ end
 
 
 AnimUtil.GetClosestInteract = function(interactType, interactTypeSpecific)
-    da.Log.Debug(("Calling GetClosestInteract type: %s %s"):format(interactType, interactTypeSpecific))
+    log.debug(("Calling GetClosestInteract type: %s %s"):format(interactType, interactTypeSpecific))
     local closestZoneId = nil
     local closestZoneData = nil
     local interactTypeHeightPriority = { .Bale, .Sack, .Crate, }
@@ -94,7 +94,7 @@ AnimUtil.GetClosestInteract = function(interactType, interactTypeSpecific)
         else
             local center = zoneData.coords and zoneData.coords.xyz
             if not center and zoneData.boundary then
-                local zoneCenter = da.Util.CalcBoundaryCenter(zoneData.boundary)
+                local zoneCenter = da_util.CalcBoundaryCenter(zoneData.boundary)
                 center = vec3(zoneCenter.x, zoneCenter.y, playerCoords.z)
             end
             local dist = #(center - playerCoords)
@@ -106,7 +106,7 @@ AnimUtil.GetClosestInteract = function(interactType, interactTypeSpecific)
         end
     end
 
-    da.Log.DebugVerbose(("ClosestZone: %s"):format(closestZoneId), closestZoneData)
+    log.spam(("ClosestZone: %s"):format(closestZoneId), closestZoneData)
     return closestZoneId, closestZoneData
 end
 
@@ -135,16 +135,16 @@ AnimUtil.GetStallQuality = function(propData, chore, alternate)
 
     local jobIndex = propData.index
     local ranchName = propData.ranchName
-    local quality, quality2 = da.Net.BlockingCb("ranching:server:getChoreData", 2000, ranchName, chore, jobIndex)
+    local quality, quality2 = TriggerBlockingServerEvent("ranching:server:getChoreData", 2000, ranchName, chore, jobIndex)
 
     return alternate and tonumber(quality2) or tonumber(quality)
 end
 
 AnimUtil.ItemHasMetadata = function(items, metadataCondition, defaultMetadata)
-    if not da.API.Active then return true; end
+    if API.framework == "Default" then return true; end
     for _, item in pairs(items) do
         if type(item) ~= "table" or not item.info then
-            da.Log.Debug("Invalid call to ItemHasMetadata, returning false.", item)
+            log.debug("Invalid call to ItemHasMetadata, returning false.", item)
             return false
         end
         item = AnimUtil.CheckAndSetDefaultMetadata(item, metadataCondition, defaultMetadata)
@@ -171,7 +171,7 @@ AnimUtil.MonitorIdleAnim = function(animState, info)
     local exit = false
     local walkSpeed = config.speed or 100
     Citizen.CreateThread(function()
-        da.Log.DebugVerbose("Start MonitorIdle", animState.animDict, animState.anim)
+        log.spam("Start MonitorIdle", animState.animDict, animState.anim)
         while IsHolding and IsHolding[1] == animState.animDict and IsHolding[2] == animState.anim do
             local wait = 0
             local needsStumble = false
@@ -280,11 +280,11 @@ AnimUtil.StatModifiers.Health = function(entity, val)
 end
 
 AnimUtil.StatModifiers.Hunger = function(entity, val)
-    da.Fn.Eat(val)
+    API.eat(val)
 end
 
 AnimUtil.StatModifiers.Thirst = function(entity, val)
-    da.Fn.Drink(val)
+    API.drink(val)
 end
 
 AnimUtil.ToggleAttachable = function(attachableId, state)

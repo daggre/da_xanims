@@ -334,7 +334,7 @@ local GetAllConditions = function(data)
     chk.hasPrimaryShortarm = chk.hasPrimaryWeapon and (chk.hasPrimaryRevolver or chk.hasPrimaryPistol)
     chk.hasPrimaryLongarm = chk.hasPrimaryWeapon and WeaponModels.Longarms[data.weapHashZero] ~= nil
     chk.hasAttachPointRightHip = WeaponModels.Sidearms[data.weapHashTwo] ~= nil
-    chk.isInClearedVeg = da.API.DependencyCheck("da_farming") and AnimUtil.IsInClearedVeg() or false
+    chk.isInClearedVeg = API.checkDepends("da_farming") and AnimUtil.IsInClearedVeg() or false
     chk.canFarmHandpick = not chk.isInClearedVeg and data.interact.farm.farmHandpick
     chk.canFarmKneel = not chk.isInClearedVeg and data.interact.farm.farmKneel ~= nil
     chk.canFarmRoot = not chk.isInClearedVeg and data.interact.farm.farmRoot ~= nil
@@ -344,7 +344,7 @@ local GetAllConditions = function(data)
     chk.canFarmShovel = not chk.isInClearedVeg and data.interact.farm.farmShovel ~= nil
     chk.canFarmTree = not chk.isInClearedVeg and data.interact.farm.farmTree ~= nil
     chk.interactPitchfork = chk.inAnimalStall
-    chk.isValidTurnIn = da.API.DependencyCheck("da_farming") and AnimUtil.IsValidTurnIn() or false
+    chk.isValidTurnIn = API.checkDepends("da_farming") and AnimUtil.IsValidTurnIn() or false
     chk.pickupPitchfork = data.interact.object.Pitchfork
     chk.pickupRake = data.interact.object.Rake ~= nil
     chk.pickupShovel = data.interact.object.Shovel ~= nil
@@ -429,7 +429,7 @@ end
 
 local GetItems = function()
     local itemsData = {}
-    local items = da.API.HasItems(InventoryItems)
+    local items = API.hasItems(InventoryItems)
     if not items then return itemsData; end
 
     for itemIndex, itemData in pairs(items) do
@@ -442,18 +442,21 @@ local GetItems = function()
 end
 
 local GetInteractData = function()
-    return da.Zone.Collect(function(zoneData, collectedData)
-        local interactType = zoneData.metadata and zoneData.metadata.interactType
-        local typeSpecific = zoneData.metadata and zoneData.metadata.interactTypeSpecific
-        assert(interactType ~= nil and collectedData[interactType], ("Interact type %s not found in collected data: %s"):format(interactType, da.String.Format(zoneData)))
-        assert(interactType == nil or typeSpecific ~= nil, ("Interact type %s requires a type specific value: %s"):format(interactType, da.String.Format(zoneData)))
+    -- TODO: Convert zones in da_lib
 
-        if interactType ~= nil then
-            collectedData[interactType][typeSpecific] = true
-        end
-
-        return collectedData
-    end, { farm = {}, object = {}, turnIn = {}, wagonTurnIn = {}, weather = {}, zone = {}, })
+    -- return da.Zone.Collect(function(zoneData, collectedData)
+    --     local interactType = zoneData.metadata and zoneData.metadata.interactType
+    --     local typeSpecific = zoneData.metadata and zoneData.metadata.interactTypeSpecific
+    --     assert(interactType ~= nil and collectedData[interactType], ("Interact type %s not found in collected data: %s"):format(interactType, log.format(zoneData)))
+    --     assert(interactType == nil or typeSpecific ~= nil, ("Interact type %s requires a type specific value: %s"):format(interactType, log.format(zoneData)))
+    --
+    --     if interactType ~= nil then
+    --         collectedData[interactType][typeSpecific] = true
+    --     end
+    --
+    --     return collectedData
+    -- end, { farm = {}, object = {}, turnIn = {}, wagonTurnIn = {}, weather = {}, zone = {}, })
+    return { farm = {}, object = {}, turnIn = {}, wagonTurnIn = {}, weather = {}, zone = {}, }
 end
 
 local GetConditionData = function(entity)
@@ -501,7 +504,7 @@ Conditions.Check = function(conditionList, debug)
     end
 
     for condition, state in pairs(allConditions) do
-        if debug then da.Log.Debug(("Condition: %s is %s (%s)"):format(condition, Conditions.Cache[condition], state)); end
+        if debug then log.debug(("Condition: %s is %s (%s)"):format(condition, Conditions.Cache[condition], state)); end
         if state ~= allow then
             if Conditions.Cache[condition] ~= state then
                 return false
@@ -509,22 +512,4 @@ Conditions.Check = function(conditionList, debug)
         end
     end
     return true
-end
-
-if da.Util.IsDev then
-    RegisterCommand("da_xanims_dump_conditions", function(source, args, rawCommand)
-        Conditions.BatchCache(PlayerPedId())
-        for k,v in pairs(Conditions.Cache) do
-            if not args[1] or args[1] == k then
-                da.Log.Debug(k, v)
-            end
-        end
-    end, false)
-
-    RegisterCommand("da_xanims_dump_conditions_data", function(source, args, rawCommand)
-        local data = GetConditionData()
-        for k,v in pairs(data) do
-            da.Log.Debug(k, v)
-        end
-    end, false)
 end

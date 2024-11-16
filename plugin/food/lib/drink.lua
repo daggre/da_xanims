@@ -27,7 +27,7 @@ AnimLib.squat_drink = {
             anim = "base",
             flag = AnimConfig.Flag.Loop,
             onTrigger = function(info)
-                if Conditions.Check({ atWaterSource = true }) then da.Fn.Drink(); end
+                if Conditions.Check({ atWaterSource = true }) then API.drink(); end
                 return info
             end,
             transitions = {
@@ -123,7 +123,7 @@ AnimLib.fill_canteen = {
             onTrigger = function(info)
                 local canteen = info.args
                 if not canteen then
-                    local canteens = da.API.GetItems(function(item)
+                    local canteens = API.getItems(function(item)
                         return item.name == "canteen" and (not item.info or item.info.water ~= 100)
                     end)
                     if canteens and next(canteens) then
@@ -133,8 +133,8 @@ AnimLib.fill_canteen = {
                 if not canteen then return info; end
 
                 Citizen.Wait(1000)
-                da.API.SetItemMetadata(canteen, {water=100})
-                da.API.Notify("Canteen refilled", "success")
+                API.setItemMetadata(canteen, {water=100})
+                API.notify("Canteen refilled", "success")
                 return info
             end,
             next = "exit",
@@ -178,7 +178,7 @@ AnimLib.drink_canteen = {
             info.prop.canteen = Prop:new()
             info.canteen = info.args
             if not info.canteen then
-                local canteens = da.API.GetItems(function(item)
+                local canteens = API.getItems(function(item)
                     return item.name == "canteen" and AnimUtil.ItemHasMetadata({item}, { water = function(a) return a >= 1 end }, { water = 0 })
                 end)
                 if canteens and next(canteens) then
@@ -187,7 +187,7 @@ AnimLib.drink_canteen = {
             end
             Citizen.Wait(550)
             if not AnimUtil.ItemHasMetadata({info.canteen}, { water = function(a) return a > 1 end }, { water = 0 }) then
-                da.API.Notify("This canteen is empty","error")
+                API.notify("This canteen is empty","error")
                 info.gotoExit = true
                 return info
             end
@@ -223,13 +223,13 @@ AnimLib.drink_canteen = {
                 if info.canteen and info.canteen.info then
                     info.canteen.info.water = newWaterAmount
                 end
-                da.API.SetItemMetadata(info.canteen, {water=newWaterAmount})
+                API.setItemMetadata(info.canteen, {water=newWaterAmount})
                 return info
             end,
             onFinish = function(info)
-                da.Fn.Drink()
+                API.drink()
                 if not AnimUtil.ItemHasMetadata({info.canteen}, { water = function(a) return a > 1 end }, { water = 0 }) then
-                    da.API.Notify("This canteen is empty","error")
+                    API.notify("This canteen is empty","error")
                     info.gotoExit = true
                 end
                 return info

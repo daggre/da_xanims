@@ -1,8 +1,5 @@
 --- Copyright © 2024 Joshua Nelson
 
-da = exports.da_lib:importLib()
-da.Log.Register(function(msg) print(msg) end)
-
 AnimConfig = {}
 AnimLib = {}
 AnimTags = {}
