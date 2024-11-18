@@ -15,6 +15,9 @@ shared_scripts {
 }
 
 client_scripts {
+    '@da_lib/dat/key.lua',
+
+    '@da_lib/lib/audio_cl.lua',
     '@da_lib/lib/anim_cl.lua',
     '@da_lib/lib/cache_lazy.lua',
     '@da_lib/lib/net_cl.lua',

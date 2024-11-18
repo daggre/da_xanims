@@ -8,30 +8,30 @@ da_mode.register({
     onActivate = function() log.debug("da_mode start xanims") end,
     onDeactivate = function() log.debug("da_mode stop xanims") end,
     keymaps = {
-        -- disablePlayerFiring = true,
-        Escape = {
-            justPressed = {
-                primary = true,
-                fn = function()
-                    da_mode.deactivate("xanims")
-                end,
-            }
+        {
+            key = "Escape",
+            event = "justPressed",
+            primary = true,
+            fn = function()
+                da_mode.deactivate("xanims")
+            end,
         },
-        x = {
-            justPressed = {
-                fn = function()
-                    log.debug("da_mode game x justPressed")
-                    TriggerEvent("da_xanims:batchCache")
-                end,
-            },
-            justReleased = {
-                fn = function()
-                    log.debug("da_mode game x justReleased")
-                    da_mode.activate("xanims")
-                end,
-            },
-        }
-
+        {
+            key = "x",
+            event = "justPressed",
+            fn = function()
+                log.debug("da_mode game x justPressed")
+                TriggerEvent("da_xanims:batchCache")
+            end,
+        },
+        {
+            key = "x",
+            event = "justReleased",
+            fn = function()
+                log.debug("da_mode game x justReleased")
+                da_mode.activate("xanims")
+            end,
+        },
     },
 })
 
