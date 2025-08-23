@@ -1,9 +1,9 @@
-var ValidKeys = {}
-var SubmenuKeys = {}
-var AnimKeys = {}
-var HudTree = {}
+let ValidKeys = {}
+let SubmenuKeys = {}
+let AnimKeys = {}
+let HudTree = {}
 
-function SendClientMessage(endpoint, data) {
+function sendClientMessage(endpoint, data) {
     fetch(`https://${GetParentResourceName()}/${endpoint}`, {
         method: 'POST',
         headers: {
@@ -18,7 +18,7 @@ window.onload = function() {
         // console.log(msg);
         switch(msg.data.type) {
             case "show":
-                InitializeTree(msg.data.optionTree);
+                InitializeTree(msg.data.optionTrie);
                 Open();
                 break;
             case "hide":
@@ -33,7 +33,7 @@ $(document).ready(function() {
         switch(event.key) {
         case "Escape": //ESC
             // Explicitly handle Escape as exit UI
-            SendClientMessage('exit', { });
+            sendClientMessage('exit', { });
             Close();
             break;
         default:
@@ -55,7 +55,6 @@ InitializeTree = function(optionTree) {
     $("#subTreesSpacer").hide();
     $("#animOptsSpacer").hide();
 
-    // console.log("tree", optionTree)
     if (optionTree.submenu) {
         for (idx in optionTree.submenu) {
             AppendSubOption(idx, optionTree.submenu[idx])
@@ -109,13 +108,13 @@ HandleKey = function(key) {
         InitializeTree(HudTree.submenu[idx])
     } else if (AnimKeys[translatedKey]) {
         let idx = AnimKeys[translatedKey]
-        SendClientMessage('anim', {
+        sendClientMessage('anim', {
             animStateName: HudTree.anims[idx].id,
             animLibName: HudTree.anims[idx].animLibName
         });
         Close();
     } else {
-        SendClientMessage('exit', { key: translatedKey });
+        sendClientMessage('exit', { key: translatedKey });
         Close();
     }
 }

@@ -11,24 +11,24 @@ lua54 'yes'
 
 shared_scripts {
     '@da_log/log_sh.lua',
-    '@da_lib/api/api_sh.lua',
+    '@da_lib/features/api/api_sh.lua',
 }
 
 client_scripts {
-    '@da_lib/dat/key.lua',
+    '@da_lib/data/key.lua',
 
-    '@da_lib/lib/audio_cl.lua',
-    '@da_lib/lib/anim_cl.lua',
-    '@da_lib/lib/cache_lazy.lua',
-    '@da_lib/lib/net_cl.lua',
-    '@da_lib/lib/util_cl.lua',
-    '@da_lib/lib/nui_cl.lua',
-    '@da_lib/lib/control_cl.lua',
-    '@da_lib/lib/object_cl.lua',
-    '@da_lib/lib/chance_cl.lua',
-    '@da_lib/lib/mode_cl.lua',
-    '@da_lib/lib/move_cl.lua',
-    '@da_lib/lib/weapon_cl.lua',
+    '@da_lib/features/audio/audio_cl.lua',
+    '@da_lib/features/anim/anim_cl.lua',
+    '@da_lib/features/cache/cache_lazy.lua',
+    '@da_lib/features/net/net_cl.lua',
+    '@da_lib/features/util/util_cl.lua',
+    '@da_lib/features/nui/nui_cl.lua',
+    '@da_lib/features/control/control_cl.lua',
+    '@da_lib/features/object/object_cl.lua',
+    '@da_lib/features/chance/chance_cl.lua',
+    '@da_lib/features/mode/mode_cl.lua',
+    '@da_lib/features/move/move_cl.lua',
+    '@da_lib/features/weapon/weapon_cl.lua',
     'src/config_cl.lua',
     'src/util.lua',
     'src/menu.lua',

@@ -76,7 +76,7 @@ local function getFinalAnim()
 end
 
 local function addSortedTransitions(animLib, animState, animLibName)
-    local tree = {}
+    local trie = {}
     local _keymap = {}
 
     if animState.transitions then
@@ -107,14 +107,14 @@ local function addSortedTransitions(animLib, animState, animLibName)
                 end
                 _keymap[key] = transitionData[2]
                 if backupIndex > 0 then
-                    table.insert(tree, #tree-backupIndex+2, {
+                    table.insert(trie, #trie-backupIndex+2, {
                         name = formattedName or animStateName,
                         key = key,
                         id = transitionData[2],
                         animLibName = animLibName,
                     })
                 else
-                    table.insert(tree, {
+                    table.insert(trie, {
                         name = formattedName or animStateName,
                         key = key,
                         id = transitionData[2],
@@ -125,17 +125,17 @@ local function addSortedTransitions(animLib, animState, animLibName)
         end
     end
 
-    return tree
+    return trie
 end
 
 local function getAnimOptions(menu, sortFunction)
-    local tree = {}
-    if not menu or menu.anims == nil then return tree; end
+    local trie = {}
+    if not menu or menu.anims == nil then return trie; end
 
     for _, animOption in pairs(menu.anims) do
         local condition = animOption.triggerCondition or animOption.condition or function() return Conditions.Check({}) end
         if condition() then
-            table.insert(tree, {
+            table.insert(trie, {
                 key = animOption.key,
                 name = animOption.name,
                 id = animOption.id,
@@ -143,13 +143,13 @@ local function getAnimOptions(menu, sortFunction)
             })
         end
     end
-    table.sort(tree, sortFunction)
-    return tree
+    table.sort(trie, sortFunction)
+    return trie
 end
 
 local function getSubMenuOptions(menu, sortFunction)
-    local tree = {}
-    if not menu or menu.submenu == nil then return tree; end
+    local trie = {}
+    if not menu or menu.submenu == nil then return trie; end
 
     for subMenuName, subMenuData in pairs(menu.submenu) do
         subMenuName = string.gsub(subMenuName, "_", " ")
@@ -159,7 +159,7 @@ local function getSubMenuOptions(menu, sortFunction)
             local sortedSubmenuOptions = getSubMenuOptions(subMenuData, sortFunction)
             local sortedAnimOptions = getAnimOptions(subMenuData, sortFunction)
             if next(sortedSubmenuOptions) or next(sortedAnimOptions) then
-                table.insert(tree, {
+                table.insert(trie, {
                     key = subMenuData.key,
                     name = subMenuName,
                     anims = next(sortedAnimOptions) and sortedAnimOptions or nil,
@@ -168,12 +168,12 @@ local function getSubMenuOptions(menu, sortFunction)
             end
         end
     end
-    table.sort(tree, sortFunction)
-    return tree
+    table.sort(trie, sortFunction)
+    return trie
 end
 
-local function getOptionTree(animMenu)
-    local optionTree = { submenu = {}, anims = {}, }
+local function getOptionTrie(animMenu)
+    local optionTrie = { submenu = {}, anims = {}, }
     local animLib, animState = table.unpack(getFinalAnim())
     local animLibName = animLib and animLib.id
     local alphaKeySort = function(a,b) return a.key < b.key; end
@@ -182,25 +182,25 @@ local function getOptionTree(animMenu)
         local condition = animLib.condition or function() return Conditions.Check({}) end
         -- We are grabbing in progress condition, dont use the triggerCondition
         if condition() then
-            optionTree.anims = addSortedTransitions(animLib, animState, animLibName)
+            optionTrie.anims = addSortedTransitions(animLib, animState, animLibName)
         end
-        table.insert(optionTree.anims, {
+        table.insert(optionTrie.anims, {
             key = "c",
             name = "Exit",
             id = "exit",
             animLibName = animLibName,
         })
-        return optionTree
+        return optionTrie
     end
 
-    optionTree = {
+    optionTrie = {
         submenu = getSubMenuOptions(animMenu, alphaKeySort),
         anims = getAnimOptions(animMenu, alphaKeySort),
     }
-    -- Append sorted animTree to sorted optionTree
+    -- Append sorted animTrie to sorted optionTrie
 
     if ActiveAnim and not IsStateType(ActiveAnim[3], "exit") then
-        table.insert(optionTree.anims, {
+        table.insert(optionTrie.anims, {
             key = "c",
             name = "Exit",
             id = "exit",
@@ -208,7 +208,7 @@ local function getOptionTree(animMenu)
         })
     end
 
-    return optionTree
+    return optionTrie
 end
 
 local function clearAnimMenu(tag, menu)
@@ -309,7 +309,7 @@ end)
 
 -- Init and HUD key listener
 Citizen.CreateThread(function()
-    local optionTree = {}
+    local optionTrie = {}
     AnimMenu, AnimTags = populateAnimConfig(AnimMenu, AnimTags)
     while true do
         Citizen.Wait(5)
@@ -320,10 +320,11 @@ Citizen.CreateThread(function()
             da_control.trackShortPress("x", function()
                 -- If we shortpress x, Open the x anims menu
                 Conditions.BatchCache(PlayerPedId())
-                optionTree = getOptionTree(AnimMenu.root)
+                optionTrie = getOptionTrie(AnimMenu.root)
+                log.debug(optionTrie)
                 SetNuiFocus(true, false)
-                da_ui.send("show", { optionTree = optionTree })
-                optionTree = {}
+                da_ui.send("show", { optionTrie = optionTrie })
+                optionTrie = {}
             end)
             -- Run BatchCache on x press
             AnimMenu, AnimTags = populateAnimConfig(AnimMenu, AnimTags)

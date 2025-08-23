@@ -62,7 +62,7 @@ function Prop:create(coords)
     local coords = coords or self.propData and self.propData.coords or vec3(0, 0, 0)
     local rotation = self.propData and self.propData.spawnParams and self.propData.spawnParams.rotation or self.propset and self.propset.rotation or nil
     local objectHash = self.propData and self.propData.objectHash or self.propset and self.propset.objectHash or nil
-    self.entity = da_obj.create(objectHash, coords, {
+    self.entity = da_obj.createObj(objectHash, coords, {
         network = true,
         netMissionEntity = true,
         rotation = rotation,
@@ -207,8 +207,7 @@ end
 function Prop:lock(callbackTimeout, lockTimeout)
     if not self.id then return false; end
     callbackTimeout = callbackTimeout or 2000
-    lockTimeout = lockTimeout or 10000
-    local locked = da.Lock.Global(self.id, lockTimeout, callbackTimeout)
+    local locked = gl_xlock("da_xanims", self.id, callbackTimeout)
     if not locked then
         API.notify("This area is in use", "info")
     end
