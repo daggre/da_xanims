@@ -289,8 +289,10 @@ function PlayAnimState(animLib, animState, stateName, info)
                     AnimInfo.prop[propName].entity,
                     propData.animDict or animState.animDict,
                     propData.anim,
+                    0.0,
                     propData.loop,
                     propData.stayInAnim,
+                    "",
                     propData.delta,
                     propData.bitset
                 )
