@@ -94,3 +94,9 @@ AnimConfig.WaterSources = {
     [`s_gen_barrelhalf02x`] = true,
     [`p_barrelhalf02x`] = true,
 }
+
+AnimConfig.TaskFilter = {
+    RightArm = "bonemask_head_neck_and_r_arm",
+    RightArm_NL_PH = "upperbodyfeathered_noleftarm_partialhead_filter",
+    RightHand = "grip_r_only_filter",
+}
