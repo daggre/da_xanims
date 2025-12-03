@@ -194,6 +194,7 @@ function PlayAnimState(animLib, animState, stateName, info)
     end
 
     if IsExitingAnimState(animLib, stateName) and not AnimInfo then
+        ClearPedSecondaryTask(PlayerPedId())
         AnimUtil.MonitorIdleAnimHalt()
         ActiveAnim = nil
         return

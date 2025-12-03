@@ -29,8 +29,6 @@ AnimLib.smoke_masc_a = {
         duration = 4300,
         blendInSpeed = 1.2,
         onTrigger = function(info)
-            -- FIXME: StopAnimTask wont work if were in the middle of a normal animation
-            StopAnimTask(info.ped, "amb_rest@world_human_smoking@male_a@base", "base", 1.0)
             Citizen.Wait(200)
             info.prop.cigarette:attach(info.ped, Propset.Cigarette)
             Citizen.Wait(2600)
@@ -1143,7 +1141,6 @@ AnimLib.smoke_cigar_fem = {
             duration = 1500,
             flag = AnimConfig.Flag.MoveHigh,
             onTrigger = function(info)
-                -- TODO: Check if we need StopAnimTask here
                 Citizen.Wait(1650)
                 Prop.Detach(info.prop.cigar, { velocity = -3.0, angle = 273, distance = 2.0, forceWait = 5000 })
                 info.prop.cigar = nil
