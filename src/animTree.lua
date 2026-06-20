@@ -338,7 +338,7 @@ QueueAnimState = function(animLib, stateName, info)
         log.error(log.line(1))
         return
     end
-    log.debug("AST init", animLib.id, stateName)
+    log.spam("AST init", animLib.id, stateName)
     -- Check if state is valid, before adding to queue
     local animState = GetState(animLib, stateName)
     assert(animState, ("Queue:%s:%s:%s"):format(animLib.id, animState, stateName))
@@ -362,11 +362,11 @@ QueueAnimState = function(animLib, stateName, info)
     while next(AnimStateQueue) do
         local animLibId = AnimStateQueue and AnimStateQueue[1] and AnimStateQueue[1][1] and AnimStateQueue[1][1].id or ""
         local animStateName = AnimStateQueue and AnimStateQueue[1] and AnimStateQueue[1][3] or ""
-        log.debug("AST play", animLibId, animStateName)
+        log.spam("AST play", animLibId, animStateName)
         PlayAnimState(table.unpack(table.remove(AnimStateQueue, 1)))
     end
     AnimThread = false
-    log.debug("AST done")
+    log.spam("AST done")
 end
 
 RegisterCommand("xanim_force_reset", function(source, args, rawCommand)
@@ -416,7 +416,7 @@ AddEventHandler("da_xanims:queueAnim", function(animLibName, animStateName, info
             QueueAnimState(animLib, "exit")
         end
     elseif not ActiveAnim or ActiveAnim[1].id ~= animLibName then
-        log.error(log.line(1))
+        log.error("No active animation", log.line(1))
         return
     end
     QueueAnimState(AnimLib[animLibName], animStateName, info)
