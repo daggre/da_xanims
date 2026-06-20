@@ -333,7 +333,7 @@ AnimLib.world_human_wash_kneel_river_maleb = {
             name = "Drink and Spit",
             onTrigger = function(info)
                 Citizen.Wait(2500)
-                if IsEntityInWater(info.ped) then API.Drink(); end
+                if IsEntityInWater(info.ped) then API.drink(); end
                 return info
             end,
         },
@@ -402,7 +402,7 @@ AnimLib.world_human_wash_kneel_river_femaleb = {
             name = "Drink Water",
             onTrigger = function(info)
                 Citizen.Wait(8000)
-                if IsEntityInWater(info.ped) then API.Drink(); end
+                if IsEntityInWater(info.ped) then API.drink(); end
                 return info
             end,
         },
