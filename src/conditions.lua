@@ -334,7 +334,7 @@ local GetAllConditions = function(data)
     chk.hasPrimaryShortarm = chk.hasPrimaryWeapon and (chk.hasPrimaryRevolver or chk.hasPrimaryPistol)
     chk.hasPrimaryLongarm = chk.hasPrimaryWeapon and WeaponModels.Longarms[data.weapHashZero] ~= nil
     chk.hasAttachPointRightHip = WeaponModels.Sidearms[data.weapHashTwo] ~= nil
-    chk.isInClearedVeg = API.checkDepends("da_farming") and AnimUtil.IsInClearedVeg() or false
+    chk.isInClearedVeg = da_util.dependsOn("da_farming") and AnimUtil.IsInClearedVeg() or false
     chk.canFarmHandpick = not chk.isInClearedVeg and data.interact.farm.farmHandpick
     chk.canFarmKneel = not chk.isInClearedVeg and data.interact.farm.farmKneel ~= nil
     chk.canFarmRoot = not chk.isInClearedVeg and data.interact.farm.farmRoot ~= nil
@@ -344,7 +344,7 @@ local GetAllConditions = function(data)
     chk.canFarmShovel = not chk.isInClearedVeg and data.interact.farm.farmShovel ~= nil
     chk.canFarmTree = not chk.isInClearedVeg and data.interact.farm.farmTree ~= nil
     chk.interactPitchfork = chk.inAnimalStall
-    chk.isValidTurnIn = API.checkDepends("da_farming") and AnimUtil.IsValidTurnIn() or false
+    chk.isValidTurnIn = da_util.dependsOn("da_farming") and AnimUtil.IsValidTurnIn() or false
     chk.pickupPitchfork = data.interact.object.Pitchfork
     chk.pickupRake = data.interact.object.Rake ~= nil
     chk.pickupShovel = data.interact.object.Shovel ~= nil
