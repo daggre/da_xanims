@@ -16,22 +16,9 @@ da_mode.register({
                 da_mode.deactivate("xanims")
             end,
         },
-        {
-            key = "x",
-            event = "justPressed",
-            fn = function()
-                log.debug("da_mode game x justPressed")
-                TriggerEvent("da_xanims:batchCache")
-            end,
-        },
-        {
-            key = "x",
-            event = "justReleased",
-            fn = function()
-                log.debug("da_mode game x justReleased")
-                da_mode.activate("xanims")
-            end,
-        },
+        -- The x key that enters this mode is registered on the baseline Game
+        -- keymap (da_mode.addGameKey, below) rather than here, so the Mode
+        -- Controller suppresses it whenever a take-over mode is active.
     },
 })
 
@@ -301,36 +288,34 @@ local function populateAnimConfig(menu, tagsData)
     return menu, tagsData
 end
 
-AddEventHandler("da_xanims:batchCache", function(args)
-    if API.isDead() then return; end
-    log.debug("Populating anim config")
-    AnimMenu, AnimTags = populateAnimConfig(AnimMenu, AnimTags)
-end)
-
--- Init and HUD key listener
+-- Init: populate the anim menu once on startup.
 Citizen.CreateThread(function()
-    local optionTrie = {}
     AnimMenu, AnimTags = populateAnimConfig(AnimMenu, AnimTags)
-    while true do
-        Citizen.Wait(5)
-        if IsEntityDead(PlayerPedId()) then Citizen.Wait(1000); end
-
-        local justPressed = da_control.isJustPressed({"x"})
-        if justPressed.x then
-            da_control.trackShortPress("x", function()
-                -- If we shortpress x, Open the x anims menu
-                Conditions.BatchCache(PlayerPedId())
-                optionTrie = getOptionTrie(AnimMenu.root)
-                log.debug(optionTrie)
-                SetNuiFocus(true, false)
-                da_ui.send("show", { optionTrie = optionTrie })
-                optionTrie = {}
-            end)
-            -- Run BatchCache on x press
-            AnimMenu, AnimTags = populateAnimConfig(AnimMenu, AnimTags)
-        end
-    end
 end)
+
+-- The x key lives on the baseline Game keymap so the Mode Controller owns it:
+-- it is active-gated by the "Game" pseudo-mode, so any active mode that declares
+-- `disableGame = true` (dev tools, interact, wardrobe, tack, ...) suppresses it.
+-- Behaviour preserved from the old da_control loop: short tap opens the anim
+-- menu; releasing x activates the xanims mode.
+da_mode.addGameKey("x", {
+    justPressed = function()
+        log.debug("x pressed")
+        if API.isDead() then return; end
+        da_control.trackShortPress("x", function()
+            log.debug("x shortpressed")
+            -- If we shortpress x, open the x anims menu
+            da_mode.activate("xanims")
+            Conditions.BatchCache(PlayerPedId())
+            local optionTrie = getOptionTrie(AnimMenu.root)
+            log.spam(optionTrie)
+            SetNuiFocus(true, false)
+            da_ui.send("show", { optionTrie = optionTrie })
+        end)
+        -- Run BatchCache on x press
+        AnimMenu, AnimTags = populateAnimConfig(AnimMenu, AnimTags)
+    end,
+})
 
 local AnimThread = nil
 QueueAnimState = function(animLib, stateName, info)
