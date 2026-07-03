@@ -34,7 +34,7 @@ Animations can have scripted actions that trigger before, during, or after the a
 
 ## Included Plugins
 
-Plugins extend the base animation set with additional scenarios. All of the following plugins are included:
+Plugins extend the base animation set with additional scenarios. All of the following plugins are available:
 
 | Plugin | Description |
 |--------|-------------|
