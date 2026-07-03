@@ -253,18 +253,15 @@ function PlayAnimState(animLib, animState, stateName, info)
     end
 
     if AnimInfo and animState and animState.animDict and animState.animDict ~= "" and animState.anim and animState.anim ~= "" then
-        da_anim.ped(
-            AnimInfo.ped,
-            animState.animDict,
-            animState.anim,
-            AnimInfo.nextBlendInSpeed or animState.blendInSpeed,
-            animState.blendOutSpeed,
-            animState.animDuration or animState.duration,
-            animState.flag,
-            animState.playbackRate,
-            animState.ikFlags,
-            animState.taskFilter
-        )
+        da_anim.ped(AnimInfo.ped, animState.animDict, animState.anim, {
+            blendIn  = AnimInfo.nextBlendInSpeed or animState.blendInSpeed,
+            blendOut = animState.blendOutSpeed,
+            duration = animState.animDuration or animState.duration,
+            flags    = animState.flag,
+            rate     = animState.playbackRate,
+            ikFlags  = animState.ikFlags,
+            filter   = animState.taskFilter,
+        })
     end
 
     -- Start the idle loop
