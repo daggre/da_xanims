@@ -6,7 +6,7 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 
 author 'daggre_actual'
 description 'Animation library and queue system for custom animation scenarios'
-version '0.3'
+version '0.6'
 lua54 'yes'
 
 shared_scripts {

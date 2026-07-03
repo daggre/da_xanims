@@ -2,7 +2,7 @@
 
 ## Version & Status
 
-v0.3
+v0.6
 
 ## Description
 
