@@ -300,10 +300,8 @@ end)
 -- menu; releasing x activates the xanims mode.
 da_mode.addGameKey("x", {
     justPressed = function()
-        log.debug("x pressed")
         if API.isDead() then return; end
         da_control.trackShortPress("x", function()
-            log.debug("x shortpressed")
             -- If we shortpress x, open the x anims menu
             da_mode.activate("xanims")
             Conditions.BatchCache(PlayerPedId())
