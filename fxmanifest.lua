@@ -67,5 +67,6 @@ ui_page {
 }
 
 dependencies {
+    'da_log',
     'da_lib',
 }
