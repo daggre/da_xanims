@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimLib.horse_drink_trough = {
     name = "Drink Trough",
     tags = { consume=1, },

@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimLib.bar_waiting = {
     name = "Bar Waiting",
     tags = { bar=1 },

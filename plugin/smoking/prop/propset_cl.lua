@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 Propset.Cigarette = {
     objectHash = `p_cigarette01x`,
     bone = "PH_R_Hand",

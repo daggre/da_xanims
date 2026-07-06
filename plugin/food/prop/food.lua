@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 Propset.apple = {
     objectHash = `s_bit_apple01x`,
     bone = "PH_R_Hand",

@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimLib.wolf_sniffing_ground = {
     name = "Sniffing Ground",
     tags = { environment=1, },

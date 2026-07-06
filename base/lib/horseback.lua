@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimLib.horse_duckleft = {
     name = "Duck Left",
     tags = { horseback=1, },

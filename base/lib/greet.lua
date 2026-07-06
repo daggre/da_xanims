@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 -- Wave
 AnimLib.greet_subtle_left = {
     name = "Subtle Wave Left",

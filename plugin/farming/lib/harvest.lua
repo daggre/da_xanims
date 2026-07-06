@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimLib.handshovel = {
     name = "Handshovel Kneeling",
     tags = { work=1, },

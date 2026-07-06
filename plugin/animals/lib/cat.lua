@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 -- TODO add cat anims
 -- creatures_mammal@cat
 -- creatures@cat

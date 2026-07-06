@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimLib.dog_eat_ground = {
     name = "Eat Kibble",
     tags = { consume=1, },

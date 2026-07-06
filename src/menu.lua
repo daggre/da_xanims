@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 allow = "allow"
 
 AnimMenu = {}

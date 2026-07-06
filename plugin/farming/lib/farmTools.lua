@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimLib.rake = {
     name = "Rake",
     tags = {

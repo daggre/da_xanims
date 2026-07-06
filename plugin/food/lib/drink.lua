@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimLib.squat_drink = {
     name = "Drink Water",
     tags = { root=1, squat=1, ["food_&_drink"]=1, },

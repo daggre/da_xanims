@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 Propset.Rake = {
     objectHash = `p_rake03x`,
     bone = "PH_R_Hand",

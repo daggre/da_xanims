@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 -- Removed newspaper. It now just looks like elbows on the counter
 AnimLib.bartender_lean_newspaper = {
     name = "Bar Bored",

@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 Propset.ChickenCrate = {
     objectHash = `p_cratechicken03x_anim`,
     interactRange = 2.0,

@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimUtil.DoRanchJob = function(job, data, amount)
     TriggerServerEvent("ranching:server:attemptJob", job, data.ranchName, data.index, amount)
 end

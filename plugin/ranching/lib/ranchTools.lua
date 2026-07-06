@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimLib.female_bucket_pick_up_empty = {
     name = "Pick Up Empty Bucket",
     tags = { root=1, },

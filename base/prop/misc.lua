@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 Propset.WhittleWood = {
     objectHash = `p_woodwhittle01x`,
     bone = "PH_L_Hand",

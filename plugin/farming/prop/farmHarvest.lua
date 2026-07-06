@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 Propset.pickapple = {
     OrchardPicking = {
         objectHash = `p_apple01x`,

@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 lazy.isInClearedVeg = function()
     if da_util.dependsOn("da_farming") then
         return exports.da_farming:IsInClearedVeg()

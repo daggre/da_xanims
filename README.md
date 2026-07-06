@@ -135,4 +135,4 @@ Common flags from `AnimConfig.Flag`:
 
 ## Authors and Acknowledgment
 
-- daggre_actual (Joshua Nelson)
+- daggre_actual

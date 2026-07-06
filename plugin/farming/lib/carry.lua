@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimLib.pickup_bale = {
     name = "Pickup Bale",
     tags = {

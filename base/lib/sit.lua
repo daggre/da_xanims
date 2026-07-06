@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimLib.world_human_sit_ground_legoutkneeup = {
     name = "Knee Up",
     tags = { sit=1, },

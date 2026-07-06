@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimLib.lean_railing_male_a = {
     name = "Two Hands On Railing",
     tags = { lean_front=1, },

@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimLib.ragdoll = {
     name = "Ragdoll",
     tags = { root=1, },

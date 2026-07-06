@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 AnimLib.coyote_eating_ground = {
     name = "Eat Meat",
     tags = { consume=1, },

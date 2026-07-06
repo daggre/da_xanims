@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 Propset.Rag = {
     objectHash = 'p_cs_rag01x',
     bone = "PH_R_Hand",

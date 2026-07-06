@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 Propset.BucketEmpty = {
     objectHash = `p_cs_bucket01bx`,
     bone = "PH_R_Hand",

@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 Propset.Firewood = {
     objectHash = `p_woodpiece01x`,
     bone = "SKEL_R_Hand",

@@ -1,5 +1,3 @@
---- Copyright © 2024 Joshua Nelson
-
 Propset.FenceDefault = {
     objectHash = `p_fence_cattle01x`,
     offset = {
