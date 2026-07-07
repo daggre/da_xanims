@@ -246,18 +246,15 @@ AnimUtil.MonitorIdleAnim = function(animState, info)
             end
             if IsHolding ~= nil and not exit and not IsEntityPlayingAnim(info.ped, animState.animDict, animState.anim, 49) then
                 if animState.animDict and animState.animDict ~= "" and animState.anim and animState.anim ~= "" then
-                    playAnim(
-                        info.ped,
-                        animState.animDict,
-                        animState.anim,
-                        info.nextBlendInSpeed or animState.blendInSpeed,
-                        animState.blendOutSpeed,
-                        animState.animDuration or animState.duration,
-                        animState.flag,
-                        animState.playbackRate,
-                        animState.ikFlags,
-                        animState.taskFilter
-                    )
+                    da_anim.ped(info.ped, animState.animDict, animState.anim, {
+                        blendIn  = info.nextBlendInSpeed or animState.blendInSpeed,
+                        blendOut = animState.blendOutSpeed,
+                        duration = animState.animDuration or animState.duration,
+                        flags    = animState.flag,
+                        rate     = animState.playbackRate,
+                        ikFlags  = animState.ikFlags,
+                        filter   = animState.taskFilter
+                    })
                 end
             end
             Citizen.Wait(0)
