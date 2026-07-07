@@ -6,7 +6,7 @@ AnimLib.eat_apple = {
     enter = {
         animDict = "amb_misc@world_human_eat_apple@male_a@enter",
         anim = "enter",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         blendInSpeed = 1.0,
         onTrigger = function(info)
             info.prop.apple = Prop:new()
@@ -26,7 +26,8 @@ AnimLib.eat_apple = {
     exit = {
         animDict = "amb_misc@world_human_eat_apple@male_a@exit",
         anim = "exit",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         onTrigger = function(info)
             Citizen.Wait(650)
             Prop.Detach(info.prop.apple, { forceWait = 5000, velocity = -1.0, })
@@ -39,7 +40,8 @@ AnimLib.eat_apple = {
             animDict = "amb_misc@world_human_eat_apple@male_a@base",
             anim = "base",
             prop = { id = "apple", anim = "base_apple", },
-            flag = AnimConfig.Flag.MoveLoop,
+            flag = AnimConfig.Flag.MoveHighLoop,
+            taskFilter = "rightarm_nospine_filter",
             transitions = {
                 a_a = "w",
                 -- a_b = "2",
@@ -56,7 +58,7 @@ AnimLib.eat_apple = {
         a_a = {
             animDict = "amb_misc@world_human_eat_apple@male_a@idle_a",
             anim = "idle_a",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             prop = { id = "apple", anim = "idle_a_apple", },
             name = "Wipe on Shirt",
             onTrigger = function(info)
@@ -78,7 +80,8 @@ AnimLib.eat_apple = {
         a_c = {
             animDict = "amb_misc@world_human_eat_apple@male_a@idle_a",
             anim = "idle_c",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             prop = { id = "apple", anim = "idle_c_apple", },
             name = "Wipe on Pants, Bite",
             onTrigger = function(info)
@@ -96,7 +99,8 @@ AnimLib.eat_apple = {
         a_d = {
             animDict = "amb_misc@world_human_eat_apple@male_a@idle_b",
             anim = "idle_d",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             prop = { id = "apple", anim = "idle_d_apple", },
             name = "Bite",
             duration = 6000,
@@ -119,7 +123,8 @@ AnimLib.eat_apple = {
         a_f = {
             animDict = "amb_misc@world_human_eat_apple@male_a@idle_b",
             anim = "idle_f",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             prop = { id = "apple", anim = "idle_f_apple", },
             name = "Pick Out Seed",
             onTrigger = function(info)
@@ -141,7 +146,7 @@ AnimLib.eat_apple = {
         exit_throw = {
             animDict = "amb_camp@world_camp_jack_throws_rocks_ledge@idle_a",
             anim = "idle_c",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             name = "Throw Apple",
             blendInSpeed = 0.5,
             duration = 3200,
@@ -165,12 +170,11 @@ AnimLib.eat_pear = {
     enter = {
         animDict = "amb_misc@world_human_eat_apple@male_a@enter",
         anim = "enter",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         blendInSpeed = 1.0,
         onTrigger = function(info)
             info.prop.pear = Prop:new()
             Citizen.Wait(1300)
-            log.debug("args", info.args)
             API.consume("pear", info.args)
             info.prop.pear:attach(info.ped, Propset.pear)
             info.pear = {
@@ -185,7 +189,8 @@ AnimLib.eat_pear = {
     exit = {
         animDict = "amb_misc@world_human_eat_apple@male_a@exit",
         anim = "exit",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         onTrigger = function(info)
             Citizen.Wait(650)
             Prop.Detach(info.prop.pear, { forceWait = 5000, velocity = -1.0, })
@@ -198,7 +203,8 @@ AnimLib.eat_pear = {
             animDict = "amb_misc@world_human_eat_apple@male_a@base",
             anim = "base",
             prop = { id = "pear", anim = "base_apple", },
-            flag = AnimConfig.Flag.MoveLoop,
+            flag = AnimConfig.Flag.MoveHighLoop,
+            taskFilter = "rightarm_nospine_filter",
             transitions = {
                 a_a = "w",
                 -- a_b = "2",
@@ -215,7 +221,8 @@ AnimLib.eat_pear = {
         a_a = {
             animDict = "amb_misc@world_human_eat_apple@male_a@idle_a",
             anim = "idle_a",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             prop = { id = "pear", anim = "idle_a_apple", },
             name = "Wipe on Shirt",
             onTrigger = function(info)
@@ -237,7 +244,8 @@ AnimLib.eat_pear = {
         a_c = {
             animDict = "amb_misc@world_human_eat_apple@male_a@idle_a",
             anim = "idle_c",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             prop = { id = "pear", anim = "idle_c_apple", },
             name = "Wipe on Pants, Bite",
             onTrigger = function(info)
@@ -255,7 +263,8 @@ AnimLib.eat_pear = {
         a_d = {
             animDict = "amb_misc@world_human_eat_apple@male_a@idle_b",
             anim = "idle_d",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             prop = { id = "pear", anim = "idle_d_apple", },
             name = "Bite",
             duration = 6000,
@@ -278,7 +287,8 @@ AnimLib.eat_pear = {
         a_f = {
             animDict = "amb_misc@world_human_eat_apple@male_a@idle_b",
             anim = "idle_f",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             prop = { id = "pear", anim = "idle_f_apple", },
             name = "Pick Out Seed",
             onTrigger = function(info)
@@ -300,7 +310,7 @@ AnimLib.eat_pear = {
         exit_throw = {
             animDict = "amb_camp@world_camp_jack_throws_rocks_ledge@idle_a",
             anim = "idle_c",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             name = "Throw pear",
             blendInSpeed = 0.5,
             duration = 3200,
@@ -324,7 +334,7 @@ AnimLib.eat_breadroll = {
     enter = {
         animDict = "amb_misc@world_human_eat_apple@male_a@enter",
         anim = "enter",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         blendInSpeed = 1.0,
         onTrigger = function(info)
             info.prop.bread = Prop:new()
@@ -343,9 +353,9 @@ AnimLib.eat_breadroll = {
     exit = {
         animDict = "amb_misc@world_human_eat_apple@male_a@exit",
         anim = "exit",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         onTrigger = function(info)
-            local bread = info.prop.bread
             Citizen.Wait(650)
             Prop.Detach(info.prop.bread, { forceWait = 5000, velocity = -1.0, })
             info.prop.bread = nil
@@ -356,7 +366,8 @@ AnimLib.eat_breadroll = {
         idle_a = {
             animDict = "amb_misc@world_human_eat_apple@male_a@base",
             anim = "base",
-            flag = AnimConfig.Flag.MoveLoop,
+            flag = AnimConfig.Flag.MoveHighLoop,
+            taskFilter = "rightarm_nospine_filter",
             prop = { id = "bread", anim = "base_apple", },
             transitions = {
                 a_d = "b",
@@ -369,7 +380,8 @@ AnimLib.eat_breadroll = {
         a_d = {
             animDict = "amb_misc@world_human_eat_apple@male_a@idle_b",
             anim = "idle_d",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             prop = { id = "bread", anim = "idle_d_apple", },
             name = "Bite",
             duration = 6000,
@@ -388,7 +400,8 @@ AnimLib.eat_breadroll = {
         a_f = {
             animDict = "amb_misc@world_human_eat_apple@male_a@idle_b",
             anim = "idle_f",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             prop = { id = "bread", anim = "idle_f_apple", },
             name = "Pick off dirt",
             onTrigger = function(info)
@@ -406,7 +419,8 @@ AnimLib.eat_breadroll = {
         exit_throw = {
             animDict = "amb_camp@world_camp_jack_throws_rocks_ledge@idle_a",
             anim = "idle_c",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             name = "Throw Bread",
             blendInSpeed = 0.5,
             duration = 3200,
@@ -423,9 +437,9 @@ AnimLib.eat_breadroll = {
 }
 
 AnimLib.eat_generic = {
-    name = "",
-    tags = {},
-    key = "",
+    name = "Eat Snack",
+    tags = { ["food_&_drink"]=1, },
+    key = "e",
     condition = function() return Conditions.Check({ onMount = allow, }) end,
     enter = {
         animDict = "mech_inventory@item@_templates@book@w15-8_h20-6@unarmed@base",
@@ -433,10 +447,10 @@ AnimLib.eat_generic = {
         blendInSpeed = 1.0,
         duration = 1000,
         next = "exit",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         onTrigger = function(info)
             Citizen.Wait(600)
-            API.consume(info.args.name, info.args)
+            if info.args then API.consume(info.args.name, info.args) end
             return info
         end,
     },
@@ -444,10 +458,12 @@ AnimLib.eat_generic = {
         animDict = "mech_inventory@eating@multi_bite@wedge_a4-2_b0-75_w8_h9-4_eat_cheese",
         anim = "quick_right_hand",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         duration = 1500,
         onTrigger = function(info)
-            API.eat(info.args.increaseAmount)
+            local increaseAmount = info.args and info.args.increaseAmount or 5
+            API.eat(increaseAmount)
             return info
         end,
     },
@@ -464,13 +480,13 @@ AnimLib.eat_rotten = {
         blendInSpeed = 1.0,
         duration = 1000,
         next = "exit",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         changeCore = {
             Health = -50,
         },
         onTrigger = function(info)
             Citizen.Wait(600)
-            API.consume(info.args.name, info.args)
+            if info.args then API.consume(info.args.name, info.args) end
             return info
         end,
     },
@@ -478,29 +494,31 @@ AnimLib.eat_rotten = {
         animDict = "mech_inventory@eating@multi_bite@wedge_a4-2_b0-75_w8_h9-4_eat_cheese",
         anim = "quick_right_hand",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         duration = 1500,
         onTrigger = function(info)
-            API.eat(info.args.increaseAmount)
+            local increaseAmount = info.args and info.args.increaseAmount or 5
+            API.eat(increaseAmount)
             return info
         end,
     },
 }
 
 AnimLib.eat_generic_can = {
-    name = "",
-    tags = {},
-    key = "",
+    name = "Eat Canned Goods",
+    tags = { ["food_&_drink"]=1, },
+    key = "c",
     condition = function() return Conditions.Check({ onMount = allow, }) end,
     enter = {
         animDict = "mech_inventory@item@_templates@cylinder@d12_h6-7_inspecty@offhand@base",
         anim = "unholster",
         blendInSpeed = 1.0,
         next = "exit",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         onTrigger = function(info)
             Citizen.Wait(600)
-            API.consume(info.args.name, info.args)
+            if info.args then API.consume(info.args.name, info.args) end
             info.prop.can = Prop:new()
             info.prop.can:attach(info.ped, Propset.canned_goods.Hold)
             return info
@@ -512,9 +530,11 @@ AnimLib.eat_generic_can = {
         prop = { id = "can", anim = "right_hand_can" },
         blendInSpeed = 1.0,
         duration = 2700,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         onTrigger = function(info)
-            API.eat(info.args.increaseAmount)
+            local increaseAmount = info.args and info.args.increaseAmount or 5
+            API.eat(increaseAmount)
             Citizen.Wait(1000)
             info.prop.can:attach(info.ped, Propset.canned_goods)
             Citizen.Wait(1650)
@@ -526,9 +546,9 @@ AnimLib.eat_generic_can = {
 }
 
 AnimLib.eat_generic_stew = {
-    name = "",
-    tags = {},
-    key = "",
+    name = "Eat Stew",
+    tags = { ["food_&_drink"]=1, },
+    key = "s",
     condition = function() return Conditions.Check({ onMount = allow, }) end,
     enter = {
         animDict = "mech_inventory@item@_templates@cylinder@d12_h6-7_inspecty@offhand@base",
@@ -536,9 +556,9 @@ AnimLib.eat_generic_stew = {
         blendInSpeed = 1.0,
         duration = 660,
         next = "eat_1",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         onFinish = function(info)
-            API.consume(info.args.name, info.args)
+            if info.args then API.consume(info.args.name, info.args) end
             return info
         end,
     },
@@ -546,7 +566,7 @@ AnimLib.eat_generic_stew = {
         animDict = "mech_inventory@eating@stew",
         anim = "eat_finish_discard",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         duration = 6000,
         onTrigger = function(info)
             local stewAmount = 0.7
@@ -563,7 +583,8 @@ AnimLib.eat_generic_stew = {
                 info.prop.bowl:expression(stewAmount)
                 Citizen.Wait(500)
             end
-            API.eat(info.args.increaseAmount/2)
+            local increaseAmount = info.args and info.args.increaseAmount or 5
+            API.eat(increaseAmount/2)
             -- Workaround for certain bowls not having physics, swap empty bowl back to stew bowl
             local foodBowl = info.prop.bowl
             info.prop.bowl = Prop:new()
@@ -584,10 +605,10 @@ AnimLib.eat_generic_stew = {
             animDict = "mech_inventory@eating@stew",
             anim = "intro",
             blendInSpeed = 2.0,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             next = "exit",
             onTrigger = function(info)
-                local propset = info.args.propset or "Stew"
+                local propset = info.args and info.args.propset or "Stew"
                 Citizen.Wait(300)
                 info.prop.bowl = Prop:new()
                 info.prop.bowl:attach(info.ped, Propset.bowl[propset])
@@ -601,7 +622,8 @@ AnimLib.eat_generic_stew = {
             end,
             onFinish = function(info)
                 -- Change hunger on finish prior to exit to prevent player from skipping anim
-                API.eat(info.args.increaseAmount/2)
+                local increaseAmount = info.args and info.args.increaseAmount or 5
+                API.eat(increaseAmount/2)
                 return info
             end,
         },

@@ -166,12 +166,12 @@ AnimLib.drink_canteen = {
         isRunning = false,
     }) end,
     enter = {
-        animDict = "mech_inventory@item@_templates@cylinder@d12_h6-7_inspecty@offhand@base",
+        animDict = "mech_inventory@item@_templates@cylinder@d8-2_h10-5_inspecty@offhand@base",
         anim = "unholster",
         blendInSpeed = 1.0,
         nextBlendInSpeed = 0.8,
-        duration = 600,
-        flag = AnimConfig.Flag.Move,
+        duration = 1000,
+        flag = AnimConfig.Flag.MoveHigh,
         onTrigger = function(info)
             info.prop.canteen = Prop:new()
             info.canteen = info.args
@@ -183,7 +183,7 @@ AnimLib.drink_canteen = {
                     info.canteen = canteens[1]
                 end
             end
-            Citizen.Wait(550)
+            Citizen.Wait(850)
             if not AnimUtil.ItemHasMetadata({info.canteen}, { water = function(a) return a > 1 end }, { water = 0 }) then
                 API.notify("This canteen is empty","error")
                 info.gotoExit = true
@@ -197,23 +197,24 @@ AnimLib.drink_canteen = {
         next = "a_a",
     },
     exit = {
-        animDict = "mech_inventory@item@_templates@cylinder@d12_h6-7_inspecty@offhand@base",
+        animDict = "mech_inventory@item@_templates@cylinder@d8-2_h10-5_inspecty@offhand@base",
         anim = "holster",
-        duration = 620,
+        duration = 950,
         playbackRate = 0.02,
         blendInSpeed = 2.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         onTrigger = function(info)
-            Citizen.Wait(600)
+            Citizen.Wait(900)
             Prop.Delete(info.prop.canteen)
             return info
         end,
     },
     idles = {
         idle_a = {
-            animDict = "amb_rest_drunk@world_human_drinking@female_a@base",
+            animDict = "amb_rest_drunk@world_human_drinking@male_a@base",
             anim = "base",
-            flag = AnimConfig.Flag.Loop | AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHighLoop,
+            taskFilter = "rightarm_nospine_filter",
             onStart = function(info)
                 local waterAmount = info.canteen and info.canteen.info and info.canteen.info.water or 0
                 local newWaterAmount = waterAmount - 20
@@ -234,58 +235,24 @@ AnimLib.drink_canteen = {
             end,
             transitions = {
                 a_a = "d",
-                -- a_b = "2",
                 a_c = "s",
-                -- a_d = "4",
-                a_e = "q",
-                -- a_f = "w",
-                -- a_g = "e",
-                -- a_h = "r",
             },
         },
     },
     animations = {
         a_a = {
-            animDict = "amb_rest_drunk@world_human_drinking@female_a@idle_a",
+            animDict = "amb_rest_drunk@world_human_drinking@male_a@idle_a",
             anim = "idle_a",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             name = "Drink",
         },
-        a_b = {
-            animDict = "amb_rest_drunk@world_human_drinking@female_a@idle_a",
-            anim = "idle_b",
-        },
         a_c = {
-            animDict = "amb_rest_drunk@world_human_drinking@female_a@idle_a",
+            animDict = "amb_rest_drunk@world_human_drinking@male_a@idle_a",
             anim = "idle_c",
-            flag = AnimConfig.Flag.Move,
-            name = "Talk, Swish and Swig",
-        },
-        a_d = {
-            animDict = "amb_rest_drunk@world_human_drinking@female_a@idle_b",
-            anim = "idle_d",
-        },
-        a_e = {
-            animDict = "amb_rest_drunk@world_human_drinking@female_a@idle_b",
-            anim = "idle_e",
-            flag = AnimConfig.Flag.Move,
-            name = "Long Drink",
-        },
-        a_f = {
-            animDict = "amb_rest_drunk@world_human_drinking@female_a@idle_b",
-            anim = "idle_f",
-        },
-        a_g = {
-            animDict = "amb_rest_drunk@world_human_drinking@female_a@idle_c",
-            anim = "idle_g",
-        },
-        a_h = {
-            animDict = "amb_rest_drunk@world_human_drinking@female_a@idle_c",
-            anim = "idle_h",
-        },
-        a_i = {
-            animDict = "amb_rest_drunk@world_human_drinking@female_a@idle_c",
-            anim = "idle_i",
+            flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
+            name = "Drink, Swish",
         },
     },
 }

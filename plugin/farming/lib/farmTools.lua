@@ -1,3 +1,10 @@
+local StopRakeIdle = function()
+    local animDict = "amb_wander@code_human_rake_wander@male_a@base"
+    local anim = "base"
+    Citizen.Wait(600)
+    StopAnimTask(PlayerPedId(), animDict, anim, 1.0)
+end
+
 AnimLib.rake = {
     name = "Rake",
     tags = {
@@ -37,12 +44,13 @@ AnimLib.rake = {
             animDict = "amb_wander@code_human_rake_wander@male_a@base",
             anim = "base",
             blendInSpeed = 4.0,
-            flag = AnimConfig.Flag.MoveLoop,
+            flag = AnimConfig.Flag.MoveHighLoop,
+            taskFilter = "rightarmonly_filter",
             transitions = {
-                trans_rake1= "q",
-                trans_rake3 = "a",
-                trans_rake6 = "s",
-                trans_rake = "w",
+                trans_rake1 = "1",
+                trans_rake3 = "3",
+                trans_rake6 = "6",
+                trans_rake = "r",
                 trans_harvest_sweat = "s",
                 trans_harvest = "z",
                 set_down = "l",
@@ -67,12 +75,17 @@ AnimLib.rake = {
             animDict = "amb_work@world_human_rake_putdown@male_a@stand_enter_withprop",
             anim = "enter_back_lf",
             next = "exit_set_down",
+            onStart = function(info)
+                Citizen.CreateThread(StopRakeIdle)
+                return info
+            end,
         },
         exit_set_down = {
             animDict = "amb_work@world_human_rake_putdown@male_a@stand_exit",
             anim = "exit_front",
             duration = 400,
             onTrigger = function(info)
+                Citizen.CreateThread(StopRakeIdle)
                 Prop.Detach(info.prop.rake, { forceWait = 5000 })
                 info.prop.rake = nil
                 return info
@@ -96,6 +109,7 @@ AnimLib.rake = {
             next = "sweat",
             changeCore = { Stamina = -10 },
             onStart = function(info)
+                Citizen.CreateThread(StopRakeIdle)
                 info.field = AnimUtil.GetInteractiveZone("farm", "farmRake")
                 if not info.field then info.exit = true; end
                 return info
@@ -110,6 +124,7 @@ AnimLib.rake = {
             next = "rake",
             changeCore = { Stamina = -10 },
             onStart = function(info)
+                Citizen.CreateThread(StopRakeIdle)
                 info.field = AnimUtil.GetInteractiveZone("farm", "farmRake")
                 log.debug(info.field)
                 if not info.field then info.exit = true; end
@@ -124,6 +139,10 @@ AnimLib.rake = {
             animLibName = "rake_active",
             next = "rake1",
             changeCore = { Stamina = -10 },
+            onStart = function(info)
+                Citizen.CreateThread(StopRakeIdle)
+                return info
+            end,
         },
         trans_rake3 = {
             name = "Rake Long",
@@ -133,6 +152,10 @@ AnimLib.rake = {
             animLibName = "rake_active",
             next = "rake3_1",
             changeCore = { Stamina = -10 },
+            onStart = function(info)
+                Citizen.CreateThread(StopRakeIdle)
+                return info
+            end,
         },
         trans_rake6 = {
             name = "Rake Longer",
@@ -142,15 +165,23 @@ AnimLib.rake = {
             animLibName = "rake_active",
             next = "rake6_1",
             changeCore = { Stamina = -10 },
+            onStart = function(info)
+                Citizen.CreateThread(StopRakeIdle)
+                return info
+            end,
         },
         trans_rake = {
-            name = "Keep Raking",
+            name = "Rake Nonstop",
             condition = function() return Conditions.Check({ canFarmRake = false, isInClearedVeg = false, }) end,
             animDict = "amb_work@world_human_farmer_rake@male_a@stand_enter_withprop",
             anim = "enter_back_rf",
             animLibName = "rake_active",
             next = "rakeloop_1",
             changeCore = { Stamina = -10 },
+            onStart = function(info)
+                Citizen.CreateThread(StopRakeIdle)
+                return info
+            end,
         }
     }
 }
@@ -348,6 +379,14 @@ AnimLib.rake_active = {
     }
 }
 
+
+local StopShovelIdle = function()
+    local animDict = "amb_work@world_human_gravedig@working@male_b@react_look@loop@generic"
+    local anim = "react_look_front_loop"
+    Citizen.Wait(600)
+    StopAnimTask(PlayerPedId(), animDict, anim, 1.0)
+end
+
 AnimLib.shovel = {
     name = "Shovel",
     tags = {
@@ -376,7 +415,7 @@ AnimLib.shovel = {
         animDict = "mech_loco_m@generic@discard@2handshovel@right",
         anim = "casual_discard_right",
         duration = 500,
-        flag = AnimConfig.Flag.MoveLoop,
+        flag = AnimConfig.Flag.MoveHigh,
         onTrigger = function(info)
             Citizen.Wait(200)
             Prop.Detach(info.prop.shovel, { forceWait = 10000 })
@@ -389,11 +428,11 @@ AnimLib.shovel = {
             animDict = "amb_work@world_human_gravedig@working@male_b@react_look@loop@generic",
             anim = "react_look_front_loop",
             prop = { shovel = { anim = "react_look_front_loop_shovel" } },
-            flag = AnimConfig.Flag.MoveLoop,
+            flag = AnimConfig.Flag.MoveHighLoop,
             transitions = {
-                trans_scoop3 = "a",
-                trans_scoop6 = "s",
-                trans_scoop = "w",
+                trans_scoop3 = "3",
+                trans_scoop6 = "6",
+                trans_scoop = "s",
                 exit_put_down = "x",
                 trans_harvest = "z",
             },
@@ -448,6 +487,7 @@ AnimLib.shovel = {
             duration = 5000,
             name = "Set Shovel Down",
             onTrigger = function(info)
+                Citizen.CreateThread(StopShovelIdle)
                 Citizen.Wait(2600)
                 Prop.Detach(info.prop.shovel, { forceWait = 10000 })
                 info.prop.shovel = nil
@@ -462,7 +502,11 @@ AnimLib.shovel = {
             blendInSpeed = 1.0,
             duration = 2300,
             next = "scoop_3_1",
-            name = "Scoop Thrice",
+            name = "Scoop 3x",
+            onStart = function(info)
+                Citizen.CreateThread(StopShovelIdle)
+                return info
+            end,
         },
         trans_scoop6 = {
             condition = function() return Conditions.Check({ canFarmShovel = false, isInClearedVeg = false, }) end,
@@ -472,7 +516,11 @@ AnimLib.shovel = {
             blendInSpeed = 1.0,
             duration = 2300,
             next = "scoop_6_1",
-            name = "Scoop Thrice Twice"
+            name = "Scoop 6x",
+            onStart = function(info)
+                Citizen.CreateThread(StopShovelIdle)
+                return info
+            end,
         },
         trans_scoop = {
             condition = function() return Conditions.Check({ canFarmShovel = false, isInClearedVeg = false, }) end,
@@ -482,7 +530,11 @@ AnimLib.shovel = {
             blendInSpeed = 1.0,
             duration = 2300,
             next = "scoop_loop",
-            name = "Keep Shoveling"
+            name = "Shovel Nonstop",
+            onStart = function(info)
+                Citizen.CreateThread(StopShovelIdle)
+                return info
+            end,
         },
         trans_harvest = {
             condition = function() return Conditions.Check({ canFarmShovel = true, isInClearedVeg = false, }) end,
@@ -495,7 +547,11 @@ AnimLib.shovel = {
             name = "Dig",
             onStart = function(info)
                 info.field = AnimUtil.GetInteractiveZone("farm", "farmShovel")
-                if not info.field then info.gotoIdle = true; end
+                if not info.field then
+                    info.gotoIdle = true
+                    return info
+                end
+                Citizen.CreateThread(StopShovelIdle)
                 return info
             end,
         },

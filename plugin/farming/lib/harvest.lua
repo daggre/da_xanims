@@ -17,7 +17,7 @@ AnimLib.handshovel = {
     exit = {
         animDict = "amb_camp@world_camp_jack_plant@exit",
         anim = "exit",
-        duration = 5000,
+        duration = 3500,
         onTrigger = function(info)
             Citizen.Wait(2300)
             Prop.Detach(info.prop.handshovel)
