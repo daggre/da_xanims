@@ -160,13 +160,13 @@ function PlayAnimState(animLib, animState, stateName, info)
         return
     end
     -- Initialize animLib on enter
+    local playerPedId = PlayerPedId()
     if IsStateType(stateName, "enter") then
         -- assert(not ActiveAnim, "Tried to enter animation while animation is already active.")
         if ActiveAnim then
             log.error(log.line(1), "Tried to enter animation while animation is already active.")
             return
         end
-        local playerPedId = PlayerPedId()
         local condition = animLib.triggerCondition or animLib.condition
         if Conditions.BatchCache(playerPedId) and not condition() then return; end
         AnimInfo = InitializeAnimInfo(AnimInfo, animLib, playerPedId, info)
@@ -176,7 +176,7 @@ function PlayAnimState(animLib, animState, stateName, info)
             if IsExitingAnimState(animLib, stateName) then
                 AnimUtil.MonitorIdleAnimHalt()
                 if AnimInfo then
-                    local ped = AnimInfo and AnimInfo.ped or PlayerPedId()
+                    local ped = AnimInfo and AnimInfo.ped or playerPedId
                     AnimInfo = CleanAnimInfo(AnimInfo)
                     ClearPedSecondaryTask(ped)
                     ClearPedTasks(ped)
@@ -217,6 +217,7 @@ function PlayAnimState(animLib, animState, stateName, info)
 
     if animState.onStart then
         if not AnimInfo then
+            local ped = PlayerPedId()
             ClearPedSecondaryTask(ped)
             ClearPedTasks(ped)
             AnimStateQueue = {}
