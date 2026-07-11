@@ -14,7 +14,7 @@ AnimLib.handsup = {
         blendInSpeed = 1.0,
         nextBlendInSpeed = 1.0,
         playbackRate = 0.7,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
     exit = {
         animDict = "mech_loco_f@generic@reaction@handsup@unarmed@normal",
@@ -22,13 +22,13 @@ AnimLib.handsup = {
         duration = 800,
         blendInSpeed = 1.0,
         playbackRate = 1.3,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
     idles = {
         idle_a = {
             animDict = "mech_loco_f@generic@reaction@handsup@unarmed@normal",
             anim = "loop",
-            flag = AnimConfig.Flag.MoveLoop,
+            flag = AnimConfig.Flag.MoveHighLoop,
             transitions = {
                 trans_relax = "r",
                 trans_high = "h",
@@ -43,7 +43,7 @@ AnimLib.handsup = {
             animLibName = "handsup_relax",
             next = "idle_a",
             blendInSpeed = 0.7,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             name = "Relax",
         },
         trans_high = {
@@ -52,7 +52,7 @@ AnimLib.handsup = {
             animLibName = "handsup_high",
             next = "idle_a",
             blendInSpeed = 0.7,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             name = "High",
         },
         trans_handshead = {
@@ -80,7 +80,7 @@ AnimLib.handsup_high = {
         blendInSpeed = 1.0,
         nextBlendInSpeed = 1.0,
         playbackRate = 0.7,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
     exit = {
         animDict = "mech_loco_f@generic@reaction@handsup@unarmed@normal",
@@ -88,13 +88,13 @@ AnimLib.handsup_high = {
         duration = 800,
         blendInSpeed = 1.0,
         playbackRate = 1.3,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
     idles = {
         idle_a = {
             animDict = "script_proc@robberies@shop@rhodes@gunsmith@inside_upstairs",
             anim = "handsup_register_owner",
-            flag = AnimConfig.Flag.MoveLoop,
+            flag = AnimConfig.Flag.MoveHighLoop,
             transitions = {
                 trans_relax = "r",
                 trans_handsup = "a",
@@ -109,7 +109,7 @@ AnimLib.handsup_high = {
             animLibName = "handsup_relax",
             next = "idle_a",
             blendInSpeed = 0.7,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             name = "Relax",
         },
         trans_handsup = {
@@ -118,7 +118,7 @@ AnimLib.handsup_high = {
             animLibName = "handsup",
             next = "idle_a",
             blendInSpeed = 0.7,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             name = "Close",
         },
         trans_handshead = {
@@ -144,20 +144,20 @@ AnimLib.handsup_relax = {
         animDict = "mech_loco_m@generic@reaction@handsup@unarmed@tough",
         anim = "intro",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
     exit = {
         animDict = "mech_loco_m@generic@reaction@handsup@unarmed@tough",
         anim = "outro",
         blendInSpeed = 1.0,
         duration = 800,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
     idles = {
         idle_a = {
             animDict = "mech_loco_m@generic@reaction@handsup@unarmed@tough",
             anim = "loop",
-            flag = AnimConfig.Flag.MoveLoop,
+            flag = AnimConfig.Flag.MoveHighLoop,
             transitions = {
                 trans_high = "h",
                 trans_handsup = "a",
@@ -171,7 +171,7 @@ AnimLib.handsup_relax = {
             animLibName = "handsup_high",
             next = "idle_a",
             blendInSpeed = 0.7,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             name = "High",
         },
         trans_handsup = {
@@ -180,7 +180,7 @@ AnimLib.handsup_relax = {
             animLibName = "handsup",
             next = "idle_a",
             blendInSpeed = 0.7,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             name = "Close",
         },
     },
@@ -208,6 +208,33 @@ AnimLib.hands_on_head_kneel = {
             animDict = "mech_busted@unapproved",
             anim = "idle_a",
             flag = AnimConfig.Flag.Loop,
+        },
+    },
+}
+
+AnimLib.hands_on_head = {
+    name = "Hands On Head",
+    tags = { hostage=1, },
+    key = "x",
+    enter = {
+        animDict = "mech_busted@unapproved",
+        anim = "idle_2_hands_up",
+        flag = AnimConfig.Flag.MoveHigh,
+        blendInSpeed = 1.0,
+        duration = 2800,
+        nextBlendInSpeed = 0.8,
+    },
+    exit = {
+        animDict = "mech_busted@unapproved",
+        anim = "hands_up_2_idle",
+        flag = AnimConfig.Flag.MoveHigh,
+        duration = 1700,
+    },
+    idles = {
+        idle_a = {
+            animDict = "mech_busted@unapproved",
+            anim = "idle_a",
+            flag = AnimConfig.Flag.MoveHighLoop,
         },
     },
 }
