@@ -1081,7 +1081,7 @@ AnimLib.smoke_cigar_fem = {
         animDict = "script_mp@emotes@smoke_cigar@female@unarmed@upper",
         anim = "intro",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.MoveHigh,
+        flag = AnimConfig.Flag.Move,
         onTrigger = function(info)
             info.prop.cigar = Prop:new()
             API.consume("cigar", info.args)
@@ -1100,12 +1100,14 @@ AnimLib.smoke_cigar_fem = {
         next = "exit_2",
         duration = 2000,
         flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
     idles = {
         idle_s = {
             animDict = "script_mp@emotes@smoke_cigar@female@unarmed@upper",
             anim = "loop",
             flag = AnimConfig.Flag.MoveHighLoop,
+            taskFilter = "rightarm_nospine_filter",
             transitions = {
                 a_a = "w",
                 a_1 = "d",
@@ -1119,18 +1121,21 @@ AnimLib.smoke_cigar_fem = {
             anim = "action",
             name = "Blow Smoke Up",
             flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
         },
         a_1 = {
             animDict = "script_mp@emotes@smoke_cigar@female@unarmed@upper",
             anim = "action_alt1",
             name = "Smoke Inspect Cigar",
             flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
         },
         a_2 = {
             animDict = "script_mp@emotes@smoke_cigar@female@unarmed@upper",
             anim = "action_alt2",
             name = "Long Drag Tap Cherry",
             flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
         },
         exit_2 = {
             animDict = "script_mp@emotes@smoke_cigar@female@unarmed@upper",
@@ -1138,6 +1143,7 @@ AnimLib.smoke_cigar_fem = {
             blendInSpeed = 1.0,
             duration = 1500,
             flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             onTrigger = function(info)
                 Citizen.Wait(1650)
                 Prop.Detach(info.prop.cigar, { velocity = -3.0, angle = 273, distance = 2.0, forceWait = 5000 })
@@ -1158,7 +1164,7 @@ AnimLib.smoke_cigar_masc = {
         animDict = "script_mp@emotes@smoke_cigar@male@unarmed@upper",
         anim = "intro",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.MoveHigh,
+        flag = AnimConfig.Flag.Move,
         onTrigger = function(info)
             info.prop.cigar = Prop:new()
             API.consume("cigar", info.args)
@@ -1176,12 +1182,14 @@ AnimLib.smoke_cigar_masc = {
         next = "exit_2",
         duration = 2000,
         flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
     idles = {
         idle_s = {
             animDict = "script_mp@emotes@smoke_cigar@male@unarmed@upper",
             anim = "loop",
             flag = AnimConfig.Flag.MoveHighLoop,
+            taskFilter = "rightarm_nospine_filter",
             transitions = {
                 a_a = "w",
                 a_1 = "d",
@@ -1195,18 +1203,21 @@ AnimLib.smoke_cigar_masc = {
             anim = "action",
             name = "Blow Smoke Up",
             flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
         },
         a_1 = {
             animDict = "script_mp@emotes@smoke_cigar@male@unarmed@upper",
             anim = "action_alt1",
             name = "Smoke Inspect Cigar",
             flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
         },
         a_2 = {
             animDict = "script_mp@emotes@smoke_cigar@male@unarmed@upper",
             anim = "action_alt2",
             name = "Long Drag Tap Cherry",
             flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
         },
         exit_2 = {
             animDict = "script_mp@emotes@smoke_cigar@male@unarmed@upper",
@@ -1214,6 +1225,7 @@ AnimLib.smoke_cigar_masc = {
             blendInSpeed = 1.0,
             duration = 1500,
             flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             onTrigger = function(info)
                 Citizen.Wait(1650)
                 Prop.Detach(info.prop.cigar, { velocity = -3.0, angle = 273, distance = 2.0, forceWait = 5000 })
@@ -1236,7 +1248,7 @@ AnimLib.smoke_pipe = {
         anim = "nopipe_trans_pipe",
         duration = 7500,
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.MoveHigh,
+        flag = AnimConfig.Flag.Move,
         onTrigger = function(info)
             info.prop.pipe = Prop:new()
             API.consume("pipetobac", info.args)
@@ -1263,6 +1275,7 @@ AnimLib.smoke_pipe = {
             animDict = "amb_rest@world_human_smoking@male_b@base",
             anim = "base",
             flag = AnimConfig.Flag.MoveHighLoop,
+            taskFilter = "rightarm_nospine_filter",
             onTrigger = function(info)
                 local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
                 info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
@@ -1284,6 +1297,7 @@ AnimLib.smoke_pipe = {
             name = "Smoke",
             blendInSpeed = 1.5,
             flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             onTrigger = function(info)
                 local propset = Conditions.Check({ isMale = true }) and "MalePuff" or "FemalePuff"
                 info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
@@ -1313,7 +1327,7 @@ AnimLib.smoke_pipe = {
             flag = AnimConfig.Flag.MoveHighLoop,
             name = "Put Hand Behind Back",
             animLibName = "smoke_pipe_h",
-            nextBlendInSpeed = 0.5,
+            nextBlendInSpeed = 0.8,
             next = "idle_hands",
             onTrigger = function(info)
                 local propset = Conditions.Check({ isMale = true }) and "MaleHandIdle" or "FemaleHandIdle"
@@ -1401,6 +1415,7 @@ AnimLib.smoke_pipe_h = {
             blendOutSpeed=0.5,
             nextBlendInSpeed=0.5,
             flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             onTrigger = function(info)
                 local propset = Conditions.Check({ isMale = true }) and "MalePuff" or "FemalePuff"
                 info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
@@ -1433,6 +1448,7 @@ AnimLib.smoke_pipe_h = {
         },
         trans_b = {
             flag = AnimConfig.Flag.MoveHighLoop,
+            taskFilter = "headneckandrightarm_filter",
             name = "Put Arm at Side",
             animLibName = "smoke_pipe",
             nextBlendInSpeed = 0.5,
@@ -1522,6 +1538,7 @@ AnimLib.smoke_pipe_e = {
             blendOutSpeed=0.5,
             nextBlendInSpeed=0.5,
             flag = AnimConfig.Flag.MoveHigh,
+            taskFilter = "headneckandrightarm_filter",
             onTrigger = function(info)
                 local propset = Conditions.Check({ isMale = true }) and "MalePuff" or "FemalePuff"
                 info.prop.pipe:attach(info.ped, Propset.Pipe[propset])
@@ -1570,6 +1587,7 @@ AnimLib.smoke_pipe_e = {
             --animDict = "amb_rest@world_human_smoking@pipe@proper@male_d@wip_base",
             --anim = "wip_base",
             flag = AnimConfig.Flag.MoveHighLoop,
+            taskFilter = "headneckandrightarm_filter",
             name = "Put Arm at Side",
             animLibName = "smoke_pipe",
             nextBlendInSpeed = 0.5,
