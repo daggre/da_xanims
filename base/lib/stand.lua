@@ -835,12 +835,15 @@ AnimLib.hand_on_revolver = {
         duration = 500;
         blendInSpeed = 1.0,
         blendOutSpeed = 1.0,
+        flag = AnimConfig.Flag.Move,
+        taskFilter = "headneckandrightarm_filter",
     },
     idles = {
         idle_a = {
             animDict = "mp_lobby@standard@standing@mp_male_d@base",
             anim = "base",
-            flag = AnimConfig.Flag.Loop,
+            flag = AnimConfig.Flag.MoveLoop,
+            taskFilter = "headneckandrightarm_filter",
         },
     },
 }
