@@ -45,7 +45,7 @@ AnimLib.WorldHumanClipboard = {
     enter = {
         animDict = "amb_work@world_human_clipboard@male_a@stand_enter_withprop",
         anim = "enter_back_rf",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         onTrigger = function(info)
             info.prop.nubpencil = Prop:new()
             info.prop.clipboard = Prop:new()
@@ -59,7 +59,7 @@ AnimLib.WorldHumanClipboard = {
         animDict = "amb_work@world_human_clipboard@male_a@stand_exit_withprop",
         anim = "exit_front",
         duration = 2600,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         onTrigger = function(info)
             Citizen.Wait(2500)
             Prop.Detach(info.prop.clipboard)
@@ -73,7 +73,7 @@ AnimLib.WorldHumanClipboard = {
         idle_a = {
             animDict = "amb_work@world_human_clipboard@male_a@base",
             anim = "base",
-            flag = AnimConfig.Flag.MoveLoop,
+            flag = AnimConfig.Flag.MoveHighLoop,
             idleAnimConfig = {
                 canClimb = false,
                 canJump = false,
@@ -101,49 +101,49 @@ AnimLib.WorldHumanClipboard = {
             animDict = "amb_work@world_human_clipboard@male_a@idle_a",
             anim = "idle_a",
             name = "Look Up",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
         },
         a_b = {
             animDict = "amb_work@world_human_clipboard@male_a@idle_a",
             anim = "idle_b",
             name = "Look Right",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
         },
         a_c = {
             animDict = "amb_work@world_human_clipboard@male_a@idle_a",
             anim = "idle_c",
             name = "Distracted",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
         },
         b_d = {
             animDict = "amb_work@world_human_clipboard@male_a@idle_b",
             anim = "idle_d",
             name = "Look Left",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
         },
         b_e = {
             animDict = "amb_work@world_human_clipboard@male_a@idle_b",
             anim = "idle_e",
             name = "Relax",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
         },
         b_f = {
             animDict = "amb_work@world_human_clipboard@male_a@idle_b",
             anim = "idle_f",
             name = "Stretch",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
         },
         c_g = {
             animDict = "amb_work@world_human_clipboard@male_a@idle_c",
             anim = "idle_g",
             name = "Count",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
         },
         c_h = {
             animDict = "amb_work@world_human_clipboard@male_a@idle_c",
             anim = "idle_h",
             name = "Wary",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
         },
         inspect_bedding = {
             condition = function() return Conditions.Check({ inAnimalStall = true, }) end,
@@ -151,7 +151,7 @@ AnimLib.WorldHumanClipboard = {
             anim = "idle_g",
             name = "Inspect Bedding",
             duration = 4000,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             onStart = function(info)
                 info.chore = Prop:initNearby("stall")
                 if not info.chore then info.gotoIdle = true; end
@@ -169,7 +169,7 @@ AnimLib.WorldHumanClipboard = {
             anim = "idle_g",
             name = "Inspect Cleanliness",
             duration = 4000,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             onStart = function(info)
                 info.chore = Prop:initNearby("stall")
                 if not info.chore then info.gotoIdle = true; end
@@ -187,7 +187,7 @@ AnimLib.WorldHumanClipboard = {
             anim = "idle_g",
             name = "Inspect Water Trough",
             duration = 4000,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             onStart = function(info)
                 info.chore = Prop:initNearby("waterTrough")
                 if not info.chore then info.gotoIdle = true; end
@@ -205,7 +205,7 @@ AnimLib.WorldHumanClipboard = {
             anim = "idle_g",
             name = "Inspect Feed Trough",
             duration = 4000,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             onStart = function(info)
                 info.chore = Prop:initNearby("feedTrough")
                 if not info.chore then info.gotoIdle = true; end
@@ -223,7 +223,7 @@ AnimLib.WorldHumanClipboard = {
             anim = "idle_g",
             name = "Inspect Paddock",
             duration = 4000,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             onStart = function(info)
                 info.chore = Prop:initNearby("paddock")
                 if not info.chore then info.gotoIdle = true; end
@@ -241,7 +241,7 @@ AnimLib.WorldHumanClipboard = {
             anim = "idle_g",
             name = "Inspect Fence",
             duration = 4000,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             onStart = function(info)
                 info.chore = Prop:initNearby("inspectFence")
                 if not info.chore then info.gotoIdle = true; end
@@ -263,7 +263,7 @@ AnimLib.write_notebook_male = {
     enter = {
         animDict = "amb_work@world_human_write_notebook@male_a@stand_enter",
         anim = "enter_back_lf",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         blendInSpeed = 1.0,
         prop = { ledger = { anim = "enter_back_lf_ledger", }, },
         onStart = function(info)
@@ -287,7 +287,7 @@ AnimLib.write_notebook_male = {
     exit = {
         animDict = "amb_work@world_human_write_notebook@male_a@stand_exit",
         anim = "exit_front",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         prop = { ledger = { anim = "exit_front_ledger", }, },
         onTrigger = function(info)
             Citizen.Wait(1000)
@@ -307,7 +307,7 @@ AnimLib.write_notebook_male = {
         idle_a = {
             animDict = "amb_work@world_human_write_notebook@male_a@base",
             anim = "base",
-            flag = AnimConfig.Flag.MoveLoop,
+            flag = AnimConfig.Flag.MoveHighLoop,
             idleAnimConfig = {
                 canJump = false,
                 canRun = false,
@@ -330,7 +330,7 @@ AnimLib.write_notebook_male = {
         a_a = {
             animDict = "amb_work@world_human_write_notebook@male_a@idle_a",
             anim = "idle_a",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             duration = 13000,
             prop = { ledger = { anim = "idle_a_ledger", }, },
             name = "Pencil Scratch"
@@ -339,14 +339,14 @@ AnimLib.write_notebook_male = {
             animDict = "amb_work@world_human_write_notebook@male_a@idle_a",
             anim = "idle_b",
             duration = 12500,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             prop = { ledger = { anim = "idle_b_ledger", }, },
             name = "Bite Pencil"
         },
         a_c = {
             animDict = "amb_work@world_human_write_notebook@male_a@idle_a",
             anim = "idle_c",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             duration = 7500,
             prop = { ledger = { anim = "idle_c_ledger", }, },
             name = "Lift Pencil"
@@ -356,7 +356,7 @@ AnimLib.write_notebook_male = {
             anim = "idle_d",
             duration = 12000,
             blendInSpeed = 1.0,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             prop = { ledger = { anim = "idle_d_ledger", }, },
             name = "Thinking"
         },
@@ -364,7 +364,7 @@ AnimLib.write_notebook_male = {
             animDict = "amb_work@world_human_write_notebook@male_a@idle_b",
             anim = "idle_e",
             duration = 10000,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             prop = { ledger = { anim = "idle_e_ledger", }, },
             name = "Look Up"
         },
@@ -372,7 +372,7 @@ AnimLib.write_notebook_male = {
             animDict = "amb_work@world_human_write_notebook@male_a@idle_b",
             anim = "idle_f",
             duration = 10000,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             prop = { ledger = { anim = "idle_f_ledger", }, },
             name = "Look Up Right"
         },
@@ -380,7 +380,7 @@ AnimLib.write_notebook_male = {
             animDict = "amb_work@world_human_write_notebook@male_a@idle_c",
             anim = "idle_g",
             duration = 8500,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             prop = { ledger = { anim = "idle_g_ledger", }, },
             name = "Neck Crack",
         },
@@ -388,7 +388,7 @@ AnimLib.write_notebook_male = {
             animDict = "amb_work@world_human_write_notebook@male_a@idle_c",
             anim = "idle_h",
             duration = 11000,
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
             prop = { ledger = { anim = "idle_h_ledger", }, },
             name = "Write Things"
         },

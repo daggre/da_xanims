@@ -10,20 +10,23 @@ AnimLib.point = {
         anim = "point_fwd",
         blendInSpeed = 1.6,
         duration = 200,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
     exit = {
         animDict = "ai_react@point@base",
         anim = "point_fwd",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         blendOutSpeed = -1.6,
         duration = 100,
+        taskFilter = "headneckandrightarm_filter",
     },
     idles = {
         idle_point = {
             animDict = "ai_react@point@base",
             anim = "point_fwd",
             flag = AnimConfig.Flag.MoveLoop,
+            taskFilter = "rightarmonly_filter",
         },
     },
 }
@@ -39,7 +42,7 @@ AnimLib.gesticulate_angry_punctuate1 = {
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker@rt_hand",
         anim = "aggressive_punctuate_f_001",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         duration = 1000,
         blendInSpeed = 1.0,
     },
@@ -55,7 +58,7 @@ AnimLib.gesticulate_apology = {
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker@rt_hand",
         anim = "mild_apologies_f_001",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         duration = 1000,
         blendInSpeed = 1.0,
     },
@@ -71,7 +74,7 @@ AnimLib.gesticulate_point_disagree = {
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker@rt_hand@prop_rt",
         anim = "stern_punctuate_f_001",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         duration = 1400,
         blendInSpeed = 1.0,
     },
@@ -87,7 +90,8 @@ AnimLib.gesture_angry_point = {
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "angry_point_r_002",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         blendInSpeed = 1.0,
         duration = 1500,
     },
@@ -103,9 +107,10 @@ AnimLib.gesture_move_along = {
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "annoyed_dismiss_l_003",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         blendInSpeed = 1.0,
         duration = 700,
+        taskFilter = "headneckandleftarm_filter",
     },
 }
 
@@ -121,7 +126,7 @@ AnimLib.gesture_subtle_left = {
         anim = "confused_punctuate_l_002",
         blendInSpeed = 1.0,
         duration = 1500,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
 }
 
@@ -137,7 +142,7 @@ AnimLib.gesture_subtle_right = {
         anim = "confused_punctuate_r_002",
         blendInSpeed = 1.0,
         duration = 1500,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
 }
 
@@ -152,7 +157,7 @@ AnimLib.gesture_defeated = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "frustrated_punctuate_f_006",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         duration = 800,
     },
 }
@@ -164,7 +169,7 @@ AnimLib.gesture_confused = {
     enter = {
         animDict = "ai_gestures@gen_female@standing@no_english",
         anim = "guarma_confused_what_f_002",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         blendInSpeed = 1.0,
         duration = 800,
     },
@@ -180,7 +185,7 @@ AnimLib.gesture_disagree = {
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "negative_disagree_f_001",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         blendInSpeed = 1.0,
         duration = 2000,
     },
@@ -198,7 +203,8 @@ AnimLib.gesture_point_self = {
         anim = "john_negative_pointself_r_001",
         blendInSpeed = 1.0,
         duration = 2000,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
 }
 
@@ -213,8 +219,9 @@ AnimLib.gesture_dismiss = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "frustrated_dismiss_r_001",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
         duration = 2100,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
 }
 
@@ -230,7 +237,7 @@ AnimLib.gesture_pleading = {
         anim = "athr_dtch_02_desperate_foolish_dutch",
         blendInSpeed = 1.0,
         duration = 3000,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
 }
 
@@ -247,7 +254,7 @@ AnimLib.gesticulate_neutral_appease = {
         anim = "neutral_appease_f_003",
         blendInSpeed = 1.0,
         duration = 1800,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
 }
 
@@ -263,7 +270,7 @@ AnimLib.gesticulate_defensive_appease = {
         anim = "defensive_appease_f_001",
         duration = 1100,
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
 }
 
@@ -277,7 +284,8 @@ AnimLib.gesticulate_point_defer = {
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker@rt_hand@prop_rt",
         anim = "neutral_punctuate_r_018",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         duration = 1500,
         blendInSpeed = 1.0,
     },
@@ -295,7 +303,7 @@ AnimLib.gesture_thank = {
         anim = "thank_you_f_002",
         blendInSpeed = 1.0,
         duration = 2000,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
 }
 
@@ -311,7 +319,8 @@ AnimLib.gesture_punctuate1 = {
         anim = "positive_punctuate_r_010",
         blendInSpeed = 1.0,
         duration = 700,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
 }
 
@@ -327,7 +336,8 @@ AnimLib.gesture_pointdown = {
         anim = "stern_pointdown_l_001",
         blendInSpeed = 1.0,
         duration = 1000,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandleftarm_filter",
     },
 }
 
@@ -343,7 +353,8 @@ AnimLib.gesture_lefthand = {
         anim = "stern_punctuate_l_002",
         blendInSpeed = 1.0,
         duration = 2000,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandleftarm_filter",
     },
 }
 
@@ -359,7 +370,8 @@ AnimLib.gesture_righthand = {
         anim = "stern_punctuate_r_002",
         blendInSpeed = 1.0,
         duration = 2000,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
 }
 
@@ -375,7 +387,8 @@ AnimLib.gesture_right_tilthead = {
         anim = "stern_punctuate_r_006",
         blendInSpeed = 1.0,
         duration = 1500,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
 }
 
@@ -389,6 +402,7 @@ AnimLib.longgesture_finger_right = {
         blendInSpeed = 1.0,
         duration = 7000,
         flag = AnimConfig.Flag.Move,
+        taskFilter = "headneckandrightarm_filter",
     },
 }
 
@@ -403,24 +417,9 @@ AnimLib.react_disgusted = {
     enter = {
         animDict = "ai_react@react_look_layers@base_emotions@generic@male_a@idle_b",
         anim = "idle_e",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         blendInSpeed = 1.0,
         duration = 4000,
-    },
-}
-
-AnimLib.react_consider = {
-    name = "Tilt Head",
-    tags = { react = 1 },
-    key = "h",
-    condition = function()
-        return Conditions.Check({ onMount = allow })
-    end,
-    enter = {
-        animDict = "ai_react@react_look_layers@base_emotions@generic@male_a@idle_b",
-        anim = "idle_d",
-        blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.UpperBody,
     },
 }
 
@@ -434,7 +433,7 @@ AnimLib.gesture_shrug = {
     enter = {
         animDict = "ai_gestures@john@standing@speaker",
         anim = "john_neutral_shrug_f_001",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         blendInSpeed = 1.0,
         duration = 1000,
     },
@@ -450,7 +449,7 @@ AnimLib.gesture_shrug_stern = {
     enter = {
         animDict = "ai_gestures@gen_female@standing@speaker",
         anim = "stern_shrug_f_001",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         blendInSpeed = 1.0,
         duration = 400,
     },
@@ -467,7 +466,7 @@ AnimLib.gesture_disbelief = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "frustrated_disbelieve_l_001",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
         duration = 400,
     },
 }
@@ -483,7 +482,7 @@ AnimLib.gesture_nod_positive = {
         animDict = "ai_gestures@gen_male@standing@speaker",
         anim = "positive_nod_f_001",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
 }
 
@@ -498,7 +497,8 @@ AnimLib.gesture_headshake_empathetic = {
         animDict = "ai_gestures@gen_male@standing@speaker",
         anim = "empathise_headshake_f_001",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headonly_filter",
         duration = 2300,
     },
 }
@@ -515,7 +515,8 @@ AnimLib.gesture_stop = {
         anim = "silent_defensive_punctuate_l_002",
         duration = 1000,
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandleftarm_filter",
     },
 }
 
@@ -530,7 +531,8 @@ AnimLib.signal_stop_point_r = {
     enter = {
         animDict = "ai_gestures@gen_male@standing@silent@script@bounty_hunters@rt_hand",
         anim = "bh_that_way_l_001",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         blendInSpeed = 1.0,
         duration = 2500,
     },
@@ -546,7 +548,8 @@ AnimLib.signal_stop_r = {
     enter = {
         animDict = "ai_gestures@gen_male@standing@silent@script@bounty_hunters@rt_hand",
         anim = "bh_that_way_l_001",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         blendInSpeed = 1.0,
         duration = 750,
     },
@@ -562,14 +565,47 @@ AnimLib.signal_point_r = {
     enter = {
         animDict = "ai_gestures@gen_male@standing@silent@script@bounty_hunters@rt_hand",
         anim = "bh_that_way_l_002",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         blendInSpeed = 1.0,
         duration = 1800,
     },
 }
 
+AnimLib.herding_point_right = {
+    name = "Point Right",
+    tags = { signal_right = 1 },
+    key = "1",
+    condition = function()
+        return Conditions.Check({ onMount = allow })
+    end,
+    enter = {
+        animDict = "veh_horseback@seat_saddle@generic@herding@point@1h@right",
+        anim = "right_hand_point_01",
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
+        blendInSpeed = 0.5,
+    },
+}
+
+AnimLib.herding_point_left = {
+    name = "Point Left",
+    tags = { signal_left = 1 },
+    key = "1",
+    condition = function()
+        return Conditions.Check({ onMount = allow })
+    end,
+    enter = {
+        animDict = "veh_horseback@seat_saddle@generic@herding@point@1h@left",
+        anim = "left_hand_point_01",
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandleftarm_filter",
+        blendInSpeed = 0.5,
+    },
+}
+
 AnimLib.signal_onward = {
-    name = "Onward!",
+    name = "Forward, High",
     tags = { signal_right = 1 },
     key = "t",
     condition = function()
@@ -585,7 +621,8 @@ AnimLib.signal_onward = {
         animDict = "veh_horseback@seat_saddle@generic@herding@point@1h@front",
         anim = "right_hand_point_01",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         duration = 500,
     },
 }
@@ -601,7 +638,8 @@ AnimLib.signal_stop_point_l = {
     enter = {
         animDict = "ai_gestures@gen_male@standing@silent@script@bounty_hunters@lt_hand",
         anim = "bh_that_way_r_001",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandleftarm_filter",
         blendInSpeed = 1.0,
         duration = 2500,
     },
@@ -617,7 +655,8 @@ AnimLib.signal_stop_l = {
     enter = {
         animDict = "ai_gestures@gen_male@standing@silent@script@bounty_hunters@lt_hand",
         anim = "bh_that_way_r_001",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandleftarm_filter",
         blendInSpeed = 1.0,
         duration = 750,
     },
@@ -633,7 +672,8 @@ AnimLib.signal_point_l = {
     enter = {
         animDict = "ai_gestures@gen_male@standing@silent@script@bounty_hunters@lt_hand",
         anim = "bh_that_way_r_002",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandleftarm_filter",
         blendInSpeed = 1.0,
         duration = 1800,
     },
@@ -651,7 +691,8 @@ AnimLib.signal_come_here = {
         anim = "john_neutral_comehere_r_001",
         blendInSpeed = 1.0,
         duration = 1000,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
 }
 
@@ -664,7 +705,8 @@ AnimLib.nod_point_back_left = {
         anim = "neutral_nod_bl_001",
         blendInSpeed = 1.0,
         duration = 500,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandleftarm_filter",
     },
 }
 
@@ -677,7 +719,23 @@ AnimLib.nod_point_back_right = {
         anim = "neutral_nod_br_001",
         blendInSpeed = 1.0,
         duration = 500,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
+    },
+}
+
+AnimLib.left_hand_whip = {
+    name = "Forward, Low",
+    tags = { signal_right = 1 },
+    condition = function() return Conditions.Check({ onMount = true }) end,
+    key = "f",
+    enter = {
+        animDict = "veh_horseback@seat_saddle@generic@herding@whip@1h@front",
+        anim = "left_hand_whip_01",
+        blendInSpeed = 1.0,
+        duration = 800,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "bonemask_head_neck_and_arms",
     },
 }
 
@@ -690,7 +748,7 @@ AnimLib.shush = {
         anim = "fullbody_alt_2",
         blendInSpeed = 1.0,
         duration = 1000,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
 }
 
@@ -702,7 +760,7 @@ AnimLib.rps_rock = {
     enter = {
         animDict = "script_mp@emotes@rock_paper_scissors@male@unarmed@full",
         anim = "fullbody",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
 }
 
@@ -714,7 +772,7 @@ AnimLib.rps_paper = {
     enter = {
         animDict = "script_mp@emotes@rock_paper_scissors@male@unarmed@full",
         anim = "fullbody_alt1",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
 }
 
@@ -726,7 +784,7 @@ AnimLib.rps_scissors = {
     enter = {
         animDict = "script_mp@emotes@rock_paper_scissors@male@unarmed@full",
         anim = "fullbody_alt2",
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
     },
 }
 
@@ -750,17 +808,17 @@ AnimLib.rps = {
         rock = {
             animDict = "script_mp@emotes@rock_paper_scissors@male@unarmed@full",
             anim = "fullbody",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
         },
         paper = {
             animDict = "script_mp@emotes@rock_paper_scissors@male@unarmed@full",
             anim = "fullbody_alt1",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
         },
         scissors = {
             animDict = "script_mp@emotes@rock_paper_scissors@male@unarmed@full",
             anim = "fullbody_alt2",
-            flag = AnimConfig.Flag.Move,
+            flag = AnimConfig.Flag.MoveHigh,
         },
     }
 }

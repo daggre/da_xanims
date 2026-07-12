@@ -99,6 +99,7 @@ AnimLib.ridentalk_pos_nodding = {
         flag = AnimConfig.Flag.Move,
         blendInSpeed = 1.0,
         duration = 1200,
+        taskFilter = "headandneckonly_filter",
     },
 }
 

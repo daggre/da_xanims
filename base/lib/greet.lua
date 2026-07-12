@@ -8,7 +8,8 @@ AnimLib.greet_subtle_left = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "greet_bored_l_001",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandleftarm_filter",
         duration = 600,
     },
 }
@@ -22,7 +23,8 @@ AnimLib.greet_subtle_right = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "greet_bored_r_001",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         duration = 600,
     },
 }
@@ -36,7 +38,8 @@ AnimLib.greet_cocky_left = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "greet_cocky_l_003",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandleftarm_filter",
         duration = 800,
     },
 }
@@ -50,7 +53,8 @@ AnimLib.greet_cocky_right = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "greet_cocky_r_003",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         duration = 800,
     },
 }
@@ -64,7 +68,8 @@ AnimLib.wave_left = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "greet_happy_l_001",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandleftarm_filter",
         duration = 800,
     },
 }
@@ -78,7 +83,8 @@ AnimLib.wave_right = {
         animDict = "ai_gestures@arthur@standing@speaker",
         anim = "greet_happy_r_001",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         duration = 800,
     },
 }
@@ -87,12 +93,13 @@ AnimLib.nod_wave_right = {
     name = "Nod And Wave",
     tags = { wave=1, },
     key = "w",
-    condition = function() return Conditions.Check({ onMount = true }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker@no_hat",
         anim = "greet_hat_tip_r_001",
         blendInSpeed = 1.0,
-        flag = AnimConfig.Flag.UpperBody,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
         duration = 1000,
     },
 }
@@ -108,7 +115,8 @@ AnimLib.ack_chin_up = {
         anim = "aknwoledge_tough_chin_up_f_001",
         blendInSpeed = 0.8,
         duration = 400,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headandneckonly_filter",
     },
 }
 
@@ -122,7 +130,8 @@ AnimLib.hat_tip_slow = {
         anim = "greet_hat_tip_r_001",
         blendInSpeed = 1.0,
         duration = 1700,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
 }
 
@@ -136,7 +145,8 @@ AnimLib.hat_tip_quick = {
         anim = "greet_hat_tip_r_001",
         blendInSpeed = 1.0,
         duration = 1700,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
 }
 
@@ -144,11 +154,12 @@ AnimLib.greet_subtle_nod = {
     name = "Nod Once",
     tags = { greet=1, },
     key = "g",
-    condition = function() return Conditions.Check({ onMount = true }) end,
+    condition = function() return Conditions.Check({ onMount = allow }) end,
     enter = {
         animDict = "ai_gestures@arthur@standing@speaker@no_hat",
         anim = "greet_hat_tip_l_004",
         flag = AnimConfig.Flag.UpperBody,
+        taskFilter = "headandneckonly_filter",
         blendInSpeed = 1.0,
         duration = 200,
     },
@@ -165,7 +176,8 @@ AnimLib.salute_point = {
         anim = "silent_casual_salute_r_001",
         blendInSpeed = 1.0,
         duration = 1000,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
 }
 
@@ -179,7 +191,8 @@ AnimLib.salute_brim = {
         anim = "silent_casual_salute_r_002",
         blendInSpeed = 1.0,
         duration = 1000,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
 }
 
@@ -193,7 +206,8 @@ AnimLib.salute_look_down = {
         anim = "silent_casual_salute_r_003",
         blendInSpeed = 1.0,
         duration = 1000,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
 }
 
@@ -207,6 +221,7 @@ AnimLib.salute_hat_touch = {
         anim = "silent_neutral_hat_tip_r_004",
         blendInSpeed = 1.0,
         duration = 1300,
-        flag = AnimConfig.Flag.Move,
+        flag = AnimConfig.Flag.MoveHigh,
+        taskFilter = "headneckandrightarm_filter",
     },
 }
